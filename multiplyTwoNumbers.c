@@ -10,25 +10,30 @@ int main ()
     signed int num_2;
     signed int multiply = 0;
 
-    printf("Enter a number: ");
-    scanf("%d", &num_1);
-    printf("Enter another number: ");
-    scanf("%d", &num_2);
-
-
-    for(int i = 1; i <= num_2; i++)
+    while(1)
     {
-
-        multiply += num_1;
+        multiply = 0;
         
-    }
+        printf("Enter a number: ");
+        scanf("%d", &num_1);
+        printf("Enter another number: ");
+        scanf("%d", &num_2);
 
-    for(int i = num_2; i <= -1; i++)
-    {
 
-        multiply -= num_1;
+        for(int i = 1; i <= num_2; i++)
+        {
+
+            multiply += num_1;
+            
+        }
+
+        for(int i = num_2; i <= -1; i++)
+        {
+
+            multiply -= num_1;
+            
+        }
         
+        printf("Ans = %d \n", multiply);
     }
-    
-    printf("Ans = %d \n", multiply);
 }

@@ -7,12 +7,15 @@
 
 int main ()
 {
+    
+    signed int NoOfNunbers;
+    signed int num;
+    signed int sum = 0;
+
+
     while(1)
     {
-        signed int NoOfNunbers;
-        signed int num;
-        signed int sum = 0;
-        
+        sum = 0;
 
         printf("Enter the No. of numbers: ");
         scanf("%d", &NoOfNunbers);

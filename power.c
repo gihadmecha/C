@@ -11,29 +11,34 @@ int main ()
     signed int power_new;
     double ans = 1;
 
-    printf("Enter a number: ");
-    scanf("%d", &base);
-    printf("Enter another number: ");
-    scanf("%d", &power);
-    power_new = power;
-    if(power < 0)
+    while(1)
     {
-        power_new = 0 - power;
-    }
+        ans = 1;
 
-    
-    for(int i = 1; i <= power_new; i++)
-    {
+        printf("Enter a number: ");
+        scanf("%d", &base);
+        printf("Enter another number: ");
+        scanf("%d", &power);
+        power_new = power;
+        if(power < 0)
+        {
+            power_new = 0 - power;
+        }
 
-        ans *= base;
         
-    }
+        for(int i = 1; i <= power_new; i++)
+        {
+
+            ans *= base;
+            
+        }
 
 
-    if(power < 0)
-    {
-        ans = 1.0 / ans;        
+        if(power < 0)
+        {
+            ans = 1.0 / ans;        
+        }
+        
+        printf("Ans = %lf \n", ans);
     }
-    
-    printf("Ans = %lf \n", ans);
 }

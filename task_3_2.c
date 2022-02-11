@@ -3,15 +3,20 @@
 
 int main ()
 {
+
+    signed int num_1;
+    signed int num_2;
+    signed int max;
+    signed int min;
+    signed int sum = 0;
+    signed int factor;
+    signed int flag = 0;
+
+
     while(1)
     {
-        signed int num_1;
-        signed int num_2;
-        signed int max;
-        signed int min;
-        signed int sum = 0;
-        signed int factor;
-
+        sum = 0;
+        flag = 0;
 
         printf("Enter a number: ");
         scanf("%d", &num_1);
@@ -38,8 +43,20 @@ int main ()
             if(i % factor == 0)
             {
                 sum += i;
+
+                if(flag == 0)
+                {
+                    max = i;
+                    flag++;
+                }
+        
+
+                if(i > max)
+                    max = i;
             }
         }
+
         printf("sum = %d\n", sum);
-    }
+        printf("max = %d\n", max);
+    }   
 }

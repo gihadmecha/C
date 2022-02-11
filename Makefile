@@ -1,5 +1,5 @@
-exeFile = task_3_2
-sourceFile = task_3_2.c
+exeFile = xor
+sourceFile = xor.c
 
 all:
 	gcc -o $(exeFile) $(sourceFile) 

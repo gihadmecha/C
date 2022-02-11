@@ -9,21 +9,24 @@ int main ()
     int num;
     int last_num;
 
-    printf("Enter a positive integer number: ");
-    scanf("%d", &num);
+    while(1)
+    {
+        printf("Enter a positive integer number: ");
+        scanf("%d", &num);
 
-    last_num = num;
-    while(last_num != 1 && last_num % 2 == 0)
-    {
-            last_num = last_num / 2;  
-    }
+        last_num = num;
+        while(last_num != 1 && last_num % 2 == 0)
+        {
+                last_num = last_num / 2;  
+        }
 
-    if(last_num == 1)
-    {
-        printf("base of 2 !! \n");
-    }
-    else 
-    {
-        printf("not base of 2 !! \n");
+        if(last_num == 1)
+        {
+            printf("base of 2 !! \n");
+        }
+        else 
+        {
+            printf("not base of 2 !! \n");
+        }
     }
 }

@@ -22,37 +22,40 @@ int main ()
     int sum;
     int rightDigit;
 
-    printf("Enter a positive integer number: ");
-    scanf("%d", &num);
-
-
-    if(num < 0)
+    while(1)
     {
-        last_num = 0 - num;
-    }
-    else
-    {
-        last_num = num;
-    }
-    sum = 0;
-    while(last_num != 0)
-    {
-            rightDigit = last_num % 10;
-            if(rightDigit == 1 || rightDigit == 2 || rightDigit == 3 || rightDigit == 5 || rightDigit == 7)
-            {
-                rightDigit = 0;
-            }
-            else if(rightDigit == 0 || rightDigit == 4 || rightDigit == 6 || rightDigit == 9)
-            {
-                rightDigit = 1;
-            }
-            else if(rightDigit == 8)
-            {
-                rightDigit = 2;
-            }
-            sum += rightDigit;
-            last_num = last_num / 10;  
-    }
+        printf("Enter a positive integer number: ");
+        scanf("%d", &num);
 
-    printf("sum = %d\n", sum);
+        
+        if(num < 0)
+        {
+            last_num = 0 - num;
+        }
+        else
+        {
+            last_num = num;
+        }
+        sum = 0;
+        while(last_num != 0)
+        {
+                rightDigit = last_num % 10;
+                if(rightDigit == 1 || rightDigit == 2 || rightDigit == 3 || rightDigit == 5 || rightDigit == 7)
+                {
+                    rightDigit = 0;
+                }
+                else if(rightDigit == 0 || rightDigit == 4 || rightDigit == 6 || rightDigit == 9)
+                {
+                    rightDigit = 1;
+                }
+                else if(rightDigit == 8)
+                {
+                    rightDigit = 2;
+                }
+                sum += rightDigit;
+                last_num = last_num / 10;  
+        }
+
+        printf("sum = %d\n", sum);
+    }
 }

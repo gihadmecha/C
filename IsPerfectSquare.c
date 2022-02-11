@@ -9,25 +9,30 @@ int main ()
     int num;
     int flag = 0;
 
-    printf("Enter a positive integer number: ");
-    scanf("%d", &num);
-
-    
-    for(int i = 1; i < num && flag == 0; i++)
+    while(1)
     {
-        if(i * i == num) 
+        flag = 0;
+        
+        printf("Enter a positive integer number: ");
+        scanf("%d", &num);
+
+
+        for(int i = 0; i <= num && flag == 0; i++)
         {
-            flag++;
+            if(i * i == num) 
+            {
+                flag++;
+            }
         }
-    }
 
 
-    if(flag != 0)
-    {
-        printf("perfect !! \n");
-    }
-    else 
-    {
-        printf("not perfect !! \n");
+        if(flag != 0)
+        {
+            printf("perfect !! \n");
+        }
+        else 
+        {
+            printf("not perfect !! \n");
+        }
     }
 }

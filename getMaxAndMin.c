@@ -12,37 +12,41 @@ int main ()
     signed int max;
     signed int min;
 
-    printf("Enter the No. of numbers: ");
-    scanf("%d", &NoOfNunbers);
-
-    if(NoOfNunbers <= 0)
+    while(1)
     {
-        return 0;
-    }
+        printf("Enter the No. of numbers: ");
+        scanf("%d", &NoOfNunbers);
 
-
-    printf("Enter number 1: ");
-    scanf("%d", &num);
-    max = num;
-    min = num;
-
-    for(int i = 2; i <= NoOfNunbers; i++)
-    {
-        printf("Enter number %d: ", i);
-        scanf("%d", &num);
-
-        if(num > max)
+        if(NoOfNunbers <= 0)
         {
-            max = num;
+            return 0;
         }
 
-        if(num < min)
-        {
-            min = num;
-        }
-    }
-    
 
-    printf("Max. = %d \n", max);
-    printf("Min. = %d \n", min);
+        for(int i = 1; i <= NoOfNunbers; ++i)
+        {
+            printf("Enter number %d: ", i);
+            scanf("%d", &num);
+
+            if(i == 1)
+            {
+                max = num;
+                min = num;
+            }
+
+            if(num > max)
+            {
+                max = num;
+            }
+
+            if(num < min)
+            {
+                min = num;
+            }
+        }
+        
+
+        printf("Max. = %d \n", max);
+        printf("Min. = %d \n", min);
+    }
 }
