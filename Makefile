@@ -1,5 +1,5 @@
-exeFile = xor
-sourceFile = xor.c
+exeFile = main
+sourceFile = main.c
 
 all:
 	gcc -o $(exeFile) $(sourceFile) 
