@@ -10,9 +10,10 @@ int main()
     signed int ar6[] = { 1,2,3,4,5,6,7};
     signed int ar7[] = { 11,12,13,14,15,16,17,18,19,20};
     signed int ar8[] = { 5, 2, 5, 4, 4, 1, 2, 1, 1, 6, 1};
-    signed int ar9[] = { 5,8,9,0,1,2,3,4,2,7,7,7,0,5,6,7,8,2,9,1};
+    signed int ar9[] = { 5,8,9,0,1,2,3,0,5,6,7,8,2,9,1};
     signed int ar10[] = {10,1,5,3,6,8,7,2};
     unsigned char ar11[] = {'a', 's','d', 'c','f','d','l','d', 'j','r','d', 'k'}; 
+    signed int ar12[] = { 1, 2, 3, 4, 9, 10, 11, 15, 16, 17, 18, 22, 23};
     signed int ar2[100];
 
     unsigned int arrSize = sizeof(arr) / sizeof(arr[0]);
@@ -26,6 +27,8 @@ int main()
     unsigned int ar9Size = sizeof(ar9) / sizeof(ar9[0]);
     unsigned int ar10Size = sizeof(ar10) / sizeof(ar10[0]);
     unsigned int ar11Size = sizeof(ar11) / sizeof(ar11[0]);
+    unsigned int ar12Size = sizeof(ar12) / sizeof(ar12[0]);
+
 
 
 
@@ -170,9 +173,17 @@ int main()
     array_print( arr, swappedSize);
     array_print( ar3, swappedSize);
 
+    unsigned int copySize = array_copy( ar2, ar12,  ar2Size, ar12Size);
+    array_print( ar2, copySize);
+
+
     double number = 3;
     unsigned int longest = array_longestChain( ar4, ar4Size , number);
     printf("longest chain of %lf: %u  \n", number, longest);
+
+    unsigned int sequence = array_longestSequenceChain( ar12, ar12Size);
+    printf("sequence: %u  \n", sequence);
+
 
     signed int num; 
     unsigned int longestOfAnyNumber =  array_longestChainOfAnyNumber( ar5, ar5Size , &num);

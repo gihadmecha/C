@@ -86,7 +86,7 @@ signed int array_mostRepeated( int* arr,  int size)
 
     for (unsigned int i = 0; i < size; i++)
     {
-        for (unsigned int j = 0; j < size; j++)
+        for (unsigned int j = i; j < size; j++)
         {
             if( *(arr + j) == *(arr + i) )
             {
@@ -178,6 +178,26 @@ unsigned int array_swap( signed int* arr, signed int* ar2,  signed int arrSize, 
     return size;
 }
 
+unsigned int array_copy( signed int* arr, signed int* ar2,  signed int arrSize, signed int ar2Size)
+{
+    unsigned int size;
+    if ( arrSize < ar2Size)
+    {
+        size = arrSize;
+    }
+    else
+    {
+        size = ar2Size;
+    }
+    
+    for (unsigned int i = 0; i < size; i++)
+    {
+        *(arr + i) = *(ar2 + i);
+    }
+
+    return size;
+}
+
 unsigned int array_longestChain(signed int* arr, double size , double number)
 {
     unsigned int count = 0;
@@ -191,6 +211,33 @@ unsigned int array_longestChain(signed int* arr, double size , double number)
         }
         else 
         {
+            if(longest < count)
+            {
+                longest = count;
+            }
+
+            count = 0;
+        }
+    }
+
+    return longest;
+}
+
+unsigned int array_longestSequenceChain(signed int* arr, double size)
+{
+    unsigned int count = 0;
+    unsigned int longest = 0;
+
+    for (unsigned int i = 0; i < size; i++)
+    {
+        if ( *(arr + i) + 1 == *( arr + (i + 1) )  )
+        {
+            count++;
+        }
+        else 
+        {
+            count++;
+
             if(longest < count)
             {
                 longest = count;
@@ -374,15 +421,15 @@ void array_zeroDetector ( signed int* arr)
     {
         if( *(arr + i) == 0)
         {
-            flag++;
-
-            if( flag == 1)
+            if( flag == 0)
             {
-                firstZeroIndex = i;                                                                                
+                firstZeroIndex = i; 
+                flag++;                                                                               
             }
-            else
+            else if ( i - firstZeroIndex > 3)
             {
                 secendZeroIndex = i;
+                flag++;
             }
         }
 
@@ -394,6 +441,8 @@ void array_zeroDetector ( signed int* arr)
         signed int swap = *(arr + firstZeroIndex + count);
         *(arr + firstZeroIndex + count) = *(arr + secendZeroIndex + count);
         *(arr + secendZeroIndex + count) = swap;
+
+        
     }  
 }
 
