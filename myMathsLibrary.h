@@ -663,3 +663,10 @@ unsigned long int xor ( unsigned int num_1, unsigned int num_2)
 
     return 200;
 }
+
+void swap ( signed int* num_1, signed int* num_2)
+{
+    signed int swap = *num_1;
+    *num_1 = *num_2;
+    *num_2 = swap;
+}

@@ -1,5 +1,7 @@
 
 #include "myArray.h"
+#include "myString.h"
+
 
 int main()
 {
@@ -15,6 +17,13 @@ int main()
     unsigned char ar11[] = {'a', 's','d', 'c','f','d','l','d', 'j','r','d', 'k'}; 
     signed int ar12[] = { 1, 2, 3, 4, 9, 10, 11, 15, 16, 17, 18, 22, 23};
     signed int ar2[100];
+
+    unsigned char str[] = "ahmed";
+    unsigned char str1[] = "giHad mohamed"; 
+    unsigned char str2[] = "gihad ";
+    unsigned char str3[] = " gihad  ali 1 2 fksl mohAmed";
+    unsigned char str5[] = "-2987";
+    unsigned char str4[100];
 
     unsigned int arrSize = sizeof(arr) / sizeof(arr[0]);
     unsigned int ar2Size = sizeof(ar2) / sizeof(ar2[0]);
@@ -216,4 +225,51 @@ int main()
 
     unsigned char mostRepeatedChar = array_mostRepeatedChar ( ar11, ar11Size);
     printf("most Repeated Char: %c \n", mostRepeatedChar);
+
+
+
+
+
+
+
+
+
+    string_print( str);
+    unsigned int length = string_len( str);
+    printf("string length: %u \n", length);
+
+    string_reverse(  str);
+    string_print( str);
+
+    unsigned int IsEqual = string_compare (  str1,  str2);
+    if (IsEqual)
+    {
+        printf("equal !! \n");
+    }
+    else
+    {
+        printf("not equal !! \n");
+    }
+
+    unsigned int longestWord = string_longest_counter ( str3);
+    printf("size of longest word: %u \n", longestWord);
+
+    string_longest ( str3, str4);
+    string_print( str4);
+
+    string_scan ( str4);
+    string_print( str4);
+
+    signed int intNumber = 0;
+    intToString( intNumber, str4);
+    string_print( str4);
+
+    signed int intFromChar = stringToInt ( str5);
+    printf("int From Char: %d \n", intFromChar);
+   
+   string_print( str1);
+   string_print( str2);
+   string_swap(  str1,  str2);
+   string_print( str1);
+   string_print( str2);
 }
