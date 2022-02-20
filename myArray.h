@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include "myMathsLibrary.h"
+#include <stdlib.h>
+
+#define NULLPTR (void *) 0
 
 void array_print( int* arr,  int size)
 {
@@ -20,6 +23,33 @@ signed int array_search( int* arr, int size , signed int number)
         }
     }
 
+    return -1;
+}
+
+//binary search
+signed int array_search_binary( int* arr, int size , signed int number)
+{
+    signed int first = 0;
+    signed int last = size - 1;
+
+    while (first <= last)
+    {
+        middle = (last + first) / 2;
+    
+        if (arr[middle] == number)
+        {
+            return middle;
+        }
+        else if (arr[middle] > number)
+        {
+            last = middle - 1;
+        }
+        else if (arr[middle] > number)
+        {
+            first = middle + 1;
+        }
+    }
+    
     return -1;
 }
 
@@ -112,37 +142,154 @@ signed int array_mostRepeated( int* arr,  int size)
     return mostRepeated;
 }
 
-unsigned char array_mostRepeatedChar ( unsigned char* arr, double size)
+//frequecy array
+signed int array_mostRepeated_2( signed int* arr, unsigned int size)
 {
-    unsigned int count = 0;
-    unsigned int max;
-    unsigned char mostRepeated;
+    signed int max;
+    signed int min;
+    signed int mostRepeated;
+    unsigned int count;
 
     for (unsigned int i = 0; i < size; i++)
     {
-        for (unsigned int j = i; j < size; j++)
+        if (i == 0)
         {
-            if( *(arr + j) == *(arr + i) )
-            {
-                count++;
-            }
+            max = *arr;
+            min = *arr;
         }
 
-        if ( i == 0)
+        if ( arr[i] > max)
         {
-            mostRepeated = *arr;
-            max = count;
+            max = arr[i];
         }
-
-        if ( count > max)
+        
+        if ( arr[i] < min )
         {
-            mostRepeated = *(arr + i);
-            max = count;
+            min = arr[i];
         }
-
-        count = 0;
     }
 
+    unsigned int* counter = (unsigned int*) calloc ( ((max - min) + 1) , sizeof(unsigned int) );
+    if (counter == NULLPTR)
+    {
+        
+        unsigned int count = 0;
+        unsigned int max;
+        signed int mostRepeated;
+
+        for (unsigned int i = 0; i < size; i++)
+        {
+            for (unsigned int j = i; j < size; j++)
+            {
+                if( *(arr + j) == *(arr + i) )
+                {
+                    count++;
+                }
+            }
+
+            if ( i == 0)
+            {
+                mostRepeated = *arr;
+                max = count;
+            }
+
+            if ( count > max)
+            {
+                mostRepeated = *(arr + i);
+                max = count;
+            }
+
+            count = 0;
+        }
+
+        return mostRepeated;
+        
+    }
+
+    for (unsigned int i = 0; i < size; i++)
+    {
+       counter[arr[i] - min]++;
+    }
+
+    for (unsigned int i = 0; i < (max - min) + 1; i++)
+    {
+       if (i == 0)
+        {
+            mostRepeated = i + min;
+            count = *counter;
+        }
+
+        if ( counter[i] > count)
+        {
+            mostRepeated = i + min;
+            count = counter[i];
+        }
+    }
+
+    free(counter);
+
+    return mostRepeated;
+}
+
+//frequecy array
+unsigned int array_mostRepeated_mono( unsigned int* arr,  double size)
+{
+    unsigned int max;
+    unsigned int mostRepeated;
+
+    unsigned int counter[10] = {0};
+
+    for (unsigned int i = 0; i < size && arr[i] >= 0 && arr[i] <= 9 ; i++)
+    {
+        counter[arr[i]]++;
+    }
+
+    for(unsigned int i = 0; i <= 9; i++)
+    {
+        if (i == 0)
+        {
+            max = counter[i];
+            mostRepeated = i;
+        }
+
+        if( counter[i] > max)
+        {
+            max = counter[i];
+            mostRepeated = i;
+        }        
+     }
+    
+    return mostRepeated;
+}
+
+//frequecy array
+unsigned char array_mostRepeatedChar ( unsigned char* arr, double size)
+{
+    unsigned int max;
+    unsigned int mostRepeated;
+
+    unsigned int counter[256] = {0};
+
+    for (unsigned int i = 0; i < size; i++)
+    {
+        counter[arr[i]]++;
+    }
+
+    for(unsigned int i = 0; i < 256; i++)
+    {
+        if (i == 0)
+        {
+            max = counter[i];
+            mostRepeated = i;
+        }
+
+        if( counter[i] > max)
+        {
+            max = counter[i];
+            mostRepeated = i;
+        }        
+     }
+    
     return mostRepeated;
 }
 
@@ -335,19 +482,49 @@ unsigned int array_removePrime( int* arr, int size)
     return count;
 }
 
-void array_removeRepeatedNumbers  ( signed int* arr, double size)
+unsigned int array_removeRepeatedNumbers  ( signed int* arr, double size, signed int* newArr, double maxSize)
 {
+    unsigned int j = 0;
+    unsigned int newSize = 0;
+
     for (unsigned int i = 0; i < size; i++)
     {
-        for (unsigned int j = 0; j < size; j++)
+        if(i == 0)
         {
-            if( *(arr + i) == *(arr + j) &&  i != j)
+            *(newArr + j) = *(arr + i);
+
+            i++;
+
+            if (j < maxSize)
             {
-               *(arr + j) = 0; 
-               *(arr + i) = 0;
+                j++;
+            }
+            else
+            {
+                return j;
+            }
+        }
+
+        if ( *(arr + i) == *(arr + (i - 1)))
+        {
+            
+        }
+        else 
+        {
+            *(newArr + j) = *(arr + i);
+
+            if (j < maxSize)
+            {
+                j++;
+            }
+            else
+            {
+                return j;
             }
         }
     }
+
+    return j;
 }
 
 double array_scan( int* arr, int maxSize)

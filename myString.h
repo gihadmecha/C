@@ -198,3 +198,50 @@ void string_swap( unsigned char* str1, unsigned char* str2)
     str1[i] = 0;
     str2[i] = 0;
 }
+
+
+
+
+//freqency array
+unsigned char string_firstRepeated( unsigned char* str)
+{
+    unsigned int counter[256] = {0};
+
+    for (unsigned int i = 0; str[i]; i++)
+    {
+        counter[str[i]]++;
+        for (unsigned int i = 0; i < 256; i++)
+        {
+            if (counter[str[i]] == 2)
+            {
+                return str[i];
+            }
+            
+        }
+
+    }
+
+    return -1;
+}
+
+//frequency array
+void array_removeRepeatedchars  ( unsigned char* str, unsigned char* newStr, double maxSize)
+{
+    unsigned int counter[256] = {0};
+    unsigned int j = 0;
+
+    for (unsigned int i = 0; str[i]; i++)
+    {
+        counter[str[i]]++;
+
+        if (counter[str[i]] == 1)
+        {
+            if (j < maxSize)
+            {
+                *(newStr + j) = str[i];
+                j++;
+                *(newStr + j) = 0;
+            }
+        } 
+    }
+}

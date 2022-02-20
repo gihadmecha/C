@@ -16,13 +16,17 @@ int main()
     signed int ar10[] = {10,1,5,3,6,8,7,2};
     unsigned char ar11[] = {'a', 's','d', 'c','f','d','l','d', 'j','r','d', 'k'}; 
     signed int ar12[] = { 1, 2, 3, 4, 9, 10, 11, 15, 16, 17, 18, 22, 23};
+    signed int ar13[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9, 3, 4, 5, 6, 7, 8, 9, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9, 5, 6, 7, 8};
+    signed int ar14[] = {1,2,2,3,3,3,3,4,4,4,4,4,5,5,5};
+    signed int ar15[] = { 3, 4, -100, 50, 1, -10, 200, 4, -6};
     signed int ar2[100];
 
     unsigned char str[] = "ahmed";
-    unsigned char str1[] = "giHad mohamed"; 
+    unsigned char str1[] = "ggiHad mohamed"; 
     unsigned char str2[] = "gihad ";
     unsigned char str3[] = " gihad  ali 1 2 fksl mohAmed";
     unsigned char str5[] = "-2987";
+    unsigned char str6[] = "giHamd mohamed";
     unsigned char str4[100];
 
     unsigned int arrSize = sizeof(arr) / sizeof(arr[0]);
@@ -37,6 +41,10 @@ int main()
     unsigned int ar10Size = sizeof(ar10) / sizeof(ar10[0]);
     unsigned int ar11Size = sizeof(ar11) / sizeof(ar11[0]);
     unsigned int ar12Size = sizeof(ar12) / sizeof(ar12[0]);
+    unsigned int ar13Size = sizeof(ar13) / sizeof(ar13[0]);
+    unsigned int ar14Size = sizeof(ar14) / sizeof(ar14[0]);
+    unsigned int ar15Size = sizeof(ar15) / sizeof(ar15[0]);
+
 
 
 
@@ -141,6 +149,7 @@ int main()
 
 
 
+
     array_print( arr, 5);
 
     signed int elementIndex = array_search( arr, 5 , 5);
@@ -171,6 +180,12 @@ int main()
 
     signed int mostRepeatedElement = array_mostRepeated( arr,  arrSize);
     printf("the Most Repeated Element: %d  \n", mostRepeatedElement);
+
+    signed int mostRepeatedElement_2 = array_mostRepeated_2( ar15,  ar15Size);
+    printf("the Most Repeated Element 2: %d  \n", mostRepeatedElement_2);
+
+    signed int max_mono = array_mostRepeated_mono(  ar13,   ar13Size);
+    printf("the Most Repeated mono: %u  \n", max_mono);
 
     array_print( arr, arrSize);
     array_reverse( arr,  arrSize);
@@ -207,8 +222,9 @@ int main()
     array_print( arr, 5);
     printf("prime counter: %u  \n", noOfPrimes);
 
-    array_removeRepeatedNumbers  ( ar8, arrSize);
-    array_print( ar8, arrSize);
+    array_print( ar14, ar14Size);
+    unsigned int newArray = array_removeRepeatedNumbers (  ar14, ar14Size, ar2, ar2Size);
+    array_print( ar2, newArray);
 
 
     signed int size = array_scan( ar2, 100);
@@ -225,6 +241,8 @@ int main()
 
     unsigned char mostRepeatedChar = array_mostRepeatedChar ( ar11, ar11Size);
     printf("most Repeated Char: %c \n", mostRepeatedChar);
+
+
 
 
 
@@ -272,4 +290,16 @@ int main()
    string_swap(  str1,  str2);
    string_print( str1);
    string_print( str2);
+
+
+
+
+
+   signed char firstRepeated = string_firstRepeated( str6);
+   printf("first Repeated Char: %c \n", firstRepeated);
+
+   array_removeRepeatedchars  (  "Mohamed kamel",  str4, 100);
+   string_print( str4);
+
+
 }
