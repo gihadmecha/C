@@ -13,6 +13,46 @@ void array_print( int* arr,  int size)
     printf("\n");
 }
 
+signed int array_getMax (signed int* arr, double size)
+{
+    signed int max;
+
+    for (unsigned int i = 0; i < size; i++)
+    {
+        if ( i == 0)
+        {
+            max = *arr;
+        }
+
+        if ( *(arr + i) > max)
+        {
+            max = *(arr + i);
+        }
+    }
+    
+    return max;
+}
+
+signed int array_getMin (signed int* arr, double size)
+{
+    signed int min;
+
+    for (unsigned int i = 0; i < size; i++)
+    {
+        if ( i == 0)
+        {
+            min = *arr;
+        }
+
+        if ( *(arr + i) < min)
+        {
+            min = *(arr + i);
+        }
+    }
+    
+    return min;
+}
+
 signed int array_search( int* arr, int size , signed int number)
 {
     for (unsigned int i = 0; i < size; i++)
@@ -31,6 +71,7 @@ signed int array_search_binary( int* arr, int size , signed int number)
 {
     signed int first = 0;
     signed int last = size - 1;
+    signed int middle;
 
     while (first <= last)
     {

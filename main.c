@@ -27,6 +27,8 @@ int main()
     unsigned char str3[] = " gihad  ali 1 2 fksl mohAmed";
     unsigned char str5[] = "-2987";
     unsigned char str6[] = "giHamd mohamed";
+    unsigned char str7[] = "I work as an embedded software engineer for 3 years";
+    unsigned char str8[] = "ahmed mohamed ali kamel";
     unsigned char str4[100];
 
     unsigned int arrSize = sizeof(arr) / sizeof(arr[0]);
@@ -259,6 +261,20 @@ int main()
     string_reverse(  str);
     string_print( str);
 
+    string_reverseWordsInSentence ( str7);
+    string_print( str7);
+
+
+    unsigned int mirror = IsMirror ( "SalelaSnklfsd");
+    if (mirror)
+    {
+        printf("mirror !! \n");
+    }
+    else
+    {
+        printf("not mirror !! \n");
+    }    
+
     unsigned int IsEqual = string_compare (  str1,  str2);
     if (IsEqual)
     {
@@ -290,7 +306,17 @@ int main()
    string_swap(  str1,  str2);
    string_print( str1);
    string_print( str2);
+ 
+   
+   string_print( tringle ( "21 21 21 ") );
 
+   string_doubleToString ( -3.45, str4);
+   string_print( str4); 
+    
+   replace ( str8, "ali", "ayman", str4);
+   string_print( str4);
+
+   application ( "hi,5,hello,12");
 
 
 
@@ -300,6 +326,4 @@ int main()
 
    array_removeRepeatedchars  (  "Mohamed kamel",  str4, 100);
    string_print( str4);
-
-
 }
