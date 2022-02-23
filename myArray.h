@@ -109,44 +109,50 @@ signed int array_searchlastIndex( int* arr, int size , int number)
     return index;
 }
 
-signed int array_max( int* arr, double size)
+signed int array_maxIndex( int* arr, double size)
 {
     signed int max;
+    unsigned int maxIndex;
 
     for (unsigned int i = 0; i < size; i++)
     {
         if (i == 0)
         {
             max = *arr;
+            maxIndex = i;
         }
 
         if (max < *(arr + i))
         {
             max = *(arr + i);
+            maxIndex = i;
         } 
     }
 
-    return max;
+    return maxIndex;
 }
 
-signed int array_min( int* arr, double size)
+signed int array_minIndex( int* arr, double size)
 {
     signed int min;
+    unsigned int minIndex;
 
     for (unsigned int i = 0; i < size; i++)
     {
         if (i == 0)
         {
             min = *arr;
+            minIndex = i;
         }
 
         if (min > *(arr + i))
         {
             min = *(arr + i);
+            minIndex = i;
         } 
     }
 
-    return min;
+    return minIndex;
 }
 
 signed int array_mostRepeated( int* arr,  int size)
@@ -852,11 +858,68 @@ unsigned int array_searchAndReturnPreviousElements ( signed int* arr, double siz
 //sorting
 void array_bubbleSort ( signed int* arr, double size)
 {
+    unsigned int sortedFlag = 0;
 
+    for (unsigned int j = 0; j < size; j++)
+    {
+        sortedFlag = 0;
+
+        for (unsigned int i = 0; i < size - 1 - j; i++)
+        {
+            if ( arr[i] > arr[i + 1])
+            {
+                swap ( arr + i, arr + i + 1);
+                sortedFlag++;
+            }
+        }
+        if ( sortedFlag == 0)
+        {
+            return;
+        }
+        
+    }
+    
 }
 
 //sorting
 void array_selectionSort ( signed int* arr, double size)
 {
+    for (unsigned int j = 0; j < size; j++)
+    {
+        signed int maxIndex = array_maxIndex( arr, size   - j);
+
+        swap ( arr + maxIndex, arr + (unsigned int)size - 1 - j );
+    } 
+}
+
+//sorting
+void array_countingSort ( signed int* arr, double size)
+{
+    signed int max = array_getMax ( arr,  size);
+    signed int min = array_getMin ( arr,  size);
     
+    unsigned int counterSize = ((max - min) + 1);
+
+    unsigned int* counter = (unsigned int*) calloc ( counterSize, sizeof(unsigned int) );
+
+    if (counter != NULLPTR)
+    {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            counter[arr[i] - min]++;
+        }
+
+        unsigned int arrIndex = 0;
+        for (unsigned int i = 0; i < counterSize; i++)
+        {
+            for (unsigned int j = 0; j < counter[i]; j++)
+            {
+                arr[arrIndex] = i + min;
+                arrIndex++;
+            }
+            
+        }
+    }
+
+    free(counter);
 }
