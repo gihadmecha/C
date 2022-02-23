@@ -19,6 +19,9 @@ int main()
     signed int ar13[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9, 3, 4, 5, 6, 7, 8, 9, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9, 5, 6, 7, 8};
     signed int ar14[] = {1,2,2,3,3,3,3,4,4,4,4,4,5,5,5};
     signed int ar15[] = { 3, 4, -100, 50, 1, -10, 200, 4, -6};
+    signed int ar16[] = {0, 1, 2, 3, 4, 5, 5, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 9, 100};
+    signed int ar17[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 8, 9, 10};
+    signed int ar18[] = { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 7, 8, 8, 9, 9, 10, 10};
     signed int ar2[100];
 
     unsigned char str[] = "ahmed";
@@ -46,6 +49,9 @@ int main()
     unsigned int ar13Size = sizeof(ar13) / sizeof(ar13[0]);
     unsigned int ar14Size = sizeof(ar14) / sizeof(ar14[0]);
     unsigned int ar15Size = sizeof(ar15) / sizeof(ar15[0]);
+    unsigned int ar16Size = sizeof(ar16) / sizeof(ar16[0]);
+    unsigned int ar17Size = sizeof(ar17) / sizeof(ar17[0]);
+    unsigned int ar18Size = sizeof(ar18) / sizeof(ar18[0]);
 
 
 
@@ -244,10 +250,23 @@ int main()
     unsigned char mostRepeatedChar = array_mostRepeatedChar ( ar11, ar11Size);
     printf("most Repeated Char: %c \n", mostRepeatedChar);
 
+    signed int missedNumber = array_findMissedNumber ( ar16, ar16Size);
+    printf("the missed number: %d \n", missedNumber);
 
+    signed int repeatedNumber = array_findRepeatedNumber ( ar16, ar16Size);
+    printf("the repeated Number: %d \n", repeatedNumber);                                        
 
+    signed int oneRepeatedNumber = array_findNoRepeatedNumber ( ar17, ar17Size);
+    printf("the one repeated Number: %d \n", oneRepeatedNumber); 
 
+    signed int oneRepeatedNumber_2 =  array_findNoRepeatedNumber_2 ( ar17, ar17Size);
+    printf("the one repeated Number 2: %d \n", oneRepeatedNumber_2);
 
+   // signed int oneRepeatedNumberFromSortedArray = array_findNoRepeatedNumberFromSortedArray ( ar18, ar18Size);
+   // printf("the one repeated Number from sorted array: %d \n", oneRepeatedNumberFromSortedArray); 
+
+    unsigned int newSize = array_searchAndReturnPreviousElements ( ar18, ar18Size, ar2,  ar2Size, 7);
+    array_print( ar2, newSize);
 
 
 
@@ -313,7 +332,7 @@ int main()
    string_doubleToString ( -3.45, str4);
    string_print( str4); 
     
-   replace ( str8, "ali", "ayman", str4);
+   replace ( "ahmed mohamed ali kamel", "ali", "ayman", str4);
    string_print( str4);
 
    application ( "hi,5,hello,12");

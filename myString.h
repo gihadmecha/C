@@ -50,12 +50,13 @@ void string_reverseWordsInSentence ( signed char* str)
     {
         for ( last = first; str[last] != ' ' && str[last] ; last++);
 
-        for (unsigned int i = first; i <= (first + (last - 1 )) / 2; i++)
-        {
-            signed int swap = *(str + i);
-            *(str + i) = *(str + (last - 1) - (i - first));
-            *(str + (last - 1) - (i - first)) = swap;
-        }
+        array_reverseChar( str + first,  last - first);
+        // for (unsigned int i = first; i <= (first + (last - 1 )) / 2; i++)
+        // {
+        //     signed int swap = *(str + i);
+        //     *(str + i) = *(str + (last - 1) - (i - first));
+        //     *(str + (last - 1) - (i - first)) = swap;
+        // }
         
         if( str[last])
         {
@@ -396,6 +397,8 @@ void replace (unsigned char* str1, unsigned char* str2, unsigned char* str3, uns
             counter++;
         }
 
+        str4[counter] = 0;
+
         j = 0;
     }
 }
@@ -437,6 +440,8 @@ void application ( unsigned char* str)
         j = 0;
     } 
 }
+
+
 
 
 //freqency array
@@ -482,3 +487,4 @@ void array_removeRepeatedchars  ( unsigned char* str, unsigned char* newStr, dou
         } 
     }
 }
+

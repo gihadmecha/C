@@ -344,6 +344,16 @@ void array_reverse( signed int* arr,  signed int size)
     }
 }
 
+void array_reverseChar( signed char* arr,  signed int size)
+{
+    for (unsigned int i = 0; i < size / 2; i++)
+    {
+        signed int swap = *(arr + i);
+        *(arr + i) = *(arr + size - (1 + i));
+        *(arr + size - (1 + i)) = swap;
+    }
+}
+
 unsigned int array_swap( signed int* arr, signed int* ar2,  signed int arrSize, signed int ar2Size)
 {
     unsigned int size;
@@ -692,3 +702,161 @@ signed int array_biggestDifferenceBetweenTwoElement( signed int* arr, double siz
     return biggest;
 }
 
+//frequency array
+signed int array_findMissedNumber ( signed int* arr, double size)
+{
+    signed int counter[100] = {0};
+
+    for (unsigned int i = 0; i < size; i++)
+    {
+        counter[arr[i]]++;
+    }
+    
+    for (unsigned int i = 0; i <= 100; i++)
+    {
+        if ( counter[i] == 0)
+        {
+            return i;
+        }
+    } 
+}
+
+//frequency array
+signed int array_findRepeatedNumber ( signed int* arr, double size)
+{
+    signed int counter[100] = {0};
+
+    for (unsigned int i = 0; i < size; i++)
+    {
+        counter[arr[i]]++;
+    }
+    
+    for (unsigned int i = 0; i <= 100; i++)
+    {
+        if ( counter[i] > 1)
+        {
+            return i;
+        }
+    } 
+}
+
+//frequency array
+signed int array_findNoRepeatedNumber ( signed int* arr, double size)
+{
+    signed int max = array_getMax ( arr, size);
+    signed int min = array_getMin ( arr, size);
+
+    unsigned int rangeSize = (max - min) + 1;
+
+    signed int* counter = (signed int*) calloc (rangeSize, sizeof(signed int));
+
+    if (counter != NULLPTR)
+    {
+        for (unsigned int i = 0; i < size; i++)
+        {
+            counter[ arr[i] - min ]++;
+        }
+        
+        for (unsigned int i = 0; i <= 100; i++)
+        {
+            if ( counter[i] == 1)
+            {
+                return i + min;
+            }
+        } 
+    }
+
+    free(counter);
+}
+
+
+signed int array_findNoRepeatedNumber_2 ( signed int* arr, double size)
+{
+    signed int result = 0;
+
+    for (unsigned int i = 0; i < size; i++)
+    {
+        result ^= arr[i];
+    }
+
+    return result;
+}
+
+//binary search
+// signed int array_findNoRepeatedNumberFromSortedArray ( signed int* arr, double size)
+// {
+//     signed int first = 0;
+//     signed int last = size - 1;
+//     signed int middle;
+
+//     while ( first < last)
+//     {
+//         middle = ( first + last ) / 2;
+
+//         if ( arr[middle] != arr[middle + 1] && arr[middle] != arr[middle - 1])
+//         {
+//             return arr[middle];
+//             printf("%d \n ", arr[middle]);
+//         }
+//         else
+//         {
+//             last = middle - 1;
+//             middle = ( first + last ) / 2;
+//             printf("not: %d \n", arr[middle]);
+//         }
+//     }
+    
+//     last = size - 1;
+
+//     while ( first < last)
+//     {
+//         middle = ( first + last ) / 2;
+
+//         if ( arr[middle] != arr[middle + 1] && arr[middle] != arr[middle - 1])
+//         {
+//             return arr[middle];
+//             printf("%d \n ", arr[middle]);
+//         }
+//         else
+//         {
+//             first = middle + 1;
+//             middle = ( first + last ) / 2;
+//             printf("not: %d \n", arr[middle]);
+//         }
+//     }
+// }
+
+unsigned int array_searchAndReturnPreviousElements ( signed int* arr, double size, signed int* ar2, double ar2Size, double number)
+{
+    for (unsigned int i = 0; i < size; i++)
+    {
+        if ( *(arr + i) == number)
+        {
+            return i;
+        }
+        else
+        {
+            if( i < ar2Size )
+            {
+                ar2[i] = arr[i];
+            }
+            else
+            {
+                return i;
+            }
+        }
+    }
+}
+
+
+//sorting
+void array_bubbleSort ( signed int* arr, double size)
+{
+
+}
+
+//sorting
+void array_selectionSort ( signed int* arr, double size)
+{
+    
+}
