@@ -1,5 +1,5 @@
-exeFile = main
-sourceFile = main.c
+exeFile = swap_example
+sourceFile = swap_example.c
 
 all:
 	gcc -o $(exeFile) $(sourceFile) 
