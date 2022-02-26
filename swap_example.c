@@ -72,10 +72,10 @@ int main ()
     //swap_pointer ( &p1, &p2);
     //swap_withPointerToPointer ( &p1, &p2);
     //swap_variantTypePointers ( &p3, &p2);
-    swap_withVariantTypePointers ( &p3, &p2);
+    //swap_withVariantTypePointers ( &p3, &p2);
 
     // swap_variantTypePointers ( &p1, &p2);
-    //swap_withVariantTypePointers ( &p1, &p2);
+    swap_withVariantTypePointers ( &p1, &p2);
 
     printf ("%d     %u      %u\n", x, &x, p1);
     printf ("%d     %u      %u\n", y, &y, p2);

@@ -1,5 +1,5 @@
-exeFile = swap_example
-sourceFile = swap_example.c
+exeFile = arrayOfPointers
+sourceFile = arrayOfPointers.c
 
 all:
 	gcc -o $(exeFile) $(sourceFile) 
