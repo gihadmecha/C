@@ -1,5 +1,5 @@
-exeFile = 2D_array
-sourceFile = 2D_array.c
+exeFile = sizeOf
+sourceFile = sizeOf.c
 
 all:
 	gcc -o $(exeFile) $(sourceFile) 
