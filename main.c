@@ -1,13 +1,7 @@
 
  #include "myArray.h"
  #include "myString.h"
-
-
-struct parent {
-    unsigned int ID; 
-    unsigned int age; 
-    char name [7];
-};
+ #include "struct.h"
 
 // struct parent {
 //     char name[7];
@@ -391,11 +385,39 @@ int main()
 
 printf("%d \n", sizeof(int));
 printf("%d \n", sizeof(struct parent));
+printf("%d \n", sizeof(struct student) );
 printf("\n");
 int x = 5;
 
-struct parent parent1 = {1000, 300,"Ali"};
+struct parent parent1 = {1000,  "Ali"};
 struct parent parent2, parent3, parent4;
+struct parent parent5 = {11,  "mona"};
+
+student s1 = { "laila", 586, parent1, parent5};
+student school [5] = {  s1};
+
+parent_print ( parent1);
+parent_printByRef ( &parent1);
+printf("\n");
+printf("\n");
+student_arrprint ( school,  5);
+printf("\n");
+printf("\n");
+
+student s2;
+// s2 = student_scan ( );
+// student_printByRef ( &s2);
+// printf("\n");
+// printf("\n");
+
+student* ps;
+ps = student_scanReturnRef ( &s2);
+student_printByRef ( &s2);
+
+printf("\n");
+printf("\n");
+
+
 
 //printf("%u     \n"             ,      &&parent1);
 
@@ -407,61 +429,43 @@ printf("%u     \n"               ,      parent1   );
 //printf("%c\n", *parent1);
 printf("\n");
 
-//printf("%u     \n"             ,      &&(parent1.ID));
+//printf("%u     \n"             ,      &&(parent1.number));
 
-printf("%u     \n"               ,      &(parent1.ID));
+printf("%u     \n"               ,      &(parent1.number));
 printf("%u     \n"               ,      100.i  );
-printf("%u     \n"               ,      &parent1.ID  );
-printf("%u     \n"               ,      &(parent1).ID);
+printf("%u     \n"               ,      &parent1.number  );
+printf("%u     \n"               ,      &(parent1).number);
 
-printf("%u     \n"               ,      *(&(parent1.ID))     );
-printf("%u     \n"               ,      *(&parent1.ID)       );
-
-
-//printf("%u     \n"               ,      *(&parent1).ID   );
-//printf("%u     \n"               ,      *((&(parent1)).ID) );
+printf("%u     \n"               ,      *(&(parent1.number))     );
+printf("%u     \n"               ,      *(&parent1.number)       );
 
 
+//printf("%u     \n"               ,      *(&parent1).number   );
+//printf("%u     \n"               ,      *((&(parent1)).number) );
 
-printf("%u     \n"               ,      (*(&parent1)).ID   );
-printf("%u     \n"               ,      (&parent1)->ID     );
 
-// printf("%u     \n"               ,      &(parent1)->ID       );
-// printf("%u     \n"               ,      &((parent1)->ID)      );
 
-printf("%u     \n"               ,      parent1.ID   );
-printf("%u     \n"               ,      1000.ID   );
+printf("%u     \n"               ,      (*(&parent1)).number   );
+printf("%u     \n"               ,      (&parent1)->number     );
+
+// printf("%u     \n"               ,      &(parent1)->number       );
+// printf("%u     \n"               ,      &((parent1)->number)      );
+
+printf("%u     \n"               ,      parent1.number   );
+//printf("%u     \n"               ,      1000.number   );
 
 //printf("%c\n", *(parent1.ID));
-//printf("%c\n"                    ,      *(parent1).ID);
-//printf("%c\n"                    ,        *parent1.ID);
+//printf("%c\n"                    ,      *(parent1).number);
+//printf("%c\n"                    ,        *parent1.number);
 printf("\n");
 
 //printf("%u     \n"               ,      parent1 + 1  );
 
-printf("%u     \n"               ,      parent1.ID + 1  );
-printf("%u     \n"               ,      &parent1.ID + 1  );
+printf("%u     \n"               ,      parent1.number + 1  );
+printf("%u     \n"               ,      &parent1.number + 1  );
 
 printf("%u     \n"               ,      &parent1 + 1  );
 
-
-
-
-
-//printf("%u     \n"             ,      &&(parent1.age));
-printf("%u     \n"               ,      &(parent1.age));
-printf("%u     \n"               ,      &parent1.age  );
-printf("%u     \n"               ,      &(parent1).age);
-printf("%u     \n"               ,      *(&(parent1.age)));
-printf("%u     \n"               ,      *(&parent1.age)  );
-//printf("%u     \n"               ,      *(&(parent1)).age);
-printf("%u     \n"               ,      (*(&(parent1))).age);
-printf("%u     \n"               ,      (&(parent1))->age);
-printf("%u     \n"               ,      parent1.age   );
-//printf("%c\n", *(parent1.age));
-//printf("%c\n"                    ,      *(parent1).age);
-//printf("%c\n"                    ,        *parent1.age);
-printf("\n");
 
 
 
