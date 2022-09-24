@@ -1,0 +1,50 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-o",
+      "main",
+      "myMaths.c"
+    ],
+    "directory": "/home/smalinux/Documents/myGithub/C-main",
+    "file": "/home/smalinux/Documents/myGithub/C-main/myMaths.c",
+    "output": "/home/smalinux/Documents/myGithub/C-main/main"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-o",
+      "main",
+      "myArray.c"
+    ],
+    "directory": "/home/smalinux/Documents/myGithub/C-main",
+    "file": "/home/smalinux/Documents/myGithub/C-main/myArray.c",
+    "output": "/home/smalinux/Documents/myGithub/C-main/main"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-o",
+      "main",
+      "myString.c"
+    ],
+    "directory": "/home/smalinux/Documents/myGithub/C-main",
+    "file": "/home/smalinux/Documents/myGithub/C-main/myString.c",
+    "output": "/home/smalinux/Documents/myGithub/C-main/main"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-o",
+      "main",
+      "main.c"
+    ],
+    "directory": "/home/smalinux/Documents/myGithub/C-main",
+    "file": "/home/smalinux/Documents/myGithub/C-main/main.c",
+    "output": "/home/smalinux/Documents/myGithub/C-main/main"
+  }
+]

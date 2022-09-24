@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+double addTwoNumbers (  double num1, double num2);
+signed int addIntegersBetweenTwoIntegers (signed int num1, signed int num2);
+signed int multiplyTwoNumbers (  signed int num1, signed int num2);
+signed int reminder (   signed int Numerator,   signed int Denominator);
+double power (  double base, signed int power);
+double factorial (  signed int number);
+signed int IsPrime (    double number);
+signed int IsPerfectSquare (    double number);
+signed int IsBaseOf2 ( double number);
+signed int sumDigits (  double number);
+double circle ( double radius, double* circumference);
+double reverseNumber (  double number);
+signed int onesCounter (   unsigned int number);
+unsigned char reverseBinaryPresentation ( unsigned char number);
+double sumFromNumberToAnotherWithoutLoop (  double number1, double number2);
+unsigned int setBit (   unsigned int number, unsigned int bit);
+unsigned int clearBit (  unsigned int number, unsigned int bit);
+unsigned int toggleBit (    unsigned int number, unsigned int bit);
+unsigned int readBit (  unsigned int number, unsigned int bit);
+signed int maxNumberOfZeroes (signed int number);
+signed int IsPowerOf3 ( signed int number);
+void swap (signed int* number1, signed int* number2);
+void swap_char (unsigned char* character1, unsigned char* character2);
+void swap_Pointers ( signed int** pointer1, signed int** pointer2);
+signed int fibonacci (signed int noOfTerms);
+void printBinaryPresentationOfNumber ( signed int number);
+double getMax();
+double getMin();
+double addNumbers();
+double addEVenNumbers ( );
+unsigned int poster ( double num);
+char charExample ( double num, char character);
+unsigned long int xor ( unsigned int num_1, unsigned int num_2);
