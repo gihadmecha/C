@@ -32,6 +32,28 @@ signed int array_search ( signed int arr[], signed int size, signed int number)
     return -1;
 }
 
+//binary search
+signed int array_sorted_search ( signed int arr[], signed int size, signed int number)
+{
+    signed int firstElementIndex = 0;
+    signed int lastElementIndex = size - 1;
+    signed int middleElementIndex;
+
+    while ( firstElementIndex  < lastElementIndex )
+    {
+        middleElementIndex = (lastElementIndex + firstElementIndex) / 2;
+
+        if ( arr[middleElementIndex] == number )
+            return middleElementIndex;
+        else if ( number < arr[middleElementIndex] )
+            lastElementIndex = middleElementIndex - 1;
+        else if ( arr[middleElementIndex] < number )
+            firstElementIndex = middleElementIndex + 1;
+    }
+
+    return -1;
+}
+
 signed int array_searchLastIndexOfNumber ( signed int arr[], signed int size, signed int number)
 {
     signed int lastNumberIndex = -1;
@@ -148,6 +170,127 @@ signed int array_mostRepeatedNumber (signed int arr[], signed int size)
     return mostRepeatedNumber;
 }
 
+//frequency array
+signed int array_oOfN_mostRepeatedNumber ( signed int arr[], signed int arrSize)
+{
+    signed int* repeatsCounter;
+    signed int minElement = arr[0];
+    signed int maxElement = arr[0];
+    signed int maxRepeats = 0;
+    signed int mostRepeatedNumber;
+
+    for (signed int arrIndex = 0; arrIndex < arrSize; arrIndex++)
+    {
+        if (minElement > arr[arrIndex])
+            minElement = arr[arrIndex];
+        
+        if (maxElement < arr[arrIndex])
+            maxElement = arr[arrIndex];
+    }
+
+    signed int numbersRange = ( (maxElement + 1) - minElement );
+
+    repeatsCounter = (signed int*) calloc (numbersRange, sizeof (int));
+    
+    for (signed int arrIndex = 0; arrIndex < arrSize; arrIndex++)
+    {
+        repeatsCounter[ arr[arrIndex] - minElement ]++;
+    }
+    
+    for (signed int repeatsCounterIndex = 0; repeatsCounterIndex < numbersRange; repeatsCounterIndex++)
+    {
+        if ( maxRepeats < repeatsCounter[ repeatsCounterIndex ] )
+        {
+            maxRepeats = repeatsCounter[ repeatsCounterIndex ];
+            mostRepeatedNumber = repeatsCounterIndex + minElement;
+        }
+    }
+
+    free (repeatsCounter);
+    
+    return mostRepeatedNumber;
+}
+
+//frequency array
+signed int array_oOfN_mostRepeatedMono ( signed int arr[], signed int arrSize)
+{
+    signed int monoes[10] = {0};
+    signed int monoesSize = sizeof (monoes) / sizeof (monoes[0]);
+    signed int maxNoOfRepeats = 0;
+    signed int mostRepeatedMono;
+
+    for ( signed int arrIndex = 0; arrIndex < arrSize; arrIndex++)
+    {
+        monoes[ arr[arrIndex] ]++;
+    }
+
+    for (signed int monoesIndex = 0; monoesIndex < monoesSize; monoesIndex++)
+    {
+        if ( maxNoOfRepeats < monoes[monoesIndex] )
+        {
+            maxNoOfRepeats = monoes[monoesIndex];
+            mostRepeatedMono = monoesIndex;
+        }
+    }
+
+    return mostRepeatedMono;
+}
+
+signed char array_mostRepeatedChar ( signed char arr[], signed int size, signed int* noOfRepeats)
+{
+    signed int numberCounter = 0;
+
+    // number initialization = ?
+    signed char number;
+
+    *noOfRepeats = 0;
+
+    for (signed int index_i = 0; index_i < size; index_i++)
+    {
+        for (signed int index_j = index_i; index_j < size; index_j++)
+        {
+            if ( *(arr + index_j) == *(arr + index_i) )
+                numberCounter++;
+        }
+
+        if (*noOfRepeats < numberCounter)
+        {
+            *noOfRepeats = numberCounter;
+            number = *(arr + index_i);
+        }
+
+        numberCounter = 0;
+    }
+    
+    return number;
+}
+
+//signed int array_sorted_mostRepeatedNumber ( signed int arr[], signed int size, signed int* longest)
+signed int array_longestChain ( signed int arr[], signed int size, signed int* longest)
+{
+    signed int number;
+    signed int numberCounter = 1;
+    *longest = 0;
+
+    for (signed int index = 0; index < size; index++)
+    {
+        if ( *(arr + index) == *(arr + (index + 1)) )
+            numberCounter++;
+        else
+        {
+            if (*longest < numberCounter)
+            {
+                *longest = numberCounter;
+                number = *(arr + index);
+            }
+
+            numberCounter = 1;
+        }    
+    }
+    
+    return  number;
+}
+
 void array_reverse (signed int arr[], signed int size)
 {
     for (signed int index = 0; index < size / 2; index++)
@@ -237,31 +380,6 @@ signed int array_longestChainOfNumber ( signed int arr[], signed int size, signe
     }
     
     return longest;
-}
-
-signed int array_longestChain ( signed int arr[], signed int size, signed int* longest)
-{
-    signed int number;
-    signed int numberCounter = 1;
-    *longest = 0;
-
-    for (signed int index = 0; index < size; index++)
-    {
-        if ( *(arr + index) == *(arr + (index + 1)) )
-            numberCounter++;
-        else
-        {
-            if (*longest < numberCounter)
-            {
-                *longest = numberCounter;
-                number = *(arr + index);
-            }
-
-            numberCounter = 1;
-        }    
-    }
-    
-    return  number;
 }
 
 signed int array_longestSequenceChain ( signed int arr[], signed int size)
@@ -453,35 +571,6 @@ signed int array_biggestDifferenceBetweenTwoNumbers ( signed int arr[], signed i
     return biggestDifference;
 }
 
-signed char array_mostRepeatedChar ( signed char arr[], signed int size, signed int* noOfRepeats)
-{
-    signed int numberCounter = 0;
-
-    // number initialization = ?
-    signed char number;
-
-    *noOfRepeats = 0;
-
-    for (signed int index_i = 0; index_i < size; index_i++)
-    {
-        for (signed int index_j = index_i; index_j < size; index_j++)
-        {
-            if ( *(arr + index_j) == *(arr + index_i) )
-                numberCounter++;
-        }
-
-        if (*noOfRepeats < numberCounter)
-        {
-            *noOfRepeats = numberCounter;
-            number = *(arr + index_i);
-        }
-
-        numberCounter = 0;
-    }
-    
-    return number;
-}
-
 signed int array_charArrayToInt ( unsigned char arr[], signed int size)
 {
     signed int number = 0;
@@ -519,7 +608,174 @@ signed int array_compareChar (  unsigned char arr1[], unsigned char arr2[], sign
     return 1;
 }
 
+//You have an array of integers all numbers in the array repeated 2 times
+//except one number repeated one time only find this number
+signed int array_oOfN_findNotTwiceRepeatedNumber ( signed int arr[], signed int size)
+{
+    signed int notTwiceRepeatedNumber = arr[0];
 
+    for (signed int index = 1; index < size; index++)
+    {
+        notTwiceRepeatedNumber ^= arr[index];
+    }
+    
+    return notTwiceRepeatedNumber;
+}
+
+//frequency array
+signed int array_oOfN_copyWithoutRepeatedNumbers ( signed int arrOrigin[], signed int** arrCopy, signed int arrOriginSize)
+{
+    //signed int repeatsCounter[];  ??
+    signed int* repeatsCounter;        
+
+    signed int minElement = arrOrigin[0]; 
+    signed int maxElement = arrOrigin[0];
+
+    for (signed int arrOriginIndex = 0; arrOriginIndex < arrOriginSize; arrOriginIndex++)
+    {
+        if (minElement > arrOrigin[arrOriginIndex])
+            minElement = arrOrigin[arrOriginIndex];
+
+        if (maxElement < arrOrigin[arrOriginIndex])
+            maxElement = arrOrigin[arrOriginIndex];
+    }
+
+    signed int numbersRange =  ( (maxElement + 1) - minElement );
+
+    repeatsCounter = (signed int*) calloc (numbersRange , sizeof (int));
+    
+    *arrCopy = (signed int*) malloc (numbersRange * sizeof (int));
+    
+    signed int arrCopyIndex = 0;
+    for (signed int arrOriginIndex = 0; arrOriginIndex < arrOriginSize; arrOriginIndex++)
+    {
+        repeatsCounter[ arrOrigin[arrOriginIndex] - minElement ]++;
+
+        if ( repeatsCounter[ arrOrigin[arrOriginIndex] - minElement ] == 1 )
+        {
+            *(*arrCopy + arrCopyIndex) = arrOrigin[arrOriginIndex];
+            arrCopyIndex++;
+        }  
+    }
+
+    return arrCopyIndex;
+}
+
+void array_bubbleSort ( signed int arr[], signed int size )
+{
+    signed int sortFlag;
+    signed int done = 0;
+
+    do
+    {
+        sortFlag = 0;
+
+        for (signed int index = 0; index < (size - 1) - done; index++)
+        {
+            if ( arr[index] > arr[index + 1])
+            {
+                swap ( arr + index, arr + (index + 1) );
+                sortFlag++;
+            }
+        }
+
+        done++;
+
+    }while ( sortFlag > 1 );
+}
+
+void array_selectionSort ( signed int arr[], signed int size)
+{
+    signed int maxIndex;
+    signed int max;
+
+    for (signed int index_j = 0; index_j < size; index_j++)
+    {
+        max = arr[0];
+
+        for (signed int index_i = 0; index_i < size - index_j; index_i++)
+        {
+            if ( max <= arr[index_i] )
+            {
+                max = arr[index_i];
+                maxIndex = index_i;
+            }   
+        }    
+
+        swap ( arr + maxIndex, arr + ( (size - 1) - index_j) );
+    }
+}
+
+void array_countingSort ( signed int arr[], signed int arrSize)
+{
+    signed int maxIndex = array_getIndexOfMax ( arr, arrSize);
+    signed int minIndex = array_getIndexOfMin ( arr, arrSize);
+    signed int min = arr[minIndex];
+    signed int max = arr[maxIndex];
+
+    signed int  numbersRange =  ( (max + 1) - min );
+
+    signed int* repeatsCounter = (signed int*) calloc ( numbersRange, sizeof (int));
+
+    for (signed int arrIndex = 0; arrIndex < arrSize; arrIndex++)
+    {
+        repeatsCounter[ arr[arrIndex] - min ]++;
+    }
+
+    signed int arrIndex = 0;
+    for (signed int repeatsCounterIndex = 0; repeatsCounterIndex < numbersRange; repeatsCounterIndex++)
+    {
+        for (signed int repeats = 0; repeats < repeatsCounter[repeatsCounterIndex]; repeats++)
+        {
+            arr[arrIndex] = min + repeatsCounterIndex;
+            arrIndex++; 
+        }
+    }
+
+    free (repeatsCounter); 
+}
+
+//You have an array of 100 element contain all number from 0 t0 100 except
+//one number, write c function to find the missed number (try in O(n)).
+signed int array_missedNumber ( signed int arr[], signed int arrSize)
+{
+    //maxNumber = 100;
+    //minNumber = 0;
+    //numbersRange = (100 + 1) - 0 = 101
+
+    signed int repeatsCounter[101] = {0};
+
+    for (signed int arrIndex = 0; arrIndex < arrSize; arrIndex++)
+    {
+        repeatsCounter [ arr[arrIndex] ]++;
+    }
+
+    for (signed int repeatsCounterIndex = 0; repeatsCounterIndex < 101; repeatsCounterIndex++)
+    {
+        if ( repeatsCounter [ repeatsCounterIndex ] == 0 )
+            return repeatsCounterIndex;
+    }
+}
+
+signed int array_repeatedNumber ( signed int arr[], signed int arrSize)
+{
+    //maxNumber = 100
+    //minNumber = 1
+    //numberRange = (maxNumber + 1) - minNumber = (100 + 1) - 1 = 100
+
+    signed int repeatsCounter[100] = {0};
+
+    for (signed int arrIndex = 0; arrIndex < arrSize; arrIndex++)
+    {
+        repeatsCounter[ arr[arrIndex] - 1]++;
+    }
+    
+    for (signed int repeatsCounterIndex = 0; repeatsCounterIndex < 100; repeatsCounterIndex++)
+    {
+        if ( repeatsCounter [ repeatsCounterIndex ] == 2 )
+            return repeatsCounterIndex + 1;
+    }
+}
 /*
 
 //binary search

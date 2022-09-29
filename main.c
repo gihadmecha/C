@@ -58,7 +58,7 @@ int main ()
     printf ("\n\n");
     /////////////////////////////////////////////////////////////////////////////////
 
-    signed int arr1[] = { 14, -2, 1, 2, 4, 3, -1, 14, 4, 5, 3, 3,3, 6};
+    signed int arr1[] = {  2, 1, 2, 4, 3, 1, 4, 5, 3, 3,3, 6};
     signed int arr2[100];
     signed int arr3[0];
     signed int arr4[] = { 9, 8, 1};
@@ -73,6 +73,13 @@ int main ()
     signed char arr13[] = { 4, 9, 3, 9, 3, 1, 9 , 2, 9, 0, 1};
     signed int arr14[] = { 1, 2, 2, 4, 4, 4, 4, 5, 6, 6, 6, 7};
     signed int arr15[] = {1, 2, 3, 10, 11, 12, 13, 20, 31, 32};
+    signed int arr16[] = {1,2,4,66,2,1,500,66,7,7,500};
+    signed int arr17[] = {-7, -8, 0, 1, 100, 1000};
+    signed int arr18[] = { 40, 2, 1, 43, 3, 65, 0, -1, 58, 3, 42, 4};
+    signed int arr19[] = { 40, 2, 1, 43, 3, 65, 0, -1, 58, 3, 42, 4};
+    signed int arr20[] = { 40, 2, 1, 43, 3, 65, 0, -1, 58, 3, 42, 4};
+    signed int arr21[100];
+    signed int arr22[101];
     unsigned int size1 = sizeof (arr1) / sizeof (arr1[0]);
     unsigned int size2 = sizeof (arr2) / sizeof (arr2[0]);
     unsigned int size4 = sizeof (arr4) / sizeof (arr4[0]);
@@ -87,6 +94,13 @@ int main ()
     unsigned int size13 = sizeof (arr13) / sizeof (arr13[0]);
     unsigned int size14 = sizeof (arr14) / sizeof (arr14[0]);
     unsigned int size15 = sizeof (arr15) / sizeof (arr15[0]);
+    signed int size16 = sizeof (arr16) / sizeof (arr16[0]);
+    signed int size17 = sizeof (arr17) / sizeof (arr17[0]);
+    signed int size18 = sizeof (arr18) / sizeof (arr18[0]);
+    signed int size19 = sizeof (arr19) / sizeof (arr19[0]);
+    signed int size20 = sizeof (arr20) / sizeof (arr20[0]);
+    signed int size21 = sizeof (arr21) / sizeof (arr21[0]);
+    signed int size22 = sizeof (arr22) / sizeof (arr22[0]);
 
     array_print ( arr1, size1);
     signed int number = -8;
@@ -95,6 +109,12 @@ int main ()
         printf ("the index of %d = %d\n", number, numberIndex);
     else
         printf ("%d not exist !!\n", number);
+
+    signed int numberIndexSorted = array_sorted_search ( arr17, size17, number);
+    if (numberIndex >= 0)
+        printf ("the index Sorted of %d = %d\n", number, numberIndex);
+    else
+        printf ("%d not exist sorted !!\n", number);
 
     signed int lastNumberIndex = array_searchLastIndexOfNumber ( arr1, size1, number);
     if (lastNumberIndex >= 0)
@@ -135,6 +155,11 @@ int main ()
     signed int mostRepeatedNumber = array_mostRepeatedNumber ( arr1, size1);
     printf ("the most Repeated number = %d\n", mostRepeatedNumber);
     
+    array_print (arr1, size1);
+    signed int mostRepeatedNumber_oOfN = array_oOfN_mostRepeatedNumber ( arr1, size1);
+    printf ("the most Repeated number O(n) = %d\n", mostRepeatedNumber_oOfN);
+
+    printf ("mostRepeatedMono = %d\n", array_oOfN_mostRepeatedMono ( arr1, size1));
     array_print (arr1, size1);
     array_reverse (arr1, size1);
     array_print (arr1, size1);
@@ -218,6 +243,51 @@ int main ()
     }
     array_print (arr2, 20);
 
+    printf ("not twice repeated number = %d\n", array_oOfN_findNotTwiceRepeatedNumber ( arr16, size16));
+
+    printf("\n");
+    array_print (arr16, size16);
+    //signed int copyWithoutRepeatedNumbersPointer[];  ??
+    signed int* copyWithoutRepeatedNumbersPointer;
+    signed int copyWithoutRepeatedNumbersSize = array_oOfN_copyWithoutRepeatedNumbers ( arr16, &copyWithoutRepeatedNumbersPointer, size16);
+    array_print (copyWithoutRepeatedNumbersPointer, copyWithoutRepeatedNumbersSize);
+    printf("\n");
+
+    array_print ( arr18, size18);
+    array_bubbleSort ( arr18, size18);
+    array_print ( arr18, size18);
+
+    printf ("\n");
+    array_print ( arr19, size19);
+    array_selectionSort ( arr19, size19);
+    array_print ( arr19, size19);
+    printf ("\n");
+
+    printf ("\n");
+    array_print ( arr20, size20);
+    array_countingSort ( arr20, size20);
+    array_print ( arr20, size20);
+    printf ("\n");
+
+    for (signed int index = 0; index < size21; index++)
+    {
+        arr21[index] = index;
+    }
+
+    array_print ( arr21, size21);
+    printf ("missed number = %d\n", array_missedNumber ( arr21, size21));
+    
+    for (signed int index = 0; index < size22; index++)
+    {
+        arr22[index] = index + 1;
+    }
+    arr22[100] = 7;
+
+    array_print ( arr22, size22);
+    printf ("repeated number = %d\n", array_repeatedNumber ( arr22, size22));
+    
+    signed short numberBeforeSwapBytes = 0xFE20;
+    printf ("numberAfterSwapBytes = %X\n", swap_2bytesofShort ( &numberBeforeSwapBytes));
     ////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
 
@@ -323,4 +393,13 @@ int main ()
     string_print (str11);
     printf ("%d\n", string_longestWordSize (" mohamed ahmed khalad  ") );
     printf ("\n");
+
+    printf ("%c\n", string_firstRepeatedCharacter ("e"));
+
+    printf ("%c\n", string_oOfN_firstRepeatedCharacter ("emme"));
+
+    unsigned char str20[100] = {0};
+    string_print ("ahmed selem kamel");
+    string_oOfN_copyWithoutRepeatedCharacters ( str11, "ahmed selem kamel", str11Size);
+    string_print (str11);
 }

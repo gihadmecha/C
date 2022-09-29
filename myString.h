@@ -22,3 +22,6 @@ signed int string_replace(unsigned char mainString[], unsigned char findString[]
 void string_printWordNumberOftimesAsTheNumberAfterIt( unsigned char str[]);
 void string_longestWord (unsigned char str[], unsigned char longestWord[], signed int maxlongestWordSize);
 signed int string_longestWordSize (unsigned char str[]);
+unsigned char string_firstRepeatedCharacter ( unsigned char str[]);
+unsigned char string_oOfN_firstRepeatedCharacter ( unsigned char str[]);
+void string_oOfN_copyWithoutRepeatedCharacters ( unsigned char strCopy[], unsigned char strOrigin[], signed int strCopySize);

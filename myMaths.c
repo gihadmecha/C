@@ -521,6 +521,12 @@ void swap_Pointers ( signed int** pointer1, signed int** pointer2)
     *pointer2 = temporary;
 }
 
+signed int swap_2bytesofShort ( signed short* number)
+{
+    swap_char ( (signed char* )number, (signed char* )number + 1);
+    return *number;
+}
+
 signed int fibonacci (signed int noOfTerms)
 {
     signed int firstElement = 0;

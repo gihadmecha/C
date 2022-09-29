@@ -1,3 +1,4 @@
+
 #include "myString.h"
 
 void string_print(unsigned char str[])
@@ -437,48 +438,86 @@ signed int string_longestWordSize (unsigned char str[])
     return longestWordSize;
 }
 
-/*
-//freqency array
-unsigned char string_firstRepeated( unsigned char* str)
+unsigned char string_firstRepeatedCharacter ( unsigned char str[])
 {
-    unsigned int counter[256] = {0};
+    unsigned char firstRepeatedCharacter = 0;
+    signed int firstRepeatedCharacterIndex;
 
-    for (unsigned int i = 0; str[i]; i++)
+    for (signed int index_i = 0; str[index_i]; index_i++)
     {
-        counter[str[i]]++;
-        for (unsigned int i = 0; i < 256; i++)
+        for (signed int index_j = index_i + 1; str[index_j]; index_j++)
         {
-            if (counter[str[i]] == 2)
+            if ( str[index_i] == str[index_j] )
             {
-                return str[i];
+                if ( firstRepeatedCharacter )
+                {
+                    firstRepeatedCharacterIndex = index_i;
+                    firstRepeatedCharacter = str[index_i];
+                }
+
+                else if ( firstRepeatedCharacterIndex > index_i )
+                {
+                    firstRepeatedCharacterIndex = index_i;
+                    firstRepeatedCharacter = str[index_i];
+                }
             }
-
         }
+    } 
 
-    }
-
-    return -1;
+    return firstRepeatedCharacter;
 }
 
 //frequency array
-void array_removeRepeatedchars  ( unsigned char* str, unsigned char* newStr, double maxSize)
+unsigned char string_oOfN_firstRepeatedCharacter ( unsigned char str[])
 {
-    unsigned int counter[256] = {0};
-    unsigned int j = 0;
+    signed int Characters[256] = {0};
 
-    for (unsigned int i = 0; str[i]; i++)
+    for (signed int index = 0; str[index]; index++)
     {
-        counter[str[i]]++;
+        Characters[ str[index] ]++;
 
-        if (counter[str[i]] == 1)
-        {
-            if (j < maxSize)
-            {
-                *(newStr + j) = str[i];
-                j++;
-                *(newStr + j) = 0;
-            }
-        }
+        if ( Characters[ str[index] ] == 2 )
+            return str[index];
     }
+
+    return 0;
 }
-*/
+
+
+//frequency array
+unsigned char string_oOfN_firstRepeatedSmallCharacter ( unsigned char str[])
+{
+    signed int Characters[26] = {0};
+
+    for (signed int index = 0; str[index]; index++)
+    {
+        Characters[ str[index] - 'a' ]++;
+
+        if ( Characters[ str[index] - 'a' ] == 2 )
+            return str[index];
+    }
+
+    return 0;
+}
+
+//frequecy array
+void string_oOfN_copyWithoutRepeatedCharacters ( unsigned char strCopy[], unsigned char strOrigin[], signed int strCopySize)
+{
+    signed int characters[256] = {0};
+    signed int strCopyIndex = 0;
+
+    for (signed int strOriginIndex = 0; strOrigin[strOriginIndex] && strCopyIndex < strCopySize - 1; strOriginIndex++)
+    {
+        characters[strOrigin[strOriginIndex]]++;
+
+        if (characters[ strOrigin[strOriginIndex] ] == 1)
+        {
+            strCopy[strCopyIndex] = strOrigin[strOriginIndex];
+            strCopyIndex++;
+        }
+
+    }
+
+    strCopy[strCopyIndex] = 0;
+}
+
