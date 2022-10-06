@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "myMaths.h"
+#include "myBasics.h"
 #include "myArray.h"
 
 void string_print ( unsigned char str[]);
@@ -25,3 +25,14 @@ signed int string_longestWordSize (unsigned char str[]);
 unsigned char string_firstRepeatedCharacter ( unsigned char str[]);
 unsigned char string_oOfN_firstRepeatedCharacter ( unsigned char str[]);
 void string_oOfN_copyWithoutRepeatedCharacters ( unsigned char strCopy[], unsigned char strOrigin[], signed int strCopySize);
+void array_ofPointersToChar_stringPrint ( unsigned char* arr[], signed int size);
+signed int array_ofPointersToChar_IsStingExist ( unsigned char* strList[], signed int strListSize, unsigned char strNeeded[]);
+signed int string_compare2(unsigned char str1[], unsigned char str2[]);
+signed int array_ofPointersToChar_stringSearch ( unsigned char* strPointerList[], signed int strPointerListSize, unsigned char strNeeded[]);
+void array_ofPointersToChar_selectionSort ( unsigned char* strPointerList[], signed int strPointerListSize);
+signed int array_ofPointersToChar_sorted_search ( unsigned char* strPointerList[], signed int strPointerListSize, unsigned char strNeeded[]);
+void array_ofArrayOf10Char_print ( unsigned char arr[][10], signed int arrSize);
+void array_ofArrayOf10Char_print2 ( unsigned char arr[][10], signed int row, signed int column);
+void array_ofArrayOfChar_search ( unsigned char arr[][10], signed int arrSize, unsigned char character, signed int* neededArrIndex, signed int* neddedElementIndex);
+void array_OfArrayOf10Char_setStar ( unsigned char arr[][10], signed int row, signed int column, signed int starRowIndex, signed int starColumnIndex);
+void array_OfArrayOf10Char_starSearch ( unsigned char arr[][10], signed int row, signed int column, unsigned char character, signed int* neededRowIndex, signed int* neededColumnIndex);

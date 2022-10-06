@@ -1,12 +1,15 @@
-exeFile = main
-sourceFile = main.c 
+exeFile = swapExample
+sourceFile = swapExample.c 
 
 
 
 all:
-	gcc -o $(exeFile) myMaths.c myArray.c myString.c $(sourceFile) 
-	./$(exeFile) 
-	rm $(exeFile)
+	gcc -o main myBasics.c myArray.c myString.c main.c 
+	./main
+	rm main
+#	gcc -o $(exeFile)  $(sourceFile) 
+#	./$(exeFile) 
+#	rm $(exeFile)
 
 #run:
 #	./$(exeFile)	

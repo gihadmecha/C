@@ -1,4 +1,4 @@
-#include "myMaths.h"
+#include "myBasics.h"
 
 double addTwoNumbers(double num1, double num2)
 {
@@ -519,6 +519,40 @@ void swap_Pointers ( signed int** pointer1, signed int** pointer2)
     signed int* temporary = *pointer1;
     *pointer1 = *pointer2;
     *pointer2 = temporary;
+}
+
+void swap_PointersToChar ( unsigned char** pointer1, unsigned char** pointer2)
+{
+    unsigned char* temporary = *pointer1;
+    *pointer1 = *pointer2;
+    *pointer2 = temporary;
+}
+
+void swap_withPointerToPointer ( signed int** ppx, signed int** ppy)
+{
+    signed int temp = **ppx;
+    **ppx = **ppy;
+    **ppy = temp;
+}
+
+void swap_variantTypePointers ( signed char** ppx, signed int** ppy)
+{
+    signed int* temp = *ppx;
+    *ppx = *ppy;
+    *ppy = temp;
+}
+
+void swap_withVariantTypePointers ( signed char** ppx, signed int** ppy)
+{
+    signed int temp = **ppx;
+    // printf ("%d \n", **ppx);
+    // printf ("%d \n", temp);
+    // printf ("%d \n", **ppy);
+    **ppx = **ppy;
+    **ppy = temp;
+    // printf ("%d \n", **ppx);
+    // printf ("%d \n", temp);
+    // printf ("%d \n", **ppy);
 }
 
 signed int swap_2bytesofShort ( signed short* number)

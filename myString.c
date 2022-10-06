@@ -270,7 +270,7 @@ signed int string_compare(unsigned char str1[], unsigned char str2[])
 {
     for (signed int index = 0; str1[index] || str2[index]; index++)
     {
-        if (str1[index] != str2[index] || str1[index] != 'A' + (str2[index] - 'a') || str1[index] != 'a' + (str2[index] - 'A'))
+        if (str1[index] != str2[index] && str1[index] != 'A' + (str2[index] - 'a') && str1[index] != 'a' + (str2[index] - 'A'))
             return 0;
     }
 
@@ -521,3 +521,259 @@ void string_oOfN_copyWithoutRepeatedCharacters ( unsigned char strCopy[], unsign
     strCopy[strCopyIndex] = 0;
 }
 
+void array_ofPointersToChar_stringPrint ( unsigned char* arr[], signed int size)
+{
+    for (signed int arrIndex = 0; arrIndex < size; arrIndex++)
+    {
+        string_print (*(arr + arrIndex));
+        // for (signed int strIndex = 0; *( *(arr + arrIndex) + strIndex ); strIndex++)
+        // {
+        //     printf ("%c", *( *(arr + arrIndex) + strIndex ) );
+        // }
+
+        //printf ("\n");
+    }  
+}
+
+signed int array_ofPointersToChar_IsStingExist ( unsigned char* strList[], signed int strListSize, unsigned char strNeeded[])
+{
+    for (signed int strListIndex = 0; strListIndex < strListSize; strListIndex++)
+    {
+       if ( string_compare ( *(strList + strListIndex), strNeeded ) )
+       {
+            return 1;
+       }
+    }
+
+    return 0;
+}
+
+signed int array_ofPointersToChar_stringSearch ( unsigned char* strPointerList[], signed int strPointerListSize, unsigned char strNeeded[]) 
+{
+    for (signed int strPointerListIndex = 0; strPointerListIndex < strPointerListSize; strPointerListIndex++)
+    {
+        if ( string_compare ( *(strPointerList + strPointerListIndex), strNeeded) )
+            return strPointerListIndex;
+    } 
+
+    return -1;  
+}
+
+signed int string_compare2(unsigned char str1[], unsigned char str2[])
+{
+    for (signed int index = 0; str1[index] || str2[index]; index++)
+    {
+        if (str1[index] < str2[index])
+            return -1;
+
+        else if (str1[index] > str2[index] )
+            return  1;   
+    }
+
+    return 0;
+}
+
+void array_ofPointersToChar_selectionSort ( unsigned char* strPointerList[], signed int strPointerListSize)
+{
+    signed int lastStringPointerIndex;
+    unsigned char* lastStringAddress;
+
+    for (signed int strPointerListIndex_j = 0; strPointerListIndex_j < strPointerListSize; strPointerListIndex_j++)
+    {
+        lastStringAddress = *( strPointerList + 0);
+
+        for (signed int strPointerListIndex_i = 0; strPointerListIndex_i < strPointerListSize - strPointerListIndex_j; strPointerListIndex_i++)
+        { 
+            if ( string_compare2 ( lastStringAddress, *(strPointerList + strPointerListIndex_i)) <= 0 )
+            {
+                lastStringAddress = strPointerList[strPointerListIndex_i];
+                lastStringPointerIndex = strPointerListIndex_i;
+            }  
+        }    
+
+        swap_PointersToChar ( strPointerList + lastStringPointerIndex, strPointerList + ( (strPointerListSize - 1) - strPointerListIndex_j) );
+    }
+}
+
+//binary search
+signed int array_ofPointersToChar_sorted_search ( unsigned char* strPointerList[], signed int strPointerListSize, unsigned char strNeeded[])
+{
+    signed int firstElementIndex = 0;
+    signed int lastElementIndex = strPointerListSize - 1;
+    signed int middleElementIndex;
+
+    while ( firstElementIndex  <=  lastElementIndex )
+    {
+        middleElementIndex = (lastElementIndex + firstElementIndex) / 2;
+
+        if ( string_compare2 ( strNeeded, *(strPointerList + middleElementIndex) ) == 0 ) 
+            return middleElementIndex;
+
+        else if ( string_compare2 ( strNeeded, *(strPointerList + middleElementIndex) ) ==  -1 )
+            lastElementIndex = middleElementIndex - 1;
+
+        else if ( string_compare2 ( strNeeded, *(strPointerList + middleElementIndex) ) ==  1 )
+            firstElementIndex = middleElementIndex + 1;
+    }
+
+    return -1;
+}
+
+void array_ofArrayOf10Char_print ( unsigned char arr[][10], signed int arrSize)
+{
+    for (signed int arrIndex = 0; arrIndex < arrSize; arrIndex++)
+    {
+        string_print ( *(arr + arrIndex) );
+
+        // for (signed int elementIndex = 0; *( *(arr + arrIndex) + elementIndex ); elementIndex++)
+        // {
+        //     printf ("%c",  *( *(arr + arrIndex) + elementIndex ) );
+        // }
+
+        // printf ("\n");
+    }  
+}
+
+void array_ofArrayOf10Char_print2 ( unsigned char arr[][10], signed int row, signed int column)
+{
+    for (signed int rowIndex = 0; rowIndex < row; rowIndex++)
+    {
+        for (signed int columnIndex = 0; columnIndex < column; columnIndex++ )
+        {
+            printf ("%c",  *( *(arr + rowIndex) + columnIndex ) );
+        }
+
+        printf ("\n");
+    }  
+}
+
+void array_ofArrayOfChar_search ( unsigned char arr[][10], signed int arrSize, unsigned char character, signed int* neededArrIndex, signed int* neddedElementIndex)
+{
+    *neededArrIndex = -1;
+    *neddedElementIndex = -1;
+
+    for (signed int arrIndex = 0; arrIndex < arrSize; arrIndex++)
+    {
+        for (signed int elementIndex = 0; *( *(arr + arrIndex) + elementIndex ); elementIndex++)
+        {
+            if (*( *(arr + arrIndex) + elementIndex ) == character)
+            {
+                *neededArrIndex = arrIndex;
+                *neddedElementIndex = elementIndex;
+                return;
+            }
+        }   
+    }
+}
+
+void array_ofArrayOfChar_searchLastIndex ( unsigned char arr[][10], signed int arrSize, unsigned char character, signed int* neededArrIndex, signed int* neddedElementIndex)
+{
+    *neededArrIndex = -1;
+    *neddedElementIndex = -1;
+
+    for (signed int arrIndex = 0; arrIndex < arrSize; arrIndex++)
+    {
+        for (signed int elementIndex = 0; *( *(arr + arrIndex) + elementIndex ); elementIndex++)
+        {
+            if (*( *(arr + arrIndex) + elementIndex ) == character)
+            {
+                *neededArrIndex = arrIndex;
+                *neddedElementIndex = elementIndex;
+            }
+        }   
+    }
+}
+
+void array_OfArrayOf10Char_setStar ( unsigned char arr[][10], signed int row, signed int column, signed int starRowIndex, signed int starColumnIndex)
+{
+    arr [starRowIndex][starColumnIndex] = '*';
+
+    for (signed int rowIndex = 0; rowIndex < row; rowIndex++)
+    {
+        for (signed int columnIndex = 0; columnIndex < column; columnIndex++)
+        {
+            if ( rowIndex < starRowIndex && columnIndex < starColumnIndex)
+                arr[rowIndex][columnIndex] = '1';
+            else if ( rowIndex < starRowIndex && columnIndex == starColumnIndex)
+                arr[rowIndex][columnIndex] = 'v';
+            else if ( rowIndex < starRowIndex && columnIndex > starColumnIndex)
+                arr[rowIndex][columnIndex] = '2';
+            else if ( rowIndex == starRowIndex && columnIndex < starColumnIndex)
+                arr[rowIndex][columnIndex] = '>';
+            else if ( rowIndex == starRowIndex && columnIndex > starColumnIndex)
+                arr[rowIndex][columnIndex] = '<';
+            else if ( rowIndex > starRowIndex && columnIndex < starColumnIndex)
+                arr[rowIndex][columnIndex] = '3';
+            else if ( rowIndex > starRowIndex && columnIndex == starColumnIndex)
+                arr[rowIndex][columnIndex] = '^';
+            else if ( rowIndex > starRowIndex && columnIndex > starColumnIndex)
+                arr[rowIndex][columnIndex] = '4';
+        }
+    }
+}
+
+//binary search
+void array_OfArrayOf10Char_starSearch ( unsigned char arr[][10], signed int row, signed int column, unsigned char character, signed int* neededRowIndex, signed int* neededColumnIndex)
+{
+    signed int firstRowIndex = 0;
+    signed int lastRowIndex = row - 1;
+
+    signed int firstColumnIndex = 0;
+    signed int lastColumnIndex = column - 1;
+
+    signed int middleRowIndex;
+    signed int middleColumnIndex;
+    
+
+    while ( firstRowIndex <= lastRowIndex && firstColumnIndex <= lastColumnIndex )
+    {
+        middleRowIndex = (firstRowIndex + lastRowIndex) / 2;
+        middleColumnIndex = (firstColumnIndex + lastColumnIndex) / 2;
+
+        if ( arr[middleRowIndex][middleColumnIndex] == character )
+        {
+            *neededRowIndex = middleRowIndex;
+            *neededColumnIndex = middleColumnIndex;
+            return;
+        }   
+        else if ( arr[middleRowIndex][middleColumnIndex] == '1' )
+        {
+            firstRowIndex = middleRowIndex + 1;
+            firstColumnIndex = middleColumnIndex + 1; 
+        }
+        else if ( arr[middleRowIndex][middleColumnIndex] == 'v' )
+        {
+            firstRowIndex = middleRowIndex + 1; 
+        }
+        else if ( arr[middleRowIndex][middleColumnIndex] == '2' )
+        {
+            firstRowIndex = middleRowIndex + 1;
+            lastColumnIndex = middleColumnIndex - 1; 
+        }
+        else if ( arr[middleRowIndex][middleColumnIndex] == '>' )
+        {
+            firstColumnIndex = middleColumnIndex + 1;
+        }
+        else if ( arr[middleRowIndex][middleColumnIndex] == '<' )
+        {
+            lastColumnIndex = middleColumnIndex - 1; 
+        }
+        else if ( arr[middleRowIndex][middleColumnIndex] == '3' )
+        {
+            lastRowIndex = middleRowIndex - 1;
+            firstColumnIndex = middleColumnIndex + 1; 
+        }
+        else if ( arr[middleRowIndex][middleColumnIndex] == '^' )
+        {
+            lastRowIndex = middleRowIndex - 1; 
+        }
+        else if ( arr[middleRowIndex][middleColumnIndex] == '4' )
+        {
+            lastRowIndex = middleRowIndex - 1;
+            lastColumnIndex = middleColumnIndex - 1; 
+        }
+    }
+
+    *neededRowIndex = -1;
+    *neededColumnIndex = -1;
+}

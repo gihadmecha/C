@@ -1,5 +1,5 @@
 
-#include "myMaths.h"
+#include "myBasics.h"
 #include "myArray.h"
 #include "myString.h"
 
@@ -54,7 +54,6 @@ int main ()
 
     printBinaryPresentationOfNumber (5);
 
-
     printf ("\n\n");
     /////////////////////////////////////////////////////////////////////////////////
 
@@ -80,6 +79,14 @@ int main ()
     signed int arr20[] = { 40, 2, 1, 43, 3, 65, 0, -1, 58, 3, 42, 4};
     signed int arr21[100];
     signed int arr22[101];
+    unsigned char* arr23[] = {"ahmed", "khaled", "asmaa", "lolo", "sadek", "mustafa"};
+    unsigned char arr24[][10] = {"ahmed", "khaled", "asmaa"};
+    signed int arr25[5][5] = { {1, 2, 3, 4, 5}, {11, 12, 13, 14} };
+    signed int arr26[3][3] = { {3, 3, 3}, {3, 3, 3}, {3, 3, 3} };
+    unsigned char arr27[10][10];
+    unsigned char arr28[][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
+    unsigned char arr29[] = {'4', '5', '6', '3'};
+    unsigned char arr30[] = {'1', '2', '3'};
     unsigned int size1 = sizeof (arr1) / sizeof (arr1[0]);
     unsigned int size2 = sizeof (arr2) / sizeof (arr2[0]);
     unsigned int size4 = sizeof (arr4) / sizeof (arr4[0]);
@@ -101,6 +108,14 @@ int main ()
     signed int size20 = sizeof (arr20) / sizeof (arr20[0]);
     signed int size21 = sizeof (arr21) / sizeof (arr21[0]);
     signed int size22 = sizeof (arr22) / sizeof (arr22[0]);
+    signed int size23 = sizeof (arr23) / sizeof (arr23[0]);
+    signed int size24 = sizeof (arr24) / sizeof (arr24[0]);
+    signed int size25 = sizeof (arr25) / sizeof (arr25[0]);
+    signed int size26 = sizeof (arr26) / sizeof (arr26[0]);
+    signed int size27 = sizeof (arr27) / sizeof (arr27[0]);
+    signed int size28 = sizeof (arr28) / sizeof (arr28[0]);
+    signed int size29 = sizeof (arr29) / sizeof (arr29[0]);
+    signed int size30 = sizeof (arr30) / sizeof (arr30[0]);
 
     array_print ( arr1, size1);
     signed int number = -8;
@@ -288,6 +303,42 @@ int main ()
     
     signed short numberBeforeSwapBytes = 0xFE20;
     printf ("numberAfterSwapBytes = %X\n", swap_2bytesofShort ( &numberBeforeSwapBytes));
+    
+    printf ("\n");
+    array_ofArrayOf5Int_print ( arr25, size25);
+    printf ("\n");
+
+    array_OfArrayOf5Int_printZigzag ( arr25, size25);
+    printf ("\n");
+
+    array_ofArrayOf3Int_print (arr26, 3);
+    printf ("\n");
+    if ( array_ofArrayOf3Int_IsdiagonalsEqual ( arr26, 3, 3))
+        printf ("true\n");
+    else
+        printf ("false\n");
+
+    printf ("\n");
+   
+    signed int (*arr2DDynamic)[10] = array_ofArrayOf19Int_dynamic ( );
+    array_ofArrayOf10Int_print ( arr2DDynamic, 10);
+
+    printf ("\n");
+    signed int** dynamicArrayOfPointers = array_ofPointersToInt_dynamic ( );
+    array_ofPointersToInt ( dynamicArrayOfPointers, 5, 5);
+
+    printf ("\n");
+    //array_of9Arrayof3ArrayOf3Int_sudoku ();
+    printf ("\n");
+
+    array_ofArrayOf3Char_print ( arr28, size28, 3);
+    array_printChar ( arr29, size29);
+    array_printChar ( arr30, size30);
+    printf ("compareChar = %d\n", array_compareChar (arr29, arr30, size29, size30));
+    printf ("searchForSmallArray = %d\n", array_ofArrayOf3Char_searchForSmallArray ( arr28, size28, arr29, size29));
+
+    printf ("searchForSortedSmallArray = %d\n", array_arrayOf3Char_sortedSearch ( arr28, size28, 3, arr29, size29) );
+
     ////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
 
@@ -402,4 +453,50 @@ int main ()
     string_print ("ahmed selem kamel");
     string_oOfN_copyWithoutRepeatedCharacters ( str11, "ahmed selem kamel", str11Size);
     string_print (str11);
+
+
+    if ( string_compare ("asmaa", "asmaa") )
+        printf ("Exist !! \n");
+    else
+        printf ("Not Exist !! \n");
+
+
+    array_ofPointersToChar_stringPrint ( arr23, size23);
+    if ( array_ofPointersToChar_IsStingExist ( arr23, size23, "asmaa") )
+        printf ("Exist !! \n");
+    else
+        printf ("Not Exist !! \n");
+    
+    signed int stringSearch = array_ofPointersToChar_stringSearch ( arr23, size23, "asmaa");
+    string_print (*(arr23 + stringSearch));
+
+    printf ("\n");
+    array_ofPointersToChar_stringPrint ( arr23, size23);
+    printf ("\n");
+    array_ofPointersToChar_selectionSort ( arr23, size23);
+    array_ofPointersToChar_stringPrint ( arr23, size23);
+    printf ("\n");
+
+    printf ("\n");
+    array_ofPointersToChar_stringPrint ( arr23, size23);
+    printf ("\n");
+    signed int arrayofPointersToChar_sorted_searchIndex = array_ofPointersToChar_sorted_search ( arr23, size23, "kaghkl");
+    printf ("arrayofPointersToChar_sorted_searchIndex = %d\n", arrayofPointersToChar_sorted_searchIndex);
+
+    printf ("\n");
+    array_ofArrayOf10Char_print ( arr24, 3);
+    printf ("\n");
+    
+    signed int neededArrIndex;
+    signed int neededArrElement;
+    array_ofArrayOfChar_search ( arr24, size24, 'w', &neededArrIndex, &neededArrElement);
+    printf ("%c in line %d character %d\n", 'w', neededArrIndex, neededArrElement);
+
+    printf ("\n");
+    array_OfArrayOf10Char_setStar ( arr27, 10, 10, 9, 0);
+    array_ofArrayOf10Char_print2 ( arr27, 10, 10);
+    signed int neededRowIndex;
+    signed int neededColumnIndex;
+    array_OfArrayOf10Char_starSearch ( arr27, 10, 10, '*', &neededRowIndex, &neededColumnIndex);
+    printf ("star corrdinate = (%d, %d)\n",neededRowIndex, neededColumnIndex);
 }
