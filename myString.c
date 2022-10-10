@@ -117,13 +117,16 @@ void string_scan(unsigned char str[], signed int size)
     printf("write less than %d character: ", size - 1);
 
     signed int index = 0;
-    scanf("%c", str + index);
+    //printf ("%c\n", str + 0);
     for (index = 0; index < (size - 1) && *(str + (index - 1)) != '\n'; index++)
     {
         scanf("%c", str + index);
     }
 
-    *(str + index) = 0;
+    if (index == size - 1)
+        *(str + index) = 0;
+    else if (*(str + (index - 1)) == '\n')
+        *(str + (index - 1)) = 0;
 }
 
 signed int string_IsMirror(unsigned char str[])

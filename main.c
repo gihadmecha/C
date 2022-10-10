@@ -2,6 +2,7 @@
 #include "myBasics.h"
 #include "myArray.h"
 #include "myString.h"
+#include "struct.h"
 
 int main ()
 {
@@ -499,4 +500,49 @@ int main ()
     signed int neededColumnIndex;
     array_OfArrayOf10Char_starSearch ( arr27, 10, 10, '*', &neededRowIndex, &neededColumnIndex);
     printf ("star corrdinate = (%d, %d)\n",neededRowIndex, neededColumnIndex);
+
+    //==========================================================================================================
+    //==========================================================================================================
+
+    // struct student student1 = {"ahmed", 21, 'A'};
+    // struct student course[4]= {student1, {"alaa", 33, 'B'}};
+    // signed int courseSize = sizeof (course) / sizeof (course[0]);
+    // student student2;
+
+    // student_byValue_print (student1);
+    // student_byReference_print ( &student1 );
+    // student_byValue_print ( course[0] );
+    // student_byReference_print  (course + 0 );
+    // array_ofStudent_byReferace_print ( course, courseSize);
+    // course[3] = student_returnValue_scan ();
+    // student_byValue_print ( course[3] );
+    // student_ByReference_scan ( &student2);
+    // student_byReference_print ( &student2 );
+    answer answer;
+    answer = addAndMultiply ( 5, 7);
+    printf ("add = %d\n", answer.add);
+    printf ("multiply = %d\n", answer.multiply);
+
+    student school[1000] = {0};
+    signed int schoolSize = sizeof (school) / sizeof(school[0]);
+
+    student_insert ( school + 3 );
+    student_print ( school + 3 );
+    signed int studentIndex = array_student_searchByName ( school,  schoolSize, "gihad");
+    printf ("student Index = %d\n", studentIndex);
+    if ( studentIndex >= 0)
+        student_print(school + studentIndex );
+    else
+        printf ("not exist !!\n");
+
+    student_insert ( school + 6 );
+    printf ("%d\n", array_student_searchByID ( school, schoolSize));
+    student_selectionSort_byId ( school, schoolSize);
+    student_print(school + 999 );
+    student_print(school + 6 );
+    school_print ( school, 1000);
+    student_delete ( school, schoolSize, 997);
+    school_print ( school, 1000);
+    student_add (school, schoolSize, 996);
+    school_print ( school, 1000);
 }
