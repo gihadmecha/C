@@ -3,6 +3,8 @@
 #include "myArray.h"
 #include "myString.h"
 #include "struct.h"
+#include "stack.h"
+#include "queue.h"
 
 int main ()
 {
@@ -545,4 +547,56 @@ int main ()
     school_print ( school, 1000);
     student_add (school, schoolSize, 996);
     school_print ( school, 1000);
+
+    //==================================================================
+    //==================================================================
+
+    signed int Push;
+    signed int Pop;
+    signed int x = 15;
+
+    while (x--)
+    {
+        scanf ("%d", &Push);
+
+        if (Push != 0)
+        {
+            if (push(Push))
+                printf ("%d is pushed !!\n", Push);
+            else 
+                printf ("stack is full !!\n");
+        }
+        else
+        {
+            if (pop(&Pop))
+                printf ("%d is popped !!\n", Pop);
+            else
+                printf ("stack is Empty !!\n");
+        }   
+    }
+
+    
+    x = 15;
+
+    while (x--)
+    {
+        scanf ("%d", &Push);
+
+        if (Push != 0)
+        {
+            if (inQueue(Push))
+                printf ("%d is Entered !!\n", Push);
+            else 
+                printf ("queue is full !!\n");
+        }
+        else
+        {
+            if (outQueue(&Pop))
+                printf ("%d is out !!\n", Pop);
+            else
+                printf ("queue is Empty !!\n");
+        }   
+    }
+
+
 }
