@@ -5,7 +5,7 @@
 int main ()
 {
     
-    //printf ("%d\n", u8IsPowerOfThree (12));
+    // printf ("%d\n", u8IsPowerOfThree (-10));
 
     // int arr1[] = {1, 3, 8, 12, 16, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
     // int arr1Size = sizeof (arr1) / sizeof (arr1[0]);
@@ -14,7 +14,7 @@ int main ()
     // array_print (arr1, arr1Size);
     // array_print (result, result_count);
 
-    // int arr1[] = {1, 3, 8, 12, 16, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
+    // int arr1[] = {3, 13, 4, 11, 9, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
     // int sum = arraySum ( 5, arr1);
     // printf ("%d \n", sum);
 
@@ -24,6 +24,16 @@ int main ()
     // int sum = addNumbers2 (1.1, 3.89);
     // printf ("%d\n", sum);
 
-    int result = checkEvenOrOdd (128);
-    printf ("%d\n", result);
+    // int result = checkEvenOrOdd (145);
+    // printf ("%d\n", result);
+
+    // printf ("%d\n", u8CountOnes(13));
+
+    // int arr[] = {1, 3, 8, 12, 16, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
+    // int arrSize = sizeof (arr) / sizeof (arr[0]);
+    // array_print (arr, arrSize);
+    // vidReverseArray(arrSize, arr);
+    // array_print (arr, arrSize);
+
+    printf ("%d\n", vidPrintMaxZeros(128));
 }
