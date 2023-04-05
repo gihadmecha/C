@@ -11,3 +11,4 @@ int u8CountOnes(unsigned int u32InputNumber);
 void swap_int (int* input1, int* input2);
 void vidReverseArray(int as32ArraySize, int* as32Array);
 int vidPrintMaxZeros (unsigned char u8Number);
+int* pu8PrintReverseExclusive (int u8LowerNumber, int u8UpprNumber, int* result_size);

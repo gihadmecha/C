@@ -139,3 +139,25 @@ int vidPrintMaxZeros (unsigned char u8Number)
     }
     return max;
 }
+
+int u8OutputArray[256];
+int* pu8PrintReverseExclusive (int u8LowerNumber, int u8UpprNumber, int* result_size)
+{
+        if (u8UpprNumber > u8LowerNumber)
+        {
+            *result_size = u8UpprNumber - u8LowerNumber - 1;
+
+            for (unsigned int i = 0; i < *result_size; i++)
+            {
+                u8OutputArray[i] = u8UpprNumber - 1 - i;
+            }
+        }    
+        else
+        {
+            *result_size = 2;
+            u8OutputArray[0] = 0xFF;
+            u8OutputArray[1] = 0xFF;
+        }
+
+    return u8OutputArray;
+}

@@ -35,5 +35,9 @@ int main ()
     // vidReverseArray(arrSize, arr);
     // array_print (arr, arrSize);
 
-    printf ("%d\n", vidPrintMaxZeros(128));
+    // printf ("%d\n", vidPrintMaxZeros(128));
+
+    int result_size;
+    int* arr = pu8PrintReverseExclusive (2, 5, &result_size);
+    array_print (arr, result_size);
 }
