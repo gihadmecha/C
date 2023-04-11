@@ -37,7 +37,43 @@ int main ()
 
     // printf ("%d\n", vidPrintMaxZeros(128));
 
-    int result_size;
-    int* arr = pu8PrintReverseExclusive (2, 5, &result_size);
-    array_print (arr, result_size);
+    // int result_size;
+    // int* arr = pu8PrintReverseExclusive (2, 5, &result_size);
+    // array_print (arr, result_size);
+
+    // char* string = lastLetters ("bat");
+    // string_print (string);
+
+    // int prices[] = {2, 5, 1, 4};
+    // int prices_count = sizeof(prices) / sizeof(prices[0]); 
+    // printf ("%ld\n", calculateAmount (prices_count, prices));
+
+    // char str[80] = "This is - www.tutorialspoint.com - website";
+    // const char s[2] = "-";
+    // char *token;
+    // /* get the first token */
+    // token = strtok(str, s);
+   
+    // /* walk through other tokens */
+    // while( token != NULL ) {
+    //     printf( " %s\n", token );
+        
+    //     token = strtok(NULL, s);
+    // }
+
+    //fizzBuzz (50);
+
+    //printf ("%d\n", minNum (3, 5, 5));
+
+    // int array[] = {1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3};
+    // int arraySize = sizeof (array) / sizeof (array[0]);
+    // printf ("%d\n", s32FindMostOccuring (arraySize, array));
+
+    // int array[] = {1, 2, 3, 4, 5, 6, 4};
+    // int arraySize = sizeof (array) / sizeof (array[0]);
+    // printf ("%d\n", u8FindLast (arraySize, array, 4));  
+
+    int array[] = {1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3};
+    int arraySize = sizeof (array) / sizeof (array[0]);
+    printf ("%d\n", u32FindLongestConsecutiveOccurance (arraySize, array, 3));
 }
