@@ -2,88 +2,194 @@
 
 int u8IsPowerOfThree (unsigned int u32Number)
 {
-   
+    if (u32Number == 0 || u32Number == 1)
+        return 1;
+
+    while (u32Number % 3 == 0)
+    {
+        if (u32Number == 3)
+            return 0;
+
+        u32Number /= 3;
+    }
+
+    return 1;
 }
 
 int* isPower (int arr_count, int* arr, int* result_count)
 {
-  
+    unsigned int onesCounter = 0;
+
+    unsigned int* result = (unsigned int*) malloc (arr_count * sizeof(unsigned int));
+
+    for (unsigned int index = 0; index < arr_count; index++)
+    {
+        for (unsigned int bit = 0; bit < 8; bit++)
+        {
+            if (arr[index]>>bit & 1)
+                onesCounter++;
+        }
+
+        if (onesCounter == 1)
+            result[index] = 1;
+        else
+            result[index] = 0;
+
+        onesCounter = 0;
+    }
+
+    *result_count = arr_count;
+    return result;
 }
 
 int arraySum ( int numbers_count, int* numbers)
 {
-  
+    int sum = 0;
+    for (unsigned int index = 0; index < numbers_count; index++)
+    {
+        sum += numbers[index];
+    }
+    return sum;
 }
 
 int maximum_XOR (int a, int b)
 {
-   
+    int max;
+
+    for (unsigned int L = a; L <= b; L++)
+    {
+        for (unsigned int R = L; R <= b; R++)
+        {
+            if (L == a)
+                max = L ^ R;
+
+            if (max < (L ^ R))
+                max = L ^ R;
+        }
+    }
+
+    return max;
 }
 
 int addNumbers2 (float a, float b)
 {
-   
+    return a + b;
 }
 
 int checkEvenOrOdd (unsigned int u32InputNumber)
 {
-    
+    return u32InputNumber & 1;
 }
 
 int u8CountOnes(unsigned int u32InputNumber)
 {
-    
-}
-
-void vidReverseArray(int as32ArraySize, int* as32Array)
-{
-   
+    int onesCounter = 0;
+    for (unsigned int index = 0; index < 32; index++)
+    {
+        if (u32InputNumber>>index & 1)
+            onesCounter++;
+    }
+    return onesCounter;
 }
 
 int vidPrintMaxZeros (unsigned char u8Number)
 {
-   
+    int firstOne = 0;
+    int max = 0;
+    int counter = 0;
+    for (unsigned int index = 0; index < 8; index++)
+    {
+        if (u8Number>>index & 1)
+        {
+            if (max < counter)
+                max = counter;
+
+            counter = 0;
+            firstOne = 1;
+        }
+        else if (firstOne == 1)
+        {
+            counter++;
+        }
+    }
+    return max;
+}
+
+void swap_int (int* number1, int* number2)
+{
+    unsigned int temp = *number1;
+    *number1 = *number2;
+    *number2 = temp;
+}
+void vidReverseArray(int as32ArraySize, int* as32Array)
+{
+    for (unsigned int index = 0; index < as32ArraySize/2; index++)
+    {
+        swap_int ( as32Array+index, as32Array+as32ArraySize-index-1);
+    }
 }
 
 int u8OutputArray[256];
 int* pu8PrintReverseExclusive (int u8LowerNumber, int u8UpprNumber, int* result_size)
 {
-
+    //int* result;
+    if (u8LowerNumber < u8UpprNumber)
+    {
+        *result_size = u8UpprNumber - u8LowerNumber - 1;
+        //result = (int*) malloc ((*result_size)*sizeof(int));
+        for (unsigned int index = 0; index < *result_size; index++)
+        {
+            //result[index] = u8UpprNumber - index - 1;
+            u8OutputArray[index] = u8UpprNumber - index -1;
+        }
+    }
+    else
+    {
+        *result_size = 2;
+        //result = (int*) malloc ((*result_size)*sizeof(int));
+        u8OutputArray[0] = 0xFF;
+        u8OutputArray[1] = 0xFF;
+    }
+    //return result;
+    return u8OutputArray;
 }
 
-char array[4];
+char arr[4];
 char* lastLetters (char* word)
 {
-    unsigned int index;
-    for ( index = 0; word[index]; index++);
-    array[0] = word[index-1];
-    array[1] = ' ';
-    array[2] = word[index-2];
-    array[3] = 0;
-    return array;
+    unsigned int index = 0;
+    for (index = 0; word[index]; index++);
+    arr[0] = word[index-1];
+    arr[1] = ' ';
+    arr[2] = word[index-2];
+    arr[3] = 0;
+    return arr;
 }
 
 long calculateAmount (int prices_count, int* prices)
 {
-    int minPrice = prices[0];
-    for (unsigned int index = 1; index < prices_count; index++)
-    {
-        if (minPrice < prices[index])
-            prices[index] -= minPrice;
+    int min;
+    long sum = 0;
 
-        else if (minPrice >= prices[index])
-        {
-            minPrice = prices[index];
-            prices[index] = 0;
-        }
-    }
-
-    long pricesSum = 0;
     for (unsigned int index = 0; index < prices_count; index++)
     {
-        pricesSum += prices[index];
+        if (index == 0)
+        {
+            min = prices[0];
+        }
+        else if (min > prices[index])
+        {
+            min = prices[index];
+            prices[index] = 0;
+        }
+        else
+        {
+            prices[index] -= min;
+        }
+
+        sum += prices[index];
     }
-    return pricesSum;
+    return sum;
 }
 
 char* strtok (char* str, char* s)
@@ -95,102 +201,98 @@ void fizzBuzz (int n)
 {
     for (unsigned int index = 1; index <= n; index++)
     {
-        if ((index % 3 == 0) && (index % 5 == 0))
+        if (index%3== 0 && index%5== 0)
             printf ("FizzBuzz\n");
-        else if ((index % 3 == 0) && (index % 5 != 0))
+        else if (index%3== 0)
             printf ("Fizz\n");
-        else if ((index % 3 != 0) && (index % 5 == 0))
+        else if (index%5== 0)
             printf ("Buzz\n");
-        else if ((index % 3 != 0) && (index % 5 != 0))
-            printf ("%d\n", index);
+        else
+        printf ("%d\n", index);
     }
 }
 
 int minNum (int samDaily, int kellyDaily, int difference)
 {
-    int samSolved = difference + samDaily;
-    int kellySolved = kellyDaily;
-
-    if ( (kellyDaily > samDaily) || ((kellyDaily == samDaily) && difference == 0) )
+    int days = 0;
+    int samSolved = difference;
+    int kellySolved = 0;
+    if (kellyDaily > samDaily)
     {
-        int day =1;
-        while (kellySolved < samSolved)
+        while (kellySolved <= samSolved)
         {
             samSolved += samDaily;
             kellySolved += kellyDaily;
-            day++;
+            days++;
         }
-
-        return day;
+        return days;
     }
     else
+    {
         return -1;
-    
-    return 0;
+    }
 }
 
 int s32FindMostOccuring (int as32Array_count, int* as32Array)
 {
-    int maxChain = 1;
-    int counter = 1;
-    int maxRepeatedNumber = as32Array[0];
+    int counter = 0;
+    int max = 0;
+    int requiredNumber;
 
-    for (signed int index = 0; index < as32Array_count-1; index++)
+    if (as32Array == 0)
+        return;
+
+    if (as32Array_count > 0)
     {
-        if (as32Array[index] == as32Array[index+1])
+        requiredNumber = as32Array[0];
+        for (unsigned int index = 0; index < as32Array_count-1; index++)
         {
-            counter++;
-        }
-        else
-        {
-            if (maxChain <= counter)
+
+            if (as32Array[index] == as32Array[index+1])
             {
-                maxChain = counter;
-                maxRepeatedNumber = as32Array[index];
+                counter++;
             }
-            counter = 1;
+            else
+            {
+                if (max <= counter)
+                {
+                    max = counter;
+                    requiredNumber = as32Array[index];
+                }
+                counter = 0;
+            }
         }
     }
-
-    return maxRepeatedNumber;
+    
+    return requiredNumber;
 }
 
 int u8FindLast (int au32Array_count, int* au32Array, int u32ItemToFind)
 {
-    int lastIndexOfItem = -1;
+    int requiredIndex = -1;
     for (unsigned int index = 0; index < au32Array_count; index++)
     {
-        if (u32ItemToFind == au32Array[index])
-        {
-            lastIndexOfItem = index;
-        }
+        if (au32Array[index] == u32ItemToFind)
+            requiredIndex = index;
     }
-    return lastIndexOfItem;
+    return requiredIndex;
 }
 
 int u32FindLongestConsecutiveOccurance (int as32Array_count, int* as32Array, int u32Number)
 {
-    int longestChain = 0;
-    int counter = 0;
-
-    if (as32Array_count == 0)
-        return 0;
-
-    if (as32Array == 0)
-        return 0;
-
-    for (unsigned int index = 0; index < as32Array_count-1; index++)
+    signed int counter = 0;
+    int max = 0; 
+    for (unsigned int index = 0; index < as32Array_count; index++)
     {
-        if (u32Number == as32Array[index])
+        if (as32Array[index] == u32Number)
             counter++;
-        
-        else
+        else 
         {
-            if (counter > longestChain)
-                longestChain = counter;
-            
+            if (max < counter)
+                max = counter;
+
             counter = 0;
         }
     }
-    return longestChain;
+    return max;
 }

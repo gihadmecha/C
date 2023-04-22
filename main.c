@@ -4,8 +4,17 @@
 
 int main ()
 {
+    //practice
+    /*********************************************************************************************************************/
+
+    // printf ("%c\n", string_searchFirstRepeatedChar ("kemal"));
+    // printf ("%c\n", string_searchFirstRepeatedChar2 ("kemal"));
+
+
+    //coding
+    /********************************************************************************************************************/
     
-    // printf ("%d\n", u8IsPowerOfThree (-10));
+    //printf ("%d\n", u8IsPowerOfThree (15));
 
     // int arr1[] = {1, 3, 8, 12, 16, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
     // int arr1Size = sizeof (arr1) / sizeof (arr1[0]);
@@ -24,18 +33,18 @@ int main ()
     // int sum = addNumbers2 (1.1, 3.89);
     // printf ("%d\n", sum);
 
-    // int result = checkEvenOrOdd (145);
+    // int result = checkEvenOrOdd (1);
     // printf ("%d\n", result);
 
-    // printf ("%d\n", u8CountOnes(13));
+    // printf ("%d\n", u8CountOnes(3));
+
+    // printf ("%d\n", vidPrintMaxZeros(197));
 
     // int arr[] = {1, 3, 8, 12, 16, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
     // int arrSize = sizeof (arr) / sizeof (arr[0]);
     // array_print (arr, arrSize);
     // vidReverseArray(arrSize, arr);
     // array_print (arr, arrSize);
-
-    // printf ("%d\n", vidPrintMaxZeros(128));
 
     // int result_size;
     // int* arr = pu8PrintReverseExclusive (2, 5, &result_size);
@@ -61,9 +70,9 @@ int main ()
     //     token = strtok(NULL, s);
     // }
 
-    //fizzBuzz (50);
+    // fizzBuzz (50);
 
-    //printf ("%d\n", minNum (3, 5, 5));
+    // printf ("%d\n", minNum (3, 5, 5));
 
     // int array[] = {1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3};
     // int arraySize = sizeof (array) / sizeof (array[0]);
