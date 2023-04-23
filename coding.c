@@ -432,3 +432,78 @@ int changeAds (int base10)
 
     return resultNumber;
 }
+
+void swap_char2 (char* character1, char* character2)
+{
+    char temp = *character1;
+    *character1 = *character2;
+    *character2 = temp;
+}
+
+void sort_even (char* str)
+{
+    unsigned int strLength = 0;
+    for (strLength = 0; str[strLength]; strLength++);
+
+    int completeSortFlag = 0;
+    
+    for (unsigned int i = 0; i < strLength && completeSortFlag == 0; i+=2)
+    {
+        completeSortFlag = 1;
+
+        for (unsigned int j = i+2; j < strLength; j+=2)
+        {
+            if (str[i] > str[j])
+            {
+                swap_char2 (str+i, str+j);
+                completeSortFlag = 0;
+            }
+        } 
+    }
+}
+
+void sort_odd (char* str)
+{
+    unsigned int strLength = 0;
+    for (strLength = 0; str[strLength]; strLength++);
+
+    int completeSortFlag = 0;
+    
+    for (unsigned int i = 1; i < strLength && completeSortFlag == 0; i+=2)
+    {
+        completeSortFlag = 1;
+
+        for (unsigned int j = i+2; j < strLength; j+=2)
+        {
+            if (str[i] > str[j])
+            {
+                swap_char2 (str+i, str+j);
+                completeSortFlag = 0;
+            }
+        } 
+    }
+}
+
+char** twins ( int a_count, char** a, int b_count, char** b, int* result_count)
+{
+    *result_count = a_count;
+    
+    for (unsigned int index = 0; index < a_count; index++)
+    {
+        sort_even (a[index]);
+        sort_odd (a[index]);
+        sort_even (b[index]);
+        sort_odd (b[index]);
+
+        if (string_comparetwins (a[index], b[index]))
+        {
+            string_copytwins (result[index], "Yes");
+        }
+        else
+        {
+            string_copytwins (result[index], "NO");
+        }
+    }
+
+    return result;
+}

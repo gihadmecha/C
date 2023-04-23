@@ -28,3 +28,4 @@ int fourthBit (int number);
 int maxIndex (int s, int badIndex);
 int* getOneBits (int n, int* result_count);
 int changeAds (int base10);
+char** twins ( int a_count, char** a, int b_count, char** b, int* result_count);

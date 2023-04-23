@@ -102,5 +102,15 @@ int main ()
     // int* arr = getOneBits (161, &result_count);
     // array_print (arr, result_count);
 
-    printf ("%d\n", changeAds (30));
+    // printf ("%d\n", changeAds (30));
+
+    char str1 = "abcd";
+    char str2 = "abcd";
+    char str3 = "cbad";
+    char str4 = "adbc";
+    char firstString[][10] = {str1, str2};
+    char secondString[][10] = {str3, str4};
+    int result_count;
+    char** result = twins ( 2, firstString[][10], 2, secondString[][10], result_count);
+    
 }
