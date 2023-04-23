@@ -1,6 +1,7 @@
 
 #include "coding.h"
 #include "myArray.h"
+#include "myString.h"
 
 int main ()
 {
@@ -104,13 +105,24 @@ int main ()
 
     // printf ("%d\n", changeAds (30));
 
-    char str1 = "abcd";
-    char str2 = "abcd";
-    char str3 = "cbad";
-    char str4 = "adbc";
-    char firstString[][10] = {str1, str2};
-    char secondString[][10] = {str3, str4};
-    int result_count;
-    char** result = twins ( 2, firstString[][10], 2, secondString[][10], result_count);
-    
+    // char str1[] = "abcd";
+    // char str2[] = "abcd";
+    // char str3[] = "cbad";
+    // char str4[] = "adbc";
+    // char* firstString[] = {str1, str2};
+    // char* secondString[] = {str3, str4};
+    // int result_count;
+    // char** result = twins ( 2, firstString, 2, secondString, &result_count);
+    // string_printtwins (result, result_count);
+
+    // string_print (newPassword ("hackerrank", "tree"));
+
+    // // char skills[] = "pcmbzpcmbz";
+    // char skills[] = "mppzbmbpzcbmpbmczcz";
+    // printf ("%d\n", perfectTeam (skills));
+
+    // char str[] = "GTCAG";
+    // string_print (dnaComplement (str));
+
+    // printf ("%d\n", u8CalculateHeatingTime (50));
 }

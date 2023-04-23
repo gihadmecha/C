@@ -484,26 +484,196 @@ void sort_odd (char* str)
     }
 }
 
+int string_comparetwins (char* str1, char* str2)
+{
+    unsigned int str1Length;
+    unsigned int str2Length;
+
+    for (str1Length = 0; str1[str1Length]; str1Length++);
+    for (str2Length = 0; str2[str2Length]; str2Length++);
+
+    if (str1Length != str2Length)
+        return 0;
+
+    for (unsigned int index = 0; str1[index]; index++)
+    {
+        if (str1[index] != str2[index])
+            return 0;
+    }
+
+    return 1;
+}
+
+void string_copytwins (char* strCopy, char* strOriginal, int size)
+{
+    unsigned int index = 0;
+    for (index = 0; index < size; index++)
+    {
+        strCopy[index] = strOriginal[index];
+    }
+    strCopy[index] = 0;
+}
+
+void string_printtwins (char** str, int size)
+{
+    for (unsigned int index = 0; index < size; index++)
+    {
+        string_print (str[index]);
+    }
+}
+
 char** twins ( int a_count, char** a, int b_count, char** b, int* result_count)
 {
     *result_count = a_count;
+
+    char** result = (char**) malloc ((*result_count)*sizeof(char*));
+
+    for (unsigned int index = 0; index < (*result_count); index++)
+    {
+        result[index] = (char*) malloc (3*sizeof(char));
+    } 
     
     for (unsigned int index = 0; index < a_count; index++)
     {
         sort_even (a[index]);
         sort_odd (a[index]);
         sort_even (b[index]);
-        sort_odd (b[index]);
+        sort_odd (b[index]); 
 
         if (string_comparetwins (a[index], b[index]))
         {
-            string_copytwins (result[index], "Yes");
+            string_copytwins (result[index], "Yes", 3);
+            
         }
         else
         {
-            string_copytwins (result[index], "NO");
+            string_copytwins (result[index], "NO", 2);
         }
     }
 
     return result;
+}
+
+unsigned int string_lengthpassward (char* str)
+{
+    unsigned int i;
+    for (i = 0; str[i]; i++);
+    return i;
+}
+
+char* newPassword (char* a, char* b)
+{
+    unsigned int aLength = string_lengthpassward (a);
+    unsigned int bLength = string_lengthpassward (b);
+    unsigned int cLength = aLength + bLength + 1;
+    char* c = (char*) malloc (cLength * sizeof(char));
+    unsigned int aIndex = 0;
+    unsigned int bIndex = 0;
+    unsigned int cIndex = 0;
+    for ( ; cIndex < cLength-1; )
+    {
+        if (aIndex < aLength)
+        {
+            c[cIndex] = a[aIndex]; 
+            cIndex++;
+            aIndex++;
+        }
+     
+        if (bIndex < bLength)
+        {
+            c[cIndex] = b[bIndex]; 
+            cIndex++;
+            bIndex++;
+        }
+    }
+    c[cIndex] = 0;
+    return c;
+}
+
+void sort (char* str)
+{
+    for (unsigned int i = 0; str[i]; i++)
+    {
+        for (unsigned int j = i+1; str[j]; j++)
+        {
+            if (str[i] > str[j])
+                swap_char2 (str+i, str+j);
+        }
+    }
+}
+
+int array_shortestSeries (char* str)
+{
+    unsigned int counter = 1;
+    unsigned int shortest;
+    unsigned int firstChain = 0;
+
+    for (unsigned int index = 0; str[index]; index++)
+    {
+        if (str[index] == str[index+1])
+        {
+            counter++;
+        }
+        else
+        {
+            if (firstChain == 0)
+                shortest = counter;
+
+            if (shortest > counter)
+                shortest = counter;
+
+            firstChain = 1;
+
+            counter = 1;
+        }
+    }
+
+    return shortest;
+}
+
+int perfectTeam (char* skills)
+{
+    sort (skills);
+    return array_shortestSeries (skills);
+}
+
+void string_reverseComplement (char* str)
+{
+    unsigned int length = string_lengthpassward (str);
+    for (unsigned int index = 0; index < length/2; index++)
+    {
+        swap_char2 (str+index, str+length-index-1);
+    }
+}
+
+char* dnaComplement (char* s)
+{
+    for (unsigned int index = 0; s[index]; index++)
+    {
+        string_reverseComplement (s);
+
+        if (s[index] == 'A')
+            s[index] = 'T';
+        else if (s[index] == 'T')
+            s[index] = 'A';
+        else if (s[index] == 'C')
+            s[index] = 'G';
+        else if (s[index] == 'G')
+            s[index] = 'C';
+    }
+    return s;
+}
+
+unsigned int u8CalculateHeatingTime (unsigned int u8WaterTempature)
+{
+    if (0 <= u8WaterTempature && u8WaterTempature <= 30) 
+        return 7;
+    else if (30 < u8WaterTempature && u8WaterTempature <= 60) 
+        return 5;
+    else if (60 < u8WaterTempature && u8WaterTempature <= 90) 
+        return 3;
+    else if (90 < u8WaterTempature && u8WaterTempature <= 100) 
+        return 1;
+    
+        return 0;   
 }

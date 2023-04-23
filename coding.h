@@ -29,3 +29,7 @@ int maxIndex (int s, int badIndex);
 int* getOneBits (int n, int* result_count);
 int changeAds (int base10);
 char** twins ( int a_count, char** a, int b_count, char** b, int* result_count);
+char* newPassword (char* a, char* b);
+int perfectTeam (char* skills);
+char* dnaComplement (char* s);
+unsigned int u8CalculateHeatingTime (unsigned int u8WaterTempature);
