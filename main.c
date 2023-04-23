@@ -82,7 +82,25 @@ int main ()
     // int arraySize = sizeof (array) / sizeof (array[0]);
     // printf ("%d\n", u8FindLast (arraySize, array, 4));  
 
-    int array[] = {1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3};
-    int arraySize = sizeof (array) / sizeof (array[0]);
-    printf ("%d\n", u32FindLongestConsecutiveOccurance (arraySize, array, 3));
+    // int array[] = {1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3};
+    // int arraySize = sizeof (array) / sizeof (array[0]);
+    // printf ("%d\n", u32FindLongestConsecutiveOccurance (arraySize, array, 3));
+
+    // printf ("%d\n", u32ClearBit (10, 1));
+
+    // int badNumbers[] = {37, 7, 22, 15, 49, 60};
+    // int n = sizeof(badNumbers) / sizeof(badNumbers[0]);
+    // array_print (badNumbers, n);
+    // printf ("%d\n", partition (badNumbers, 0, n-1));
+    // array_print (badNumbers, n);
+
+    // printf ("%d\n", superPower(7));
+
+    // printf ("%d\n", fourthBit (23));
+
+    // int result_count;
+    // int* arr = getOneBits (161, &result_count);
+    // array_print (arr, result_count);
+
+    printf ("%d\n", changeAds (30));
 }

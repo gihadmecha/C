@@ -296,3 +296,139 @@ int u32FindLongestConsecutiveOccurance (int as32Array_count, int* as32Array, int
     }
     return max;
 }
+
+unsigned int u32ClearBit (unsigned int u32Number, unsigned int u8BitNumber)
+{
+    return u32Number & (~(1<<u8BitNumber));
+}
+
+/*
+int partition (int* badNumbers, int low, int high)
+{
+    int pivot = badNumbers[high];
+    int index = low;
+    int i;
+    for (i = low; i < high; i++)
+    {
+        if (badNumbers[i] < badNumbers[high])
+        {
+            if (i != index)
+            {
+                swap_int (badNumbers+i, badNumbers+index);
+            }
+            index++;
+        }
+    } 
+    swap_int (badNumbers+index, badNumbers+high);
+    return index;
+}
+
+void quick (int* badNumbers, int low, int high)
+{
+    if (low < high)
+    {
+        int p_index = partition (badNumbers, low, high);
+    }
+}
+
+int goodSegment (int badNumbers_count, int* badNumbers, int lower, int upper)
+{
+    quick (badNumbers, 0, badNumbers_count-1);
+}
+*/
+
+int superPower (int z)
+{
+    int multi = 1;
+    int stopFlag;
+    for (unsigned int base = 2; base <= z; base++)
+    {
+        multi = 1;
+        for (unsigned int power = 1; power <= z; power++)
+        {
+            stopFlag = power;
+            multi *= base;
+
+            if (power != 1)
+            {
+                if (multi == z)
+                {
+                    //printf ("equal %d\n", multi);
+                    return 1;
+                }
+                else if (multi > z)
+                {
+                    //printf ("bigger %d\n", multi);
+                    break;
+                }
+            }
+        }
+
+        if (stopFlag == 2)
+            return 0;
+    }
+    return 0;
+}
+
+int fourthBit (int number)
+{
+   return (number>>3) & 1; 
+}
+
+int maxIndex (int s, int badIndex)
+{
+    int i = 0;
+    int j = 1;
+    int requiredIndex;
+    for (int index = 0; index < s; index++)
+    {
+        i = i + j;
+        i++;
+        j++;
+    }
+}
+
+static int onesIndexArray[32];
+int* getOneBits (int n, int* result_count)
+{
+    int firstOne = 0;
+    int counter = 0;
+    *result_count = 0;
+    for (signed int index = sizeof(int)*8-1; index >= 0; index--)
+    {
+        if ((n>>index) & 1)
+        {
+            if (firstOne == 0)
+            {
+                firstOne = 1;
+            }
+            counter++;
+            onesIndexArray[*result_count] = counter;
+            (*result_count)++;
+        }
+        else
+        {
+            if (firstOne == 1)
+                counter++;
+        }
+    }
+    return onesIndexArray;
+}
+
+int changeAds (int base10)
+{
+    int lastOneIndex = -1;
+    int resultNumber = base10;
+    for (unsigned int index = 0; index < 32; index++)
+    {
+        if ((base10>>index) & 1)
+            lastOneIndex = index;
+    }
+
+    for (unsigned int index = 0; index <= lastOneIndex; index++)
+    {
+        resultNumber ^= 1<<index;
+    }
+
+    return resultNumber;
+}
