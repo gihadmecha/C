@@ -93,6 +93,10 @@ int main ()
 
     // printf ("%d\n", fourthBit (23));
 
+    unsigned int pu32Output;
+    printf ("%d\n", u8RightCircularShift (0xaabbccdd, 4, &pu32Output));
+    printf ("%x\n", pu32Output);
+
     // int result_count;
     // int* arr = getOneBits (161, &result_count);
     // array_print (arr, result_count);

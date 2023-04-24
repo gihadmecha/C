@@ -340,6 +340,30 @@ int fourthBit (int number)
    return (number>>3) & 1; 
 }
 
+unsigned char u8RightCircularShift (unsigned int u32InputNumber, int u8NumberOfShifts, unsigned int *pu32Output)
+{
+    int firstDigit;
+    if (u8NumberOfShifts > 32)
+    {
+        *pu32Output = u32InputNumber;
+        return 0xFF;
+    }
+    else
+    {
+        // for (int index = 0; index < u8NumberOfShifts; index++)
+        // {
+        //     firstDigit = (u32InputNumber & 1)<<31;
+        //     u32InputNumber >>= 1;
+        //     u32InputNumber |= firstDigit;
+        // }
+        // *pu32Output = u32InputNumber;
+
+        *pu32Output = (u32InputNumber>>u8NumberOfShifts)|(u32InputNumber<<(32-u8NumberOfShifts));
+        
+        return 0;
+    }
+}
+
 static int onesIndexArray[32];
 int* getOneBits (int n, int* result_count)
 {
@@ -842,3 +866,127 @@ int minimumMoves (int arr1_count, int* arr1, int arr2_count, int* arr2)
 
     return counter;
 }
+
+// uint8 LedFlasher (uint8 OnOffInterval)
+// {
+//     static uint8 status = 1;
+//     static uint8 counter = 0;
+
+//     if ( (1 <= OnOffInterval) && (OnOffInterval <= 10) )
+//     {
+//         if (counter >= OnOffInterval)
+//         {
+//             //status = 1 - status;
+//             if (status == 1)
+//                 status = 0;
+//             else if (status == 0)
+//                 status = 1;
+
+//             counter = 1;
+//         }
+//         else
+//         {
+//             counter++;
+//         }
+
+//         return status;
+//     }
+//     else
+//     {
+//         return 0xFF;
+//     }
+// }
+
+// uint8 Dec2SevenSeg (uint8 DecimalNum)
+// {
+//     uint8 arr[] = {0X7E, 0X30, 0X6D, 0x79, 0x33, 0X5B, 0x5F, 0X70, 0X7F, 0X7B};
+    
+//     if (DecimalNum >= 0 && DecimalNum <= 9)
+//     {
+//         return arr[DecimalNum];
+//     }
+//     return 0;
+// }
+
+// uint8 BattaryVoltageMonitor (uint8 BattaryVoltage)
+// {
+//     static char status = 'U';
+
+//     BattaryVoltage = (BattaryVoltage*25.5)/255;
+
+//     static int c1 = 0;
+//     static int c2 = 0;
+//     static int c3 = 0;
+
+//     if (voltage < 5)
+//     {
+//         c2 = 0;
+//         c3 =0;
+//         c1 = 1;
+//         if (c1 == 1)
+//         {
+//             status = 'E';
+//         }
+//     }
+//     else if (6 <= voltage && voltage < 9)
+//     {
+//         c1 = 0;
+//         c3 = 0;
+//         c2 = 1;
+//         if (c2 == 1)
+//         {
+//             status = 'L';
+//         }
+//     }
+//     else if (voltage =< 12)
+//     {
+//         c1 = 0;
+//         c2 = 0;
+//         c3 = 0;
+//         if (c3 == 1)
+//         {
+//             status = 'N';
+//         }
+//     }
+
+//     return status;
+// }
+
+// uint8 ControlFan (uint8 Temp)
+// {
+//     static uint8 status = 0;
+
+//     if (Temp >= 50)
+//     {
+//         status = 1;
+//     }
+//     else if (Temp <= 30)
+//     {
+//         status = 0;
+//     }
+
+//     return status;
+// }
+
+// uint8 SawtoothGenerator ()
+// {
+//     static uint8 digitalValue = 0;
+//     return digitalValue++;
+// }
+
+// uint32 FallingEdgeCounter (uint8 PinReading)
+// {
+//     static uint8 lastStatus = 1;
+//     static uint8 status = 1;
+//     static uint32 counter = 0;
+
+//     lastStatus = status;
+//     status = PinReading;
+
+//     if (lastStatus == 1 && status == 0)
+//     {
+//         counter++;
+//     }
+
+//     return counter;
+// }

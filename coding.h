@@ -24,6 +24,7 @@ int u32FindLongestConsecutiveOccurance (int as32Array_count, int* as32Array, int
 unsigned int u32ClearBit (unsigned int u32Number, unsigned int u8BitNumber);
 int superPower (int z);
 int fourthBit (int number);
+unsigned char u8RightCircularShift (unsigned int u32InputNumber, int u8NumberOfShifts, unsigned int *pu32Output);
 int* getOneBits (int n, int* result_count);
 int changeAds (int base10);
 char** twins ( int a_count, char** a, int b_count, char** b, int* result_count);
@@ -35,3 +36,9 @@ int closedPaths (int number);
 int maxMoves (char* s, char* t);
 int goodSegment (int badNumbers_count, int* badNumbers, int lower, int upper);
 int maxIndex (int s, int badIndex);
+// uint8 LedFlasher (uint8 OnOffInterval);
+// uint8 Dec2SevenSeg (uint8 DecimalNum);
+// uint8 BattaryVoltageMonitor (uint8 BattaryVoltage);
+// uint8 ControlFan (uint8 Temp);
+// uint8 SawtoothGenerator ();
+// uint32 FallingEdgeCounter (uint8 PinReading);
