@@ -130,5 +130,13 @@ int main ()
     // int badNumbers_count = sizeof (badNumbers)/sizeof(int);
     // printf ("%d\n", goodSegment (badNumbers_count, badNumbers, 3, 48));
 
+    // printf ("%d\n", maxIndex (4, 6));
+
+    // int arr1[] = {123, 543};
+    // int arr1_count = sizeof(arr1)/sizeof(arr1[0]);
+    // int arr2[] = {321, 279};
+    // int arr2_count = sizeof(arr2)/sizeof(arr2[0]);
+    // printf ("%d\n", minimumMoves (arr1_count, arr1, arr2_count, arr2));
+
     
 }

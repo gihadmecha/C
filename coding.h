@@ -24,7 +24,6 @@ int u32FindLongestConsecutiveOccurance (int as32Array_count, int* as32Array, int
 unsigned int u32ClearBit (unsigned int u32Number, unsigned int u8BitNumber);
 int superPower (int z);
 int fourthBit (int number);
-int maxIndex (int s, int badIndex);
 int* getOneBits (int n, int* result_count);
 int changeAds (int base10);
 char** twins ( int a_count, char** a, int b_count, char** b, int* result_count);
@@ -35,3 +34,4 @@ unsigned int u8CalculateHeatingTime (unsigned int u8WaterTempature);
 int closedPaths (int number);
 int maxMoves (char* s, char* t);
 int goodSegment (int badNumbers_count, int* badNumbers, int lower, int upper);
+int maxIndex (int s, int badIndex);

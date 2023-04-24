@@ -340,19 +340,6 @@ int fourthBit (int number)
    return (number>>3) & 1; 
 }
 
-int maxIndex (int s, int badIndex)
-{
-    int i = 0;
-    int j = 1;
-    int requiredIndex;
-    for (int index = 0; index < s; index++)
-    {
-        i = i + j;
-        i++;
-        j++;
-    }
-}
-
 static int onesIndexArray[32];
 int* getOneBits (int n, int* result_count)
 {
@@ -778,4 +765,80 @@ int goodSegment (int badNumbers_count, int* badNumbers, int lower, int upper)
     return max;
 }
 
+int maxIndex (int s, int badIndex)
+{
+    int badImportance = 0;
+    int sum = 0;
 
+    for (unsigned int index = 1; sum <= badIndex; index++)
+    {
+        sum += index;
+        if (badIndex == sum)
+        {
+            badImportance = 1;
+        }
+    }
+
+    if (badImportance)
+    {
+        sum = 0;
+        for (unsigned int index = 2; index <= s; index++)
+        {
+            sum += index;
+        }
+    }
+    else
+    {
+        sum = 0;
+        for (unsigned int index = 1; index <= s; index++)
+        {
+            sum += index;
+        }
+    }
+
+    return sum;
+}
+
+int minimumMoves (int arr1_count, int* arr1, int arr2_count, int* arr2)
+{
+    int numberCopy1;
+    int numberCopy2;
+    int digit1;
+    int digit2;
+    int counter = 0;
+
+    for (unsigned int index = 0; index < arr1_count; index++)
+    {
+        numberCopy1 = arr1[index];
+        numberCopy2 = arr2[index];
+
+        while (numberCopy1 || numberCopy2)
+        {
+            digit1 = numberCopy1 % 10;
+            digit2 = numberCopy2 % 10;
+
+            // while (digit1 > digit2)
+            // {
+            //     digit1--;
+            //     counter++;
+            // }
+
+            // while (digit1 < digit2)
+            // {
+            //     digit1++;
+            //     counter++;
+            // }
+
+            if (digit1 > digit2)
+                counter += (digit1 - digit2);
+
+            if (digit2 > digit1)
+                counter += (digit2 - digit1);
+
+            numberCopy1 = numberCopy1 / 10;
+            numberCopy2 = numberCopy2 / 10;
+        }
+    }
+
+    return counter;
+}
