@@ -302,41 +302,6 @@ unsigned int u32ClearBit (unsigned int u32Number, unsigned int u8BitNumber)
     return u32Number & (~(1<<u8BitNumber));
 }
 
-/*
-int partition (int* badNumbers, int low, int high)
-{
-    int pivot = badNumbers[high];
-    int index = low;
-    int i;
-    for (i = low; i < high; i++)
-    {
-        if (badNumbers[i] < badNumbers[high])
-        {
-            if (i != index)
-            {
-                swap_int (badNumbers+i, badNumbers+index);
-            }
-            index++;
-        }
-    } 
-    swap_int (badNumbers+index, badNumbers+high);
-    return index;
-}
-
-void quick (int* badNumbers, int low, int high)
-{
-    if (low < high)
-    {
-        int p_index = partition (badNumbers, low, high);
-    }
-}
-
-int goodSegment (int badNumbers_count, int* badNumbers, int lower, int upper)
-{
-    quick (badNumbers, 0, badNumbers_count-1);
-}
-*/
-
 int superPower (int z)
 {
     int multi = 1;
@@ -677,3 +642,140 @@ unsigned int u8CalculateHeatingTime (unsigned int u8WaterTempature)
     
         return 0;   
 }
+
+int closedPaths (int number)
+{
+    int digit;
+    int sum = 0;
+    while (number)
+    {
+        digit = number % 10;
+
+        if (digit == 0 || digit == 4 || digit == 6 || digit == 9)
+            sum += 1;
+        else if (digit == 8)
+            sum += 2;
+
+        number /= 10;
+    }
+    return sum;
+}
+
+int string_shiftLeft (char* s, int firstDeletedIndex, int lastDeletedIndex)
+{
+    int length = string_lengthpassward (s);
+    int remainlenght = length - lastDeletedIndex - 1;
+    int remainIndex = lastDeletedIndex;
+    int counter = 0;
+    unsigned int index;
+    for (index = firstDeletedIndex; remainlenght; index++)
+    {
+        remainIndex++;
+        s[index] = s[remainIndex];
+        remainlenght--;
+        counter++;
+    }
+    s[index] = 0;
+    return counter;
+}
+
+int string_compareMaxMove (char* s, char* t)
+{
+    for (unsigned int index = 0; t[index]; index++)
+    {
+        if (s[index] != t[index])
+            return 0;
+    }
+    return 1;
+}
+
+signed int string_searchStringLToR (char* s, char* t)
+{
+    for (unsigned int index = 0; s[index]; index++)
+    {
+        if (string_compareMaxMove(s+index, t))
+            return index;
+    }
+    return -1;
+}
+
+signed int string_searchStringRTOL (char* s, int sLength, char* t)
+{
+    for (unsigned int index = sLength-1; index >= 0; index--)
+    {
+        if (string_compareMaxMove(s+index, t))
+            return index;
+    }
+    return -1;
+}
+
+int maxMoves (char* s, char* t)
+{
+    int sLength = string_lengthpassward (s);
+    int tLength = string_lengthpassward (t);
+
+    char* sLToR = (char*) malloc (sLength*sizeof(char));
+    char* sRToL = (char*) malloc (sLength*sizeof(char));
+
+    string_copytwins (sLToR, s, sLength);
+    string_copytwins (sRToL, s, sLength);
+
+    int LToRDeletionSum = 0;
+    signed int LToRIndex = string_searchStringLToR (sLToR, t);
+    while (LToRIndex >= 0)
+    {
+        LToRDeletionSum += string_shiftLeft (sLToR, LToRIndex, LToRIndex + tLength - 1);
+       LToRIndex = string_searchStringLToR (sLToR, t); 
+    }
+
+    int RToLDeletionSum = 0;
+    signed int RToLIndex = string_searchStringRTOL ( sRToL,  sLength, t);
+    while (RToLIndex >= 0)
+    {
+        RToLDeletionSum += string_shiftLeft (sRToL, RToLIndex, RToLIndex + tLength - 1);
+       RToLIndex = string_searchStringRTOL ( sRToL,  sLength, t); 
+    }
+    
+    return (LToRDeletionSum > RToLDeletionSum) ? LToRDeletionSum : RToLDeletionSum;
+}
+
+
+void sort_badNumbers (int badNumbers_count, int* badNumbers)
+{
+    for (unsigned int i = 0; i < badNumbers_count; i++)
+    {
+        for (unsigned int j = i+1; j < badNumbers_count; j++)
+        {
+            if (badNumbers[i] > badNumbers[j])
+                swap_int (badNumbers+i, badNumbers+j);
+        }
+    }
+}
+
+int goodSegment (int badNumbers_count, int* badNumbers, int lower, int upper)
+{
+    sort_badNumbers (badNumbers_count, badNumbers);
+    int counter = 0;
+    int max = 0;
+    int badIndex = 0;
+
+    for (unsigned int index = lower; index <= upper; index++)
+    {
+        if (index != badNumbers[badIndex])
+        {
+            counter++;
+        }
+        else
+        {
+            if (max < counter)
+                max = counter;
+
+            counter = 0;
+            badIndex++;
+        }
+    }
+
+    return max;
+}
+
+

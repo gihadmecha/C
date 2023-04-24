@@ -89,12 +89,6 @@ int main ()
 
     // printf ("%d\n", u32ClearBit (10, 1));
 
-    // int badNumbers[] = {37, 7, 22, 15, 49, 60};
-    // int n = sizeof(badNumbers) / sizeof(badNumbers[0]);
-    // array_print (badNumbers, n);
-    // printf ("%d\n", partition (badNumbers, 0, n-1));
-    // array_print (badNumbers, n);
-
     // printf ("%d\n", superPower(7));
 
     // printf ("%d\n", fourthBit (23));
@@ -125,4 +119,16 @@ int main ()
     // string_print (dnaComplement (str));
 
     // printf ("%d\n", u8CalculateHeatingTime (50));
+
+    // printf ("%d\n", closedPaths (649578));
+
+    // char s[] = "bcbbc";
+    // char t[] = "b";
+    // printf ("%d\n", maxMoves (s, t));
+
+    // int badNumbers[] = {37, 7, 22, 15, 49, 60};
+    // int badNumbers_count = sizeof (badNumbers)/sizeof(int);
+    // printf ("%d\n", goodSegment (badNumbers_count, badNumbers, 3, 48));
+
+    
 }
