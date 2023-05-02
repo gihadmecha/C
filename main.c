@@ -14,8 +14,49 @@ int main ()
 
     //coding
     /********************************************************************************************************************/
+
+    // int array[] = {1, 2, 3, 4, 5, 6, 4};
+    // int arraySize = sizeof (array) / sizeof (array[0]);
+    // printf ("%d\n", u8FindLast (arraySize, array, 4));
+
+    // int result_size;
+    // int* arr = vidPrintReverseInclusive (2, 5, &result_size);
+    // array_print (arr, result_size);
+
+    // int result_size;
+    // int* arr = pu8PrintReverseExclusive (5, 2, &result_size);
+    // array_print (arr, result_size);
+
+    // printf ("%d\n", u32ClearBit (3, 3));
+
+    // int array[] = {1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3};
+    // int arraySize = sizeof (array) / sizeof (array[0]);
+    // printf ("%d\n", u32FindLongestConsecutiveOccurance (arraySize, array, 3));
+
+    // int array[] = {1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3};
+    // int arraySize = sizeof (array) / sizeof (array[0]);
+    // printf ("%d\n", s32FindMostOccuring (arraySize, array));
     
-    // printf ("%d\n", u8IsPowerOfThree (6));
+    // printf ("%d\n", u8IsPowerOfThree (3));
+
+    // printf ("%d\n", vidPrintMaxZeros(197));
+
+    // unsigned int pu32Output;
+    // printf ("%d\n", u8RightCircularShift (0xaabbccdd, 4, &pu32Output));
+    // printf ("%x\n", pu32Output);
+
+    // printf ("%d\n", u8CalculateHeatingTime (50));
+
+    // int arr[] = {1, 3, 8, 12, 16, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
+    // int arrSize = sizeof (arr) / sizeof (arr[0]);
+    // array_print (arr, arrSize);
+    // vidReverseArray(arrSize, arr);
+    // array_print (arr, arrSize);
+
+    // int result = checkEvenOrOdd (6);
+    // printf ("%d\n", result);
+
+    // printf ("%d\n", u8CountOnes(0x89F00123));
 
     // int arr1[] = {1, 3, 8, 12, 16, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
     // int arr1Size = sizeof (arr1) / sizeof (arr1[0]);
@@ -24,32 +65,17 @@ int main ()
     // array_print (arr1, arr1Size);
     // array_print (result, result_count);
 
+    // int maxXOR = maximum_XOR (10, 15);
+    // printf ("%d\n", maxXOR);
+
+    printf ("%d\n", fourthBit (23));
+
     // int arr1[] = {3, 13, 4, 11, 9, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
     // int sum = arraySum ( 5, arr1);
     // printf ("%d \n", sum);
 
-    // int maxXOR = maximum_XOR (10, 15);
-    // printf ("%d\n", maxXOR);
-
     // int sum = addNumbers2 (1.1, 3.89);
     // printf ("%d\n", sum);
-
-    // int result = checkEvenOrOdd (1);
-    // printf ("%d\n", result);
-
-    // printf ("%d\n", u8CountOnes(3));
-
-    // printf ("%d\n", vidPrintMaxZeros(197));
-
-    // int arr[] = {1, 3, 8, 12, 16, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
-    // int arrSize = sizeof (arr) / sizeof (arr[0]);
-    // array_print (arr, arrSize);
-    // vidReverseArray(arrSize, arr);
-    // array_print (arr, arrSize);
-
-    // int result_size;
-    // int* arr = pu8PrintReverseExclusive (2, 5, &result_size);
-    // array_print (arr, result_size);
 
     // char* string = lastLetters ("bat");
     // string_print (string);
@@ -58,44 +84,11 @@ int main ()
     // int prices_count = sizeof(prices) / sizeof(prices[0]); 
     // printf ("%ld\n", calculateAmount (prices_count, prices));
 
-    // char str[80] = "This is - www.tutorialspoint.com - website";
-    // const char s[2] = "-";
-    // char *token;
-    // /* get the first token */
-    // token = strtok(str, s);
-   
-    // /* walk through other tokens */
-    // while( token != NULL ) {
-    //     printf( " %s\n", token );
-        
-    //     token = strtok(NULL, s);
-    // }
-
     // fizzBuzz (50);
 
-    // printf ("%d\n", minNum (3, 5, 5));
-
-    // int array[] = {1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3};
-    // int arraySize = sizeof (array) / sizeof (array[0]);
-    // printf ("%d\n", s32FindMostOccuring (arraySize, array));
-
-    // int array[] = {1, 2, 3, 4, 5, 6, 4};
-    // int arraySize = sizeof (array) / sizeof (array[0]);
-    // printf ("%d\n", u8FindLast (arraySize, array, 4));  
-
-    // int array[] = {1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3};
-    // int arraySize = sizeof (array) / sizeof (array[0]);
-    // printf ("%d\n", u32FindLongestConsecutiveOccurance (arraySize, array, 3));
-
-    // printf ("%d\n", u32ClearBit (10, 1));
+    // printf ("%d\n", minNum (3, 5, 5));  
 
     // printf ("%d\n", superPower(7));
-
-    // printf ("%d\n", fourthBit (23));
-
-    // unsigned int pu32Output;
-    // printf ("%d\n", u8RightCircularShift (0xaabbccdd, 4, &pu32Output));
-    // printf ("%x\n", pu32Output);
 
     // int result_count;
     // int* arr = getOneBits (161, &result_count);
@@ -121,8 +114,6 @@ int main ()
 
     // char str[] = "GTCAG";
     // string_print (dnaComplement (str));
-
-    // printf ("%d\n", u8CalculateHeatingTime (50));
 
     // printf ("%d\n", closedPaths (649578));
 

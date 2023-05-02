@@ -1,64 +1,164 @@
 #include "coding.h"
 
-uint8 PwmGenerator (uint8 DutyCycle)
-{
-    static int counter = 0;
+// uint8 PwmGenerator (uint8 DutyCycle)
+// {
+//     static int counter = 0;
 
-    if (DutyCycle < 0 || DutyCycle > 10)
-        return 2;
+//     if (DutyCycle < 0 || DutyCycle > 10)
+//         return 2;
 
-    if (counter == 10)
-    {
-        counter = 0;
-    }
+//     if (counter == 10)
+//     {
+//         counter = 0;
+//     }
 
-    if (counter < DutyCycle)
-    {
-        counter++;
-        return 1;
-    }
-    else
-    {
-        counter++;
-        return 0;
-    }
-}
+//     if (counter < DutyCycle)
+//     {
+//         counter++;
+//         return 1;
+//     }
+//     else
+//     {
+//         counter++;
+//         return 0;
+//     }
+// }
 
-uint8 LedFlasher (uint8 OnofInterval)
-{
-    static int counter = 0;
-    static uint8 status = 1;
+// uint8 LedFlasher (uint8 OnofInterval)
+// {
+//     static int counter = 0;
+//     static uint8 status = 1;
 
-    if (OnOffInterval < 1 || OnOffInterval > 10)
-        return 0xFF;
+//     if (OnOffInterval < 1 || OnOffInterval > 10)
+//         return 0xFF;
 
-    if (counter >= OnOffInterval)
-    {
-        status != status;
-        counter = 0;
-    }
+//     if (counter >= OnOffInterval)
+//     {
+//         status != status;
+//         counter = 0;
+//     }
     
-    counter++;
+//     counter++;
 
-    return status;
+//     return status;
+// }
+
+// uint8 ControlFan (uint8 Temp)
+// {
+//     static int state = 0;
+
+//     if (Temp >= 50)
+//         state = 1;
+//     else if (Temp <= 30)
+//         state = 0;
+
+//     return state;
+// }
+
+// uint8 SawtoothGenerator ()
+// {
+//     static uint8 step = 0;
+//     return step++;
+// }
+
+int u8FindLast (int au32Array_count, int* au32Array, int u32ItemToFind)
+{
+    int u32ItemToFindIndex = -1;
+    for (unsigned int index = 0; index < au32Array_count; index++)
+    {
+        if (au32Array[index] == u32ItemToFind)
+            u32ItemToFindIndex = index;
+    }
+    return u32ItemToFindIndex;
 }
 
-uint8 ControlFan (uint8 Temp)
+int au8OutputArray1[256];
+int* vidPrintReverseInclusive (int u8LowerNumber, int u8UpprNumber, int* result_size)
 {
-    static int state = 0;
+    if (u8UpprNumber <= u8LowerNumber)
+    {
+        *result_size = 2;
+        au8OutputArray1[0] = 0xFF;
+        au8OutputArray1[1] = 0xFF;
+        return au8OutputArray1;
+    }
 
-    if (Temp >= 50)
-        state = 1;
-    else if (Temp <= 30)
-        state = 0;
-
-    return state;
+    *result_size = u8UpprNumber - u8LowerNumber + 1;
+    for (unsigned int index = 0; index < *result_size; index++)
+    {
+        au8OutputArray1[index] = u8UpprNumber--;
+    }
+    return au8OutputArray1;
 }
 
-uint8 SawtoothGenerator ()
+int u8OutputArray2[256];
+int* pu8PrintReverseExclusive (int u8LowerNumber, int u8UpprNumber, int* result_size)
 {
-    static uint8 step = 0;
-    return step++;
+    if (u8UpprNumber <= u8LowerNumber)
+    {
+        *result_size = 2;
+        u8OutputArray2[0] = 0xFF;
+        u8OutputArray2[1] = 0xFF;
+        return u8OutputArray2; 
+    }
+
+    *result_size = u8UpprNumber - u8LowerNumber - 1;
+    for (unsigned int index = 0; index < *result_size; index++)
+    {
+        u8OutputArray2[index] = --u8UpprNumber;
+    }
+    return u8OutputArray2;
+}
+
+unsigned int u32ClearBit (unsigned int u32Number, unsigned int u8BitNumber)
+{
+    if (u8BitNumber >= 0 && u8BitNumber <= 31)
+    {
+        u32Number = u32Number & (~(1<<u8BitNumber));
+    }
+    return u32Number;
+}
+
+int u32FindLongestConsecutiveOccurance (int as32Array_count, int* as32Array, int u32Number)
+{
+    unsigned int max = 0;
+    unsigned int counter = 0;
+    for (unsigned int index = 0; index < as32Array_count; index++)
+    {
+        if (as32Array[index] == u32Number)
+            counter++;
+        else
+            counter = 0;
+
+        if (max < counter)
+            max = counter;
+    }
+
+    return max;
+}
+
+int s32FindMostOccuring (int as32Array_count, int* as32Array)
+{
+    if (as32Array_count == 0)
+        return 0;
+
+    signed int longest = 1;
+    signed int counter = 1;
+    int number = as32Array[0];
+    for (unsigned int index = 0; index < as32Array_count-1; index++)
+    {
+        if (as32Array[index] == as32Array[index+1])
+            counter++;
+        else
+            counter = 1;
+
+        if (longest <= counter)
+        {
+            longest = counter;
+            number = as32Array[index];
+        }
+    }
+    return number;
 }
 
 int u8IsPowerOfThree (unsigned int u32Number)
@@ -77,29 +177,138 @@ int u8IsPowerOfThree (unsigned int u32Number)
     return 1;
 }
 
-int IsPowerOf2 (int number)
+int vidPrintMaxZeros (unsigned char u8Number)
 {
-    int NoOfOnes = 0;
-    for (int i = 0; i < 32; i++)
+    int counter = 0;
+    int max = 0;
+    int firstOneFlag = 0;
+    for (int index = 0; index < 8; index++)
     {
-        NoOfOnes += number>>i & 1;
+        if (((u8Number>>index) & 1) == 1 && firstOneFlag == 0)
+        {
+            firstOneFlag = 1;
+            
+        }
+        else if (((u8Number>>index) & 1) == 0 && firstOneFlag == 1)
+        {
+            counter++;
+        }
+        if (((u8Number>>index) & 1) == 1 && firstOneFlag == 1)
+        {
+            if (max < counter)
+                max = counter;
+
+            counter = 0;
+        }
+    }
+    return max;
+}
+
+unsigned char u8RightCircularShift (unsigned int u32InputNumber, int u8NumberOfShifts, unsigned int *pu32Output)
+{
+    if (u8NumberOfShifts > 32)
+    {
+        *pu32Output = u32InputNumber;
+        return 0xFF;
     }
 
-    if (NoOfOnes == 1)
+    *pu32Output = (u32InputNumber>>u8NumberOfShifts) | (u32InputNumber<<(32 - u8NumberOfShifts));
+    return 0;
+}
+
+unsigned int u8CalculateHeatingTime (unsigned int u8WaterTempature)
+{
+    if (0 <= u8WaterTempature && u8WaterTempature <= 30)
+        return 7;
+    else if (30 < u8WaterTempature && u8WaterTempature <= 60)
+        return 5;
+    else if (60 < u8WaterTempature && u8WaterTempature <= 90)
+        return 3;
+    else if (90 < u8WaterTempature && u8WaterTempature <= 100)
         return 1;
-    else 
+    else if (100 < u8WaterTempature)
+        return 0;
+}
+
+void swap_int (int* number1, int* number2)
+{
+    int temp = *number1;
+    *number1 = *number2;
+    *number2 = temp;
+}
+
+void vidReverseArray(int as32ArraySize, int* as32Array)
+{
+    for (int i = 0; i < as32ArraySize/2; i++)
+    {
+        swap_int (as32Array+i, as32Array+as32ArraySize-i-1);
+    }
+}
+
+int checkEvenOrOdd (unsigned int u32InputNumber)
+{
+    return u32InputNumber&1;
+}
+
+int u8CountOnes(unsigned int u32InputNumber)
+{
+    int counter = 0;
+    for (int i = 0; i < 32; i++)
+    {
+        counter += (u32InputNumber>>i) & 1;
+    }
+    return counter;
+}
+
+int isPowerOf2 (int number)
+{
+    int counter = 0;
+    for (int i = 0; i < 32; i++)
+    {
+        counter += (number>>i)&1;
+    }
+
+    if (counter == 1)
+        return 1;
+    else
         return 0;
 }
 
 int* isPower (int arr_count, int* arr, int* result_count)
 {
     *result_count = arr_count;
-    int* result = malloc (arr_count * sizeof(int));
-    for (int i = 0; i < arr_count; i++)
+    int* result = malloc ((*result_count) * sizeof(int));
+    for (int i = 0; i < *result_count; i++)
     {
-        result[i] = IsPowerOf2(arr[i]);
+        result[i] = isPowerOf2 (arr[i]);
     }
     return result;
+}
+
+int maximum_XOR (int a, int b)
+{
+    int max;
+    int xor;
+    for (int i = a; i <= b; i++)
+    {
+        for (int j = i; j <= b; j++)
+        {
+            xor = i ^ j;
+
+            if (i == a)
+                max = i ^ j;
+
+            if (max < xor)
+                max = xor;
+            
+        }
+    }
+    return max;
+}
+
+int fourthBit (int number)
+{
+    return (number>>3)&1;
 }
 
 int arraySum ( int numbers_count, int* numbers)
@@ -112,63 +321,9 @@ int arraySum ( int numbers_count, int* numbers)
     return sum;
 }
 
-int maximum_XOR (int a, int b)
-{
-    
-}
-
 int addNumbers2 (float a, float b)
 {
     return a + b;
-}
-
-int checkEvenOrOdd (unsigned int u32InputNumber)
-{
-    
-}
-
-int u8CountOnes(unsigned int u32InputNumber)
-{
-    
-}
-
-int vidPrintMaxZeros (unsigned char u8Number)
-{
-    
-}
-
-void swap_int (int* number1, int* number2)
-{
-   
-}
-void vidReverseArray(int as32ArraySize, int* as32Array)
-{
-    
-}
-
-int u8OutputArray[256];
-int* pu8PrintReverseExclusive (int u8LowerNumber, int u8UpprNumber, int* result_size)
-{
-    //int* result;
-    if (u8LowerNumber < u8UpprNumber)
-    {
-        *result_size = u8UpprNumber - u8LowerNumber - 1;
-        //result = (int*) malloc ((*result_size)*sizeof(int));
-        for (unsigned int index = 0; index < *result_size; index++)
-        {
-            //result[index] = u8UpprNumber - index - 1;
-            u8OutputArray[index] = u8UpprNumber - index -1;
-        }
-    }
-    else
-    {
-        *result_size = 2;
-        //result = (int*) malloc ((*result_size)*sizeof(int));
-        u8OutputArray[0] = 0xFF;
-        u8OutputArray[1] = 0xFF;
-    }
-    //return result;
-    return u8OutputArray;
 }
 
 char arr[4];
@@ -209,11 +364,6 @@ long calculateAmount (int prices_count, int* prices)
     return sum;
 }
 
-char* strtok (char* str, char* s)
-{
-
-}
-
 void fizzBuzz (int n)
 {
     for (unsigned int index = 1; index <= n; index++)
@@ -250,75 +400,6 @@ int minNum (int samDaily, int kellyDaily, int difference)
     }
 }
 
-int s32FindMostOccuring (int as32Array_count, int* as32Array)
-{
-    int counter = 0;
-    int max = 0;
-    int requiredNumber;
-
-    if (as32Array == 0)
-        return;
-
-    if (as32Array_count > 0)
-    {
-        requiredNumber = as32Array[0];
-        for (unsigned int index = 0; index < as32Array_count-1; index++)
-        {
-
-            if (as32Array[index] == as32Array[index+1])
-            {
-                counter++;
-            }
-            else
-            {
-                if (max <= counter)
-                {
-                    max = counter;
-                    requiredNumber = as32Array[index];
-                }
-                counter = 0;
-            }
-        }
-    }
-    
-    return requiredNumber;
-}
-
-int u8FindLast (int au32Array_count, int* au32Array, int u32ItemToFind)
-{
-    int requiredIndex = -1;
-    for (unsigned int index = 0; index < au32Array_count; index++)
-    {
-        if (au32Array[index] == u32ItemToFind)
-            requiredIndex = index;
-    }
-    return requiredIndex;
-}
-
-int u32FindLongestConsecutiveOccurance (int as32Array_count, int* as32Array, int u32Number)
-{
-    signed int counter = 0;
-    int max = 0; 
-    for (unsigned int index = 0; index < as32Array_count; index++)
-    {
-        if (as32Array[index] == u32Number)
-            counter++;
-        else 
-        {
-            if (max < counter)
-                max = counter;
-
-            counter = 0;
-        }
-    }
-    return max;
-}
-
-unsigned int u32ClearBit (unsigned int u32Number, unsigned int u8BitNumber)
-{
-    return u32Number & (~(1<<u8BitNumber));
-}
-
 int superPower (int z)
 {
     int multi = 1;
@@ -350,35 +431,6 @@ int superPower (int z)
             return 0;
     }
     return 0;
-}
-
-int fourthBit (int number)
-{
-   return (number>>3) & 1; 
-}
-
-unsigned char u8RightCircularShift (unsigned int u32InputNumber, int u8NumberOfShifts, unsigned int *pu32Output)
-{
-    int firstDigit;
-    if (u8NumberOfShifts > 32)
-    {
-        *pu32Output = u32InputNumber;
-        return 0xFF;
-    }
-    else
-    {
-        // for (int index = 0; index < u8NumberOfShifts; index++)
-        // {
-        //     firstDigit = (u32InputNumber & 1)<<31;
-        //     u32InputNumber >>= 1;
-        //     u32InputNumber |= firstDigit;
-        // }
-        // *pu32Output = u32InputNumber;
-
-        *pu32Output = (u32InputNumber>>u8NumberOfShifts)|(u32InputNumber<<(32-u8NumberOfShifts));
-        
-        return 0;
-    }
 }
 
 static int onesIndexArray[32];
@@ -657,20 +709,6 @@ char* dnaComplement (char* s)
     return s;
 }
 
-unsigned int u8CalculateHeatingTime (unsigned int u8WaterTempature)
-{
-    if (0 <= u8WaterTempature && u8WaterTempature <= 30) 
-        return 7;
-    else if (30 < u8WaterTempature && u8WaterTempature <= 60) 
-        return 5;
-    else if (60 < u8WaterTempature && u8WaterTempature <= 90) 
-        return 3;
-    else if (90 < u8WaterTempature && u8WaterTempature <= 100) 
-        return 1;
-    
-        return 0;   
-}
-
 int closedPaths (int number)
 {
     int digit;
@@ -884,36 +922,6 @@ int minimumMoves (int arr1_count, int* arr1, int arr2_count, int* arr2)
     return counter;
 }
 
-// uint8 LedFlasher (uint8 OnOffInterval)
-// {
-//     static uint8 status = 1;
-//     static uint8 counter = 0;
-
-//     if ( (1 <= OnOffInterval) && (OnOffInterval <= 10) )
-//     {
-//         if (counter >= OnOffInterval)
-//         {
-//             //status = 1 - status;
-//             if (status == 1)
-//                 status = 0;
-//             else if (status == 0)
-//                 status = 1;
-
-//             counter = 1;
-//         }
-//         else
-//         {
-//             counter++;
-//         }
-
-//         return status;
-//     }
-//     else
-//     {
-//         return 0xFF;
-//     }
-// }
-
 // uint8 Dec2SevenSeg (uint8 DecimalNum)
 // {
 //     uint8 arr[] = {0X7E, 0X30, 0X6D, 0x79, 0x33, 0X5B, 0x5F, 0X70, 0X7F, 0X7B};
@@ -967,28 +975,6 @@ int minimumMoves (int arr1_count, int* arr1, int arr2_count, int* arr2)
 //     }
 
 //     return status;
-// }
-
-// uint8 ControlFan (uint8 Temp)
-// {
-//     static uint8 status = 0;
-
-//     if (Temp >= 50)
-//     {
-//         status = 1;
-//     }
-//     else if (Temp <= 30)
-//     {
-//         status = 0;
-//     }
-
-//     return status;
-// }
-
-// uint8 SawtoothGenerator ()
-// {
-//     static uint8 digitalValue = 0;
-//     return digitalValue++;
 // }
 
 // uint32 FallingEdgeCounter (uint8 PinReading)
