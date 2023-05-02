@@ -15,7 +15,7 @@ int main ()
     //coding
     /********************************************************************************************************************/
     
-    //printf ("%d\n", u8IsPowerOfThree (15));
+    // printf ("%d\n", u8IsPowerOfThree (6));
 
     // int arr1[] = {1, 3, 8, 12, 16, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
     // int arr1Size = sizeof (arr1) / sizeof (arr1[0]);
@@ -93,9 +93,9 @@ int main ()
 
     // printf ("%d\n", fourthBit (23));
 
-    unsigned int pu32Output;
-    printf ("%d\n", u8RightCircularShift (0xaabbccdd, 4, &pu32Output));
-    printf ("%x\n", pu32Output);
+    // unsigned int pu32Output;
+    // printf ("%d\n", u8RightCircularShift (0xaabbccdd, 4, &pu32Output));
+    // printf ("%x\n", pu32Output);
 
     // int result_count;
     // int* arr = getOneBits (161, &result_count);

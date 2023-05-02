@@ -1,5 +1,60 @@
 #include "coding.h"
 
+uint8 PwmGenerator (uint8 DutyCycle)
+{
+    static int counter = 0;
+
+    if (DutyCycle < 0 || DutyCycle > 10)
+        return 2;
+
+    if (counter == 10)
+    {
+        counter = 0;
+    }
+
+    if (counter < DutyCycle)
+    {
+        counter++;
+        return 1;
+    }
+    else
+    {
+        counter++;
+        return 0;
+    }
+}
+
+uint8 LedFlasher (uint8 OnofInterval)
+{
+    static int counter = 0;
+    static uint8 status = 1;
+
+    if (OnOffInterval < 1 || OnOffInterval > 10)
+        return 0xFF;
+
+    if (counter >= OnOffInterval)
+    {
+        status != status;
+        counter = 0;
+    }
+    
+    counter++;
+
+    return status;
+}
+
+uint8 ControlFan (uint8 Temp)
+{
+    static int state = 0;
+
+    if (Temp >= 50)
+        state = 1;
+    else if (Temp <= 30)
+        state = 0;
+
+    return state;
+}
+
 int u8IsPowerOfThree (unsigned int u32Number)
 {
     if (u32Number == 0 || u32Number == 1)
@@ -16,59 +71,44 @@ int u8IsPowerOfThree (unsigned int u32Number)
     return 1;
 }
 
-int* isPower (int arr_count, int* arr, int* result_count)
+int IsPowerOf2 (int number)
 {
-    unsigned int onesCounter = 0;
-
-    unsigned int* result = (unsigned int*) malloc (arr_count * sizeof(unsigned int));
-
-    for (unsigned int index = 0; index < arr_count; index++)
+    int NoOfOnes = 0;
+    for (int i = 0; i < 32; i++)
     {
-        for (unsigned int bit = 0; bit < 8; bit++)
-        {
-            if (arr[index]>>bit & 1)
-                onesCounter++;
-        }
-
-        if (onesCounter == 1)
-            result[index] = 1;
-        else
-            result[index] = 0;
-
-        onesCounter = 0;
+        NoOfOnes += number>>i & 1;
     }
 
+    if (NoOfOnes == 1)
+        return 1;
+    else 
+        return 0;
+}
+
+int* isPower (int arr_count, int* arr, int* result_count)
+{
     *result_count = arr_count;
+    int* result = malloc (arr_count * sizeof(int));
+    for (int i = 0; i < arr_count; i++)
+    {
+        result[i] = IsPowerOf2(arr[i]);
+    }
     return result;
 }
 
 int arraySum ( int numbers_count, int* numbers)
 {
     int sum = 0;
-    for (unsigned int index = 0; index < numbers_count; index++)
+    for (int i = 0; i < numbers_count; i++)
     {
-        sum += numbers[index];
+        sum += numbers[i];
     }
     return sum;
 }
 
 int maximum_XOR (int a, int b)
 {
-    int max;
-
-    for (unsigned int L = a; L <= b; L++)
-    {
-        for (unsigned int R = L; R <= b; R++)
-        {
-            if (L == a)
-                max = L ^ R;
-
-            if (max < (L ^ R))
-                max = L ^ R;
-        }
-    }
-
-    return max;
+    
 }
 
 int addNumbers2 (float a, float b)
@@ -78,55 +118,26 @@ int addNumbers2 (float a, float b)
 
 int checkEvenOrOdd (unsigned int u32InputNumber)
 {
-    return u32InputNumber & 1;
+    
 }
 
 int u8CountOnes(unsigned int u32InputNumber)
 {
-    int onesCounter = 0;
-    for (unsigned int index = 0; index < 32; index++)
-    {
-        if (u32InputNumber>>index & 1)
-            onesCounter++;
-    }
-    return onesCounter;
+    
 }
 
 int vidPrintMaxZeros (unsigned char u8Number)
 {
-    int firstOne = 0;
-    int max = 0;
-    int counter = 0;
-    for (unsigned int index = 0; index < 8; index++)
-    {
-        if (u8Number>>index & 1)
-        {
-            if (max < counter)
-                max = counter;
-
-            counter = 0;
-            firstOne = 1;
-        }
-        else if (firstOne == 1)
-        {
-            counter++;
-        }
-    }
-    return max;
+    
 }
 
 void swap_int (int* number1, int* number2)
 {
-    unsigned int temp = *number1;
-    *number1 = *number2;
-    *number2 = temp;
+   
 }
 void vidReverseArray(int as32ArraySize, int* as32Array)
 {
-    for (unsigned int index = 0; index < as32ArraySize/2; index++)
-    {
-        swap_int ( as32Array+index, as32Array+as32ArraySize-index-1);
-    }
+    
 }
 
 int u8OutputArray[256];
