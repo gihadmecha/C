@@ -55,6 +55,12 @@ uint8 ControlFan (uint8 Temp)
     return state;
 }
 
+uint8 SawtoothGenerator ()
+{
+    static uint8 step = 0;
+    return step++;
+}
+
 int u8IsPowerOfThree (unsigned int u32Number)
 {
     if (u32Number == 0 || u32Number == 1)
