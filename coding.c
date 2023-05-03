@@ -61,6 +61,88 @@
 //     return step++;
 // }
 
+// uint8 Dec2SevenSeg (uint8 DecimalNum)
+// {
+//     if (0 <= DecimalNum && DecimalNum <= 9)
+//     {
+//         uint8 seg[] = {0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0x5F, 0x70, 0x7F, 0x7B}; 
+//         return seg[DecimalNum];
+//     }
+
+//     return 0x00;
+// }
+
+// uint32 FallingEdgeCounter (uint8 PinReading)
+// {
+//     static uint8 lastState = 0;
+//     static uint32 counter = 0;
+
+//     if (lastState == 1 && PinReading == 0)
+//         counter++;
+
+//     lastState = PinReading;
+
+//     return counter;
+// }
+
+// uint8 CalcTempValue (uint8 AdcRead)
+// {
+//     if (AdcRead > 200)
+//         return 120;
+
+//     if (0 <= AdcRead && AdcRead <= 60)
+//         return ADC * 50 / 60;
+//     else if (61 <= AdcRead && AdcRead <= 100)
+//         return ((ADC-60)*50/40) + 50;
+//     else if (101 <= AdcRead && AdcRead <= 200)
+//         return ((ADC-100)*20/100)+100;
+// }
+
+// uint8 BattaryVoltageMonitor (uint8 BattaryVoltage)
+// {
+//     BattaryVoltage /= 10;
+//     static uint8 state = 'U';
+//     static uint8 counter1 = 0;
+//     static uint8 counter2 = 0;
+//     static uint8 counter3 = 0;
+
+//     if (BattaryVoltage < 5)
+//     {
+//         counter1++;
+//         counter2 = 0;
+//         counter3 = 0;
+
+//         if (counter1 > 2)
+//         {
+//             state = 'E';
+//         }
+//     }
+//     else if (6 <= BattaryVoltage && BattaryVoltage < 9)
+//     {
+//         counter1 = 0;
+//         counter2++;
+//         counter3 = 0;
+
+//         if (counter2 > 2)
+//         {
+//             state = 'L';
+//         }
+//     }
+//     else if (12 <= BattaryVoltage)
+//     {
+//         counter1 = 0;
+//         counter2 = 0;
+//         counter3++;
+
+//         if (counter3 > 2)
+//         {
+//             state = 'N';
+//         }
+//     }
+
+//     return state;
+// }
+
 int u8FindLast (int au32Array_count, int* au32Array, int u32ItemToFind)
 {
     int u32ItemToFindIndex = -1;
@@ -311,19 +393,165 @@ int fourthBit (int number)
     return (number>>3)&1;
 }
 
-int arraySum ( int numbers_count, int* numbers)
+long calculateAmount (int prices_count, int* prices)
 {
-    int sum = 0;
-    for (int i = 0; i < numbers_count; i++)
+    int min = prices[0];
+    long sum = prices[0];
+    for (int i = 1; i < prices_count; i++)
     {
-        sum += numbers[i];
+        if (min > prices[i])
+        {
+            min = prices[i];
+            prices[i] = 0;
+        }
+        else
+        {
+            prices[i] -= min;
+        } 
+
+        sum += prices[i];
     }
     return sum;
+}
+
+void fizzBuzz (int n)
+{
+    for (int i = 1; i <= n; i++)
+    {
+        if ((i%3==0) && (i%5==0))
+            printf ("FizzBuzz\n");
+        else if (i%3==0)
+            printf ("Fizz\n");
+        else if (i%5==0)
+            printf ("Buzz\n");
+        else
+            printf("%d\n", i);
+    }
+}
+
+int minNum (int samDaily, int kellyDaily, int difference)
+{
+    if (kellyDaily < samDaily)
+        return -1;
+
+    int days = 0;
+    int sam = difference;
+    int kelly = 0;
+
+    while (kelly <= sam)
+    {
+        sam += samDaily;
+        kelly += kellyDaily;
+        days++;
+    }
+    return days;
+}
+
+void swap_charTwins (char* character1, char* character2)
+{
+    char temp = *character1;
+    *character1 = *character2;
+    *character2 = temp;
+}
+
+int string_lenghtTwins (char* string)
+{
+    int length = 0;
+    for (length = 0; string[length]; length++);
+    return length;
+}
+
+void sort_oddCharTwins (char* string)
+{
+    int length = string_lenghtTwins (string);
+    for (int i = 0; i < length-2; i+=2)
+    {
+        for (int j = i; j < length-2; j+=2)
+        {
+            if (string[i] > string[i+2])
+                swap_charTwins (string+i, string+i+2);
+        }
+    }
+}
+
+void sort_evenCharTwins (char* string)
+{
+    int length = string_lenghtTwins (string);
+    for (int i = 1; i < length-2; i+=2)
+    {
+        for (int j = i; j < length-2; j+=2)
+        {
+            if (string[i] > string[i+2])
+                swap_charTwins (string+i, string+i+2);
+        }
+    }
+}
+
+int compare_Twins (char* string1, char* string2)
+{
+    if (string_lenghtTwins(string1) == string_lenghtTwins(string2))
+    {
+        for (int i = 0; string1[i]; i++)
+        {
+            if (string1[i]!=string2[i])
+                return 0;
+        }
+        return 1;
+    }
+    else 
+        return 0;
+}
+
+void string_copyTwin (char* string1, char* string2, int size)
+{
+    int i = 0;
+    for (i = 0; i < size-1; i++)
+    {
+        string1[i] = string2[i];
+    }
+    string1[i] = 0;
+}
+
+char** twins ( int a_count, char** a, int b_count, char** b, int* result_count)
+{
+    *result_count = a_count;
+    
+    char** result = malloc ((*result_count) * sizeof(char*));
+
+    for (int i = 0; i < 4; i++)
+    {
+        result[i] = malloc (4 * sizeof(char));
+    }
+
+    for (int i = 0; i < (*result_count); i++)
+    {
+        sort_oddCharTwins (a[i]);
+        sort_evenCharTwins (a[i]);
+        sort_oddCharTwins (b[i]);
+        sort_evenCharTwins (b[i]);
+
+        if (compare_Twins(a[i], b[i]))
+            string_copyTwin (result[i], "Yes", 4);
+        else
+            string_copyTwin (result[i], "NO", 3);
+    }
+
+    return result;
 }
 
 int addNumbers2 (float a, float b)
 {
     return a + b;
+}
+
+int arraySum ( int numbers_count, int* numbers)
+{
+   int sum = 0;
+   for (int i=0; i < numbers_count; i++)
+   {
+        sum += numbers[i];
+   }
+   return sum;
 }
 
 char arr[4];
@@ -336,68 +564,6 @@ char* lastLetters (char* word)
     arr[2] = word[index-2];
     arr[3] = 0;
     return arr;
-}
-
-long calculateAmount (int prices_count, int* prices)
-{
-    int min;
-    long sum = 0;
-
-    for (unsigned int index = 0; index < prices_count; index++)
-    {
-        if (index == 0)
-        {
-            min = prices[0];
-        }
-        else if (min > prices[index])
-        {
-            min = prices[index];
-            prices[index] = 0;
-        }
-        else
-        {
-            prices[index] -= min;
-        }
-
-        sum += prices[index];
-    }
-    return sum;
-}
-
-void fizzBuzz (int n)
-{
-    for (unsigned int index = 1; index <= n; index++)
-    {
-        if (index%3== 0 && index%5== 0)
-            printf ("FizzBuzz\n");
-        else if (index%3== 0)
-            printf ("Fizz\n");
-        else if (index%5== 0)
-            printf ("Buzz\n");
-        else
-        printf ("%d\n", index);
-    }
-}
-
-int minNum (int samDaily, int kellyDaily, int difference)
-{
-    int days = 0;
-    int samSolved = difference;
-    int kellySolved = 0;
-    if (kellyDaily > samDaily)
-    {
-        while (kellySolved <= samSolved)
-        {
-            samSolved += samDaily;
-            kellySolved += kellyDaily;
-            days++;
-        }
-        return days;
-    }
-    else
-    {
-        return -1;
-    }
 }
 
 int superPower (int z)
@@ -565,38 +731,6 @@ void string_printtwins (char** str, int size)
     {
         string_print (str[index]);
     }
-}
-
-char** twins ( int a_count, char** a, int b_count, char** b, int* result_count)
-{
-    *result_count = a_count;
-
-    char** result = (char**) malloc ((*result_count)*sizeof(char*));
-
-    for (unsigned int index = 0; index < (*result_count); index++)
-    {
-        result[index] = (char*) malloc (3*sizeof(char));
-    } 
-    
-    for (unsigned int index = 0; index < a_count; index++)
-    {
-        sort_even (a[index]);
-        sort_odd (a[index]);
-        sort_even (b[index]);
-        sort_odd (b[index]); 
-
-        if (string_comparetwins (a[index], b[index]))
-        {
-            string_copytwins (result[index], "Yes", 3);
-            
-        }
-        else
-        {
-            string_copytwins (result[index], "NO", 2);
-        }
-    }
-
-    return result;
 }
 
 unsigned int string_lengthpassward (char* str)
@@ -921,75 +1055,3 @@ int minimumMoves (int arr1_count, int* arr1, int arr2_count, int* arr2)
 
     return counter;
 }
-
-// uint8 Dec2SevenSeg (uint8 DecimalNum)
-// {
-//     uint8 arr[] = {0X7E, 0X30, 0X6D, 0x79, 0x33, 0X5B, 0x5F, 0X70, 0X7F, 0X7B};
-    
-//     if (DecimalNum >= 0 && DecimalNum <= 9)
-//     {
-//         return arr[DecimalNum];
-//     }
-//     return 0;
-// }
-
-// uint8 BattaryVoltageMonitor (uint8 BattaryVoltage)
-// {
-//     static char status = 'U';
-
-//     BattaryVoltage = (BattaryVoltage*25.5)/255;
-
-//     static int c1 = 0;
-//     static int c2 = 0;
-//     static int c3 = 0;
-
-//     if (voltage < 5)
-//     {
-//         c2 = 0;
-//         c3 =0;
-//         c1 = 1;
-//         if (c1 == 1)
-//         {
-//             status = 'E';
-//         }
-//     }
-//     else if (6 <= voltage && voltage < 9)
-//     {
-//         c1 = 0;
-//         c3 = 0;
-//         c2 = 1;
-//         if (c2 == 1)
-//         {
-//             status = 'L';
-//         }
-//     }
-//     else if (voltage =< 12)
-//     {
-//         c1 = 0;
-//         c2 = 0;
-//         c3 = 0;
-//         if (c3 == 1)
-//         {
-//             status = 'N';
-//         }
-//     }
-
-//     return status;
-// }
-
-// uint32 FallingEdgeCounter (uint8 PinReading)
-// {
-//     static uint8 lastStatus = 1;
-//     static uint8 status = 1;
-//     static uint32 counter = 0;
-
-//     lastStatus = status;
-//     status = PinReading;
-
-//     if (lastStatus == 1 && status == 0)
-//     {
-//         counter++;
-//     }
-
-//     return counter;
-// }

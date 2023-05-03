@@ -68,17 +68,7 @@ int main ()
     // int maxXOR = maximum_XOR (10, 15);
     // printf ("%d\n", maxXOR);
 
-    printf ("%d\n", fourthBit (23));
-
-    // int arr1[] = {3, 13, 4, 11, 9, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
-    // int sum = arraySum ( 5, arr1);
-    // printf ("%d \n", sum);
-
-    // int sum = addNumbers2 (1.1, 3.89);
-    // printf ("%d\n", sum);
-
-    // char* string = lastLetters ("bat");
-    // string_print (string);
+    // printf ("%d\n", fourthBit (23));
 
     // int prices[] = {2, 5, 1, 4};
     // int prices_count = sizeof(prices) / sizeof(prices[0]); 
@@ -86,7 +76,28 @@ int main ()
 
     // fizzBuzz (50);
 
-    // printf ("%d\n", minNum (3, 5, 5));  
+    // printf ("%d\n", minNum (3, 5, 5));
+
+    char str1[] = "adbc";
+    char str2[] = "abcd";
+    char str3[] = "cbad";
+    char str4[] = "adbc";
+    char str5[] = "adbc";
+    char* firstString[] = {str1, str2, str5};
+    char* secondString[] = {str3, str4};
+    int result_count;
+    char** result = twins ( 2, firstString, 2, secondString, &result_count);
+    string_printtwins (result, result_count);
+
+    // int sum = addNumbers2 (1.1, 3.89);
+    // printf ("%d\n", sum);
+
+    // int arr1[] = {3, 13, 4, 11, 9, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
+    // int sum = arraySum ( 5, arr1);
+    // printf ("%d \n", sum);
+
+    // char* string = lastLetters ("bat");
+    // string_print (string);  
 
     // printf ("%d\n", superPower(7));
 
@@ -95,16 +106,6 @@ int main ()
     // array_print (arr, result_count);
 
     // printf ("%d\n", changeAds (30));
-
-    // char str1[] = "abcd";
-    // char str2[] = "abcd";
-    // char str3[] = "cbad";
-    // char str4[] = "adbc";
-    // char* firstString[] = {str1, str2};
-    // char* secondString[] = {str3, str4};
-    // int result_count;
-    // char** result = twins ( 2, firstString, 2, secondString, &result_count);
-    // string_printtwins (result, result_count);
 
     // string_print (newPassword ("hackerrank", "tree"));
 
