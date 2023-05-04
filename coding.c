@@ -145,19 +145,19 @@
 
 int u8FindLast (int au32Array_count, int* au32Array, int u32ItemToFind)
 {
-    int u32ItemToFindIndex = -1;
-    for (unsigned int index = 0; index < au32Array_count; index++)
+    int index = -1;
+    for (int i = 0; i < au32Array_count; i++)
     {
-        if (au32Array[index] == u32ItemToFind)
-            u32ItemToFindIndex = index;
+        if (au32Array[i]==u32ItemToFind)
+            index = i;
     }
-    return u32ItemToFindIndex;
+    return index;
 }
 
 int au8OutputArray1[256];
 int* vidPrintReverseInclusive (int u8LowerNumber, int u8UpprNumber, int* result_size)
 {
-    if (u8UpprNumber <= u8LowerNumber)
+    if (u8LowerNumber > u8UpprNumber)
     {
         *result_size = 2;
         au8OutputArray1[0] = 0xFF;
@@ -166,9 +166,9 @@ int* vidPrintReverseInclusive (int u8LowerNumber, int u8UpprNumber, int* result_
     }
 
     *result_size = u8UpprNumber - u8LowerNumber + 1;
-    for (unsigned int index = 0; index < *result_size; index++)
+    for (int i = 0; i < (*result_size); i++)
     {
-        au8OutputArray1[index] = u8UpprNumber--;
+        au8OutputArray1[i] = u8UpprNumber--;
     }
     return au8OutputArray1;
 }
@@ -176,68 +176,67 @@ int* vidPrintReverseInclusive (int u8LowerNumber, int u8UpprNumber, int* result_
 int u8OutputArray2[256];
 int* pu8PrintReverseExclusive (int u8LowerNumber, int u8UpprNumber, int* result_size)
 {
-    if (u8UpprNumber <= u8LowerNumber)
+    if (u8LowerNumber >= u8UpprNumber)
     {
         *result_size = 2;
         u8OutputArray2[0] = 0xFF;
         u8OutputArray2[1] = 0xFF;
-        return u8OutputArray2; 
+        return u8OutputArray2;
     }
 
     *result_size = u8UpprNumber - u8LowerNumber - 1;
-    for (unsigned int index = 0; index < *result_size; index++)
+    for (int i = 0; i < (*result_size); i++)
     {
-        u8OutputArray2[index] = --u8UpprNumber;
+        u8OutputArray2[i] = --u8UpprNumber;
     }
     return u8OutputArray2;
 }
 
 unsigned int u32ClearBit (unsigned int u32Number, unsigned int u8BitNumber)
 {
-    if (u8BitNumber >= 0 && u8BitNumber <= 31)
-    {
-        u32Number = u32Number & (~(1<<u8BitNumber));
-    }
-    return u32Number;
+    if (u8BitNumber > 31)
+        return u32Number;
+    else
+        return u32Number & (~(1<<u8BitNumber));
 }
 
 int u32FindLongestConsecutiveOccurance (int as32Array_count, int* as32Array, int u32Number)
 {
-    unsigned int max = 0;
-    unsigned int counter = 0;
-    for (unsigned int index = 0; index < as32Array_count; index++)
+    int max = 0;
+    int counter = 0;
+    for (int i = 0; i < as32Array_count; i++)
     {
-        if (as32Array[index] == u32Number)
+        if (as32Array[i]==u32Number)
             counter++;
         else
+        {
+            if (max < counter)
+                max = counter;
+
             counter = 0;
-
-        if (max < counter)
-            max = counter;
+        }
     }
-
     return max;
 }
 
 int s32FindMostOccuring (int as32Array_count, int* as32Array)
 {
-    if (as32Array_count == 0)
-        return 0;
-
-    signed int longest = 1;
-    signed int counter = 1;
-    int number = as32Array[0];
-    for (unsigned int index = 0; index < as32Array_count-1; index++)
+    int counter = 0;
+    int max = 0;
+    int number;
+    for (int i = 0; i < as32Array_count; i++)
     {
-        if (as32Array[index] == as32Array[index+1])
+        if(as32Array[i]==as32Array[i+1])
             counter++;
         else
-            counter = 1;
-
-        if (longest <= counter)
         {
-            longest = counter;
-            number = as32Array[index];
+            counter++;
+            if (max <= counter)
+            {
+                number = as32Array[i];
+                max = counter;
+            }
+            counter = 0;
         }
     }
     return number;
@@ -248,7 +247,7 @@ int u8IsPowerOfThree (unsigned int u32Number)
     if (u32Number == 0 || u32Number == 1)
         return 1;
 
-    while (u32Number % 3 == 0)
+    while (u32Number%3 == 0)
     {
         if (u32Number == 3)
             return 0;
@@ -261,21 +260,23 @@ int u8IsPowerOfThree (unsigned int u32Number)
 
 int vidPrintMaxZeros (unsigned char u8Number)
 {
+    int flag = 0;
+    int bit;
     int counter = 0;
     int max = 0;
-    int firstOneFlag = 0;
-    for (int index = 0; index < 8; index++)
+
+    for (int i = 0; i < 8; i++)
     {
-        if (((u8Number>>index) & 1) == 1 && firstOneFlag == 0)
+        bit = (u8Number>>i) & 1;
+        if (flag == 0 && bit == 1)
         {
-            firstOneFlag = 1;
-            
+            flag = 1;
         }
-        else if (((u8Number>>index) & 1) == 0 && firstOneFlag == 1)
+        else if (flag == 1 && bit == 0)
         {
             counter++;
         }
-        if (((u8Number>>index) & 1) == 1 && firstOneFlag == 1)
+        else if (flag == 1 && bit == 1)
         {
             if (max < counter)
                 max = counter;
@@ -283,6 +284,7 @@ int vidPrintMaxZeros (unsigned char u8Number)
             counter = 0;
         }
     }
+    
     return max;
 }
 
@@ -292,9 +294,9 @@ unsigned char u8RightCircularShift (unsigned int u32InputNumber, int u8NumberOfS
     {
         *pu32Output = u32InputNumber;
         return 0xFF;
-    }
+    }    
 
-    *pu32Output = (u32InputNumber>>u8NumberOfShifts) | (u32InputNumber<<(32 - u8NumberOfShifts));
+    *pu32Output = (u32InputNumber<<(32 - u8NumberOfShifts)) | (u32InputNumber>>u8NumberOfShifts);
     return 0;
 }
 
@@ -302,17 +304,22 @@ unsigned int u8CalculateHeatingTime (unsigned int u8WaterTempature)
 {
     if (0 <= u8WaterTempature && u8WaterTempature <= 30)
         return 7;
-    else if (30 < u8WaterTempature && u8WaterTempature <= 60)
+
+    if (30 < u8WaterTempature && u8WaterTempature <= 60)
         return 5;
-    else if (60 < u8WaterTempature && u8WaterTempature <= 90)
+
+    if (60 < u8WaterTempature && u8WaterTempature <= 90)
         return 3;
-    else if (90 < u8WaterTempature && u8WaterTempature <= 100)
+
+    if (90 < u8WaterTempature && u8WaterTempature <= 100)
         return 1;
-    else if (100 < u8WaterTempature)
+
+    if (100 < u8WaterTempature)
         return 0;
 }
 
-void swap_int (int* number1, int* number2)
+//////////////////////////////////////////////////////////////////////////////////
+void swap_intvidReverseArray (int* number1, int* number2)
 {
     int temp = *number1;
     *number1 = *number2;
@@ -323,9 +330,10 @@ void vidReverseArray(int as32ArraySize, int* as32Array)
 {
     for (int i = 0; i < as32ArraySize/2; i++)
     {
-        swap_int (as32Array+i, as32Array+as32ArraySize-i-1);
-    }
+        swap_intvidReverseArray (as32Array+i, as32Array+as32ArraySize-i-1);
+    }    
 }
+///////////////////////////////////////////////////////////////////////////////////
 
 int checkEvenOrOdd (unsigned int u32InputNumber)
 {
@@ -337,10 +345,12 @@ int u8CountOnes(unsigned int u32InputNumber)
     int counter = 0;
     for (int i = 0; i < 32; i++)
     {
-        counter += (u32InputNumber>>i) & 1;
-    }
+        counter += (u32InputNumber>>i)&1;
+    }    
     return counter;
 }
+
+///////////////////////////////////////////////////////////////
 
 int isPowerOf2 (int number)
 {
@@ -358,14 +368,15 @@ int isPowerOf2 (int number)
 
 int* isPower (int arr_count, int* arr, int* result_count)
 {
-    *result_count = arr_count;
-    int* result = malloc ((*result_count) * sizeof(int));
-    for (int i = 0; i < *result_count; i++)
-    {
-        result[i] = isPowerOf2 (arr[i]);
-    }
-    return result;
+   *result_count = arr_count;
+   int* result = malloc (arr_count * sizeof(int));
+   for (int i = 0; i < arr_count; i++)
+   {
+        result[i] = isPowerOf2(arr[i]);
+   }
+   return result;
 }
+/////////////////////////////////////////////////////////////////
 
 int maximum_XOR (int a, int b)
 {
@@ -377,12 +388,11 @@ int maximum_XOR (int a, int b)
         {
             xor = i ^ j;
 
-            if (i == a)
-                max = i ^ j;
+            if (i==a)
+                max = xor;
 
             if (max < xor)
                 max = xor;
-            
         }
     }
     return max;
@@ -395,8 +405,8 @@ int fourthBit (int number)
 
 long calculateAmount (int prices_count, int* prices)
 {
-    int min = prices[0];
     long sum = prices[0];
+    int min = prices[0];    
     for (int i = 1; i < prices_count; i++)
     {
         if (min > prices[i])
@@ -407,18 +417,17 @@ long calculateAmount (int prices_count, int* prices)
         else
         {
             prices[i] -= min;
-        } 
-
-        sum += prices[i];
+            sum+=prices[i];
+        }
     }
     return sum;
 }
 
 void fizzBuzz (int n)
 {
-    for (int i = 1; i <= n; i++)
+    for (int i = 0 ; i <= n; i++)
     {
-        if ((i%3==0) && (i%5==0))
+        if (i%3==0 && i%5==0)
             printf ("FizzBuzz\n");
         else if (i%3==0)
             printf ("Fizz\n");
@@ -431,22 +440,26 @@ void fizzBuzz (int n)
 
 int minNum (int samDaily, int kellyDaily, int difference)
 {
-    if (kellyDaily < samDaily)
+    if (kellyDaily <= samDaily)
         return -1;
 
-    int days = 0;
     int sam = difference;
     int kelly = 0;
+    int days = 0;
 
-    while (kelly <= sam)
+    // days = difference / (kellyDaily - samDaily) + 1;
+    while (sam >= kelly)
     {
-        sam += samDaily;
+        sam +=samDaily;
         kelly += kellyDaily;
         days++;
     }
+
     return days;
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////
 void swap_charTwins (char* character1, char* character2)
 {
     char temp = *character1;
@@ -538,20 +551,21 @@ char** twins ( int a_count, char** a, int b_count, char** b, int* result_count)
 
     return result;
 }
+//////////////////////////////////////////////////////////////////////////////
 
 int addNumbers2 (float a, float b)
 {
-    return a + b;
+    return a + b;    
 }
 
 int arraySum ( int numbers_count, int* numbers)
 {
-   int sum = 0;
-   for (int i=0; i < numbers_count; i++)
-   {
+    int sum = 0;
+    for (int i = 0; i < numbers_count; i++)
+    {
         sum += numbers[i];
-   }
-   return sum;
+    }
+    return sum;
 }
 
 char arr[4];
@@ -946,8 +960,8 @@ void sort_badNumbers (int badNumbers_count, int* badNumbers)
     {
         for (unsigned int j = i+1; j < badNumbers_count; j++)
         {
-            if (badNumbers[i] > badNumbers[j])
-                swap_int (badNumbers+i, badNumbers+j);
+           // if (badNumbers[i] > badNumbers[j])
+              //  swap_int (badNumbers+i, badNumbers+j);
         }
     }
 }

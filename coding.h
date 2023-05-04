@@ -20,7 +20,6 @@ int u8IsPowerOfThree (unsigned int u32Number);
 int vidPrintMaxZeros (unsigned char u8Number);
 unsigned char u8RightCircularShift (unsigned int u32InputNumber, int u8NumberOfShifts, unsigned int *pu32Output);
 unsigned int u8CalculateHeatingTime (unsigned int u8WaterTempature);
-void swap_int (int* number1, int* number2);
 void vidReverseArray(int as32ArraySize, int* as32Array);
 int checkEvenOrOdd (unsigned int u32InputNumber);
 int u8CountOnes(unsigned int u32InputNumber);
