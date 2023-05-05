@@ -460,6 +460,15 @@ int minNum (int samDaily, int kellyDaily, int difference)
 
 
 ////////////////////////////////////////////////////////////////////////////////////
+
+void string_printtwins (char** str, int size)
+{
+    for (unsigned int index = 0; index < size; index++)
+    {
+        string_print (str[index]);
+    }
+}
+
 void swap_charTwins (char* character1, char* character2)
 {
     char temp = *character1;
@@ -568,504 +577,114 @@ int arraySum ( int numbers_count, int* numbers)
     return sum;
 }
 
-char arr[4];
+/////////////////////////////////////////////////////////////////
+
+int string_legthLastLetters (char* string)
+{
+    int length;
+    for(length = 0; string[length]; length++);
+    return length;
+}
+
+char newString[4];
 char* lastLetters (char* word)
 {
-    unsigned int index = 0;
-    for (index = 0; word[index]; index++);
-    arr[0] = word[index-1];
-    arr[1] = ' ';
-    arr[2] = word[index-2];
-    arr[3] = 0;
-    return arr;
+    int length = string_legthLastLetters (word);
+    newString[0] = word[length-1];
+    newString[1] = ' ';
+    newString[2] = word[length-2];
+    newString[3] = 0;
+    return newString;
+}
+/////////////////////////////////////////////////////////////////
+
+static int numberBits[32];
+int* getOneBits (int n, int* result_count)
+{
+    int index = 0;
+    int result_index = 0;
+    int firstIndex = 0;
+    for (int i = 31; i >= 0; i--)
+    {
+        if (firstIndex == 1)
+            index++;
+
+        if ((n>>i)&1)
+        {
+            if (firstIndex == 0)
+            {
+                firstIndex = 1;
+                index = 1;
+            }
+            numberBits[result_index] = index;
+            result_index++;
+        }
+    }
+    *result_count = result_index;
+    return numberBits;
 }
 
 int superPower (int z)
 {
-    int multi = 1;
-    int stopFlag;
-    for (unsigned int base = 2; base <= z; base++)
-    {
-        multi = 1;
-        for (unsigned int power = 1; power <= z; power++)
-        {
-            stopFlag = power;
-            multi *= base;
-
-            if (power != 1)
-            {
-                if (multi == z)
-                {
-                    //printf ("equal %d\n", multi);
-                    return 1;
-                }
-                else if (multi > z)
-                {
-                    //printf ("bigger %d\n", multi);
-                    break;
-                }
-            }
-        }
-
-        if (stopFlag == 2)
-            return 0;
-    }
-    return 0;
-}
-
-static int onesIndexArray[32];
-int* getOneBits (int n, int* result_count)
-{
-    int firstOne = 0;
-    int counter = 0;
-    *result_count = 0;
-    for (signed int index = sizeof(int)*8-1; index >= 0; index--)
-    {
-        if ((n>>index) & 1)
-        {
-            if (firstOne == 0)
-            {
-                firstOne = 1;
-            }
-            counter++;
-            onesIndexArray[*result_count] = counter;
-            (*result_count)++;
-        }
-        else
-        {
-            if (firstOne == 1)
-                counter++;
-        }
-    }
-    return onesIndexArray;
+    
 }
 
 int changeAds (int base10)
 {
-    int lastOneIndex = -1;
-    int resultNumber = base10;
-    for (unsigned int index = 0; index < 32; index++)
-    {
-        if ((base10>>index) & 1)
-            lastOneIndex = index;
-    }
-
-    for (unsigned int index = 0; index <= lastOneIndex; index++)
-    {
-        resultNumber ^= 1<<index;
-    }
-
-    return resultNumber;
-}
-
-void swap_char2 (char* character1, char* character2)
-{
-    char temp = *character1;
-    *character1 = *character2;
-    *character2 = temp;
-}
-
-void sort_even (char* str)
-{
-    unsigned int strLength = 0;
-    for (strLength = 0; str[strLength]; strLength++);
-
-    int completeSortFlag = 0;
     
-    for (unsigned int i = 0; i < strLength && completeSortFlag == 0; i+=2)
-    {
-        completeSortFlag = 1;
-
-        for (unsigned int j = i+2; j < strLength; j+=2)
-        {
-            if (str[i] > str[j])
-            {
-                swap_char2 (str+i, str+j);
-                completeSortFlag = 0;
-            }
-        } 
-    }
-}
-
-void sort_odd (char* str)
-{
-    unsigned int strLength = 0;
-    for (strLength = 0; str[strLength]; strLength++);
-
-    int completeSortFlag = 0;
-    
-    for (unsigned int i = 1; i < strLength && completeSortFlag == 0; i+=2)
-    {
-        completeSortFlag = 1;
-
-        for (unsigned int j = i+2; j < strLength; j+=2)
-        {
-            if (str[i] > str[j])
-            {
-                swap_char2 (str+i, str+j);
-                completeSortFlag = 0;
-            }
-        } 
-    }
-}
-
-int string_comparetwins (char* str1, char* str2)
-{
-    unsigned int str1Length;
-    unsigned int str2Length;
-
-    for (str1Length = 0; str1[str1Length]; str1Length++);
-    for (str2Length = 0; str2[str2Length]; str2Length++);
-
-    if (str1Length != str2Length)
-        return 0;
-
-    for (unsigned int index = 0; str1[index]; index++)
-    {
-        if (str1[index] != str2[index])
-            return 0;
-    }
-
-    return 1;
-}
-
-void string_copytwins (char* strCopy, char* strOriginal, int size)
-{
-    unsigned int index = 0;
-    for (index = 0; index < size; index++)
-    {
-        strCopy[index] = strOriginal[index];
-    }
-    strCopy[index] = 0;
-}
-
-void string_printtwins (char** str, int size)
-{
-    for (unsigned int index = 0; index < size; index++)
-    {
-        string_print (str[index]);
-    }
-}
-
-unsigned int string_lengthpassward (char* str)
-{
-    unsigned int i;
-    for (i = 0; str[i]; i++);
-    return i;
 }
 
 char* newPassword (char* a, char* b)
 {
-    unsigned int aLength = string_lengthpassward (a);
-    unsigned int bLength = string_lengthpassward (b);
-    unsigned int cLength = aLength + bLength + 1;
-    char* c = (char*) malloc (cLength * sizeof(char));
-    unsigned int aIndex = 0;
-    unsigned int bIndex = 0;
-    unsigned int cIndex = 0;
-    for ( ; cIndex < cLength-1; )
-    {
-        if (aIndex < aLength)
-        {
-            c[cIndex] = a[aIndex]; 
-            cIndex++;
-            aIndex++;
-        }
-     
-        if (bIndex < bLength)
-        {
-            c[cIndex] = b[bIndex]; 
-            cIndex++;
-            bIndex++;
-        }
-    }
-    c[cIndex] = 0;
-    return c;
-}
-
-void sort (char* str)
-{
-    for (unsigned int i = 0; str[i]; i++)
-    {
-        for (unsigned int j = i+1; str[j]; j++)
-        {
-            if (str[i] > str[j])
-                swap_char2 (str+i, str+j);
-        }
-    }
+   
 }
 
 int array_shortestSeries (char* str)
 {
-    unsigned int counter = 1;
-    unsigned int shortest;
-    unsigned int firstChain = 0;
-
-    for (unsigned int index = 0; str[index]; index++)
-    {
-        if (str[index] == str[index+1])
-        {
-            counter++;
-        }
-        else
-        {
-            if (firstChain == 0)
-                shortest = counter;
-
-            if (shortest > counter)
-                shortest = counter;
-
-            firstChain = 1;
-
-            counter = 1;
-        }
-    }
-
-    return shortest;
+    
 }
 
 int perfectTeam (char* skills)
 {
-    sort (skills);
-    return array_shortestSeries (skills);
+    
 }
 
 void string_reverseComplement (char* str)
 {
-    unsigned int length = string_lengthpassward (str);
-    for (unsigned int index = 0; index < length/2; index++)
-    {
-        swap_char2 (str+index, str+length-index-1);
-    }
+    
 }
 
 char* dnaComplement (char* s)
 {
-    for (unsigned int index = 0; s[index]; index++)
-    {
-        string_reverseComplement (s);
 
-        if (s[index] == 'A')
-            s[index] = 'T';
-        else if (s[index] == 'T')
-            s[index] = 'A';
-        else if (s[index] == 'C')
-            s[index] = 'G';
-        else if (s[index] == 'G')
-            s[index] = 'C';
-    }
-    return s;
 }
 
 int closedPaths (int number)
 {
-    int digit;
-    int sum = 0;
-    while (number)
-    {
-        digit = number % 10;
-
-        if (digit == 0 || digit == 4 || digit == 6 || digit == 9)
-            sum += 1;
-        else if (digit == 8)
-            sum += 2;
-
-        number /= 10;
-    }
-    return sum;
-}
-
-int string_shiftLeft (char* s, int firstDeletedIndex, int lastDeletedIndex)
-{
-    int length = string_lengthpassward (s);
-    int remainlenght = length - lastDeletedIndex - 1;
-    int remainIndex = lastDeletedIndex;
-    int counter = 0;
-    unsigned int index;
-    for (index = firstDeletedIndex; remainlenght; index++)
-    {
-        remainIndex++;
-        s[index] = s[remainIndex];
-        remainlenght--;
-        counter++;
-    }
-    s[index] = 0;
-    return counter;
-}
-
-int string_compareMaxMove (char* s, char* t)
-{
-    for (unsigned int index = 0; t[index]; index++)
-    {
-        if (s[index] != t[index])
-            return 0;
-    }
-    return 1;
-}
-
-signed int string_searchStringLToR (char* s, char* t)
-{
-    for (unsigned int index = 0; s[index]; index++)
-    {
-        if (string_compareMaxMove(s+index, t))
-            return index;
-    }
-    return -1;
-}
-
-signed int string_searchStringRTOL (char* s, int sLength, char* t)
-{
-    for (unsigned int index = sLength-1; index >= 0; index--)
-    {
-        if (string_compareMaxMove(s+index, t))
-            return index;
-    }
-    return -1;
+    
 }
 
 int maxMoves (char* s, char* t)
 {
-    int sLength = string_lengthpassward (s);
-    int tLength = string_lengthpassward (t);
-
-    char* sLToR = (char*) malloc (sLength*sizeof(char));
-    char* sRToL = (char*) malloc (sLength*sizeof(char));
-
-    string_copytwins (sLToR, s, sLength);
-    string_copytwins (sRToL, s, sLength);
-
-    int LToRDeletionSum = 0;
-    signed int LToRIndex = string_searchStringLToR (sLToR, t);
-    while (LToRIndex >= 0)
-    {
-        LToRDeletionSum += string_shiftLeft (sLToR, LToRIndex, LToRIndex + tLength - 1);
-       LToRIndex = string_searchStringLToR (sLToR, t); 
-    }
-
-    int RToLDeletionSum = 0;
-    signed int RToLIndex = string_searchStringRTOL ( sRToL,  sLength, t);
-    while (RToLIndex >= 0)
-    {
-        RToLDeletionSum += string_shiftLeft (sRToL, RToLIndex, RToLIndex + tLength - 1);
-       RToLIndex = string_searchStringRTOL ( sRToL,  sLength, t); 
-    }
     
-    return (LToRDeletionSum > RToLDeletionSum) ? LToRDeletionSum : RToLDeletionSum;
 }
-
 
 void sort_badNumbers (int badNumbers_count, int* badNumbers)
 {
-    for (unsigned int i = 0; i < badNumbers_count; i++)
-    {
-        for (unsigned int j = i+1; j < badNumbers_count; j++)
-        {
-           // if (badNumbers[i] > badNumbers[j])
-              //  swap_int (badNumbers+i, badNumbers+j);
-        }
-    }
+    
 }
 
 int goodSegment (int badNumbers_count, int* badNumbers, int lower, int upper)
 {
-    sort_badNumbers (badNumbers_count, badNumbers);
-    int counter = 0;
-    int max = 0;
-    int badIndex = 0;
-
-    for (unsigned int index = lower; index <= upper; index++)
-    {
-        if (index != badNumbers[badIndex])
-        {
-            counter++;
-        }
-        else
-        {
-            if (max < counter)
-                max = counter;
-
-            counter = 0;
-            badIndex++;
-        }
-    }
-
-    return max;
+    
 }
 
 int maxIndex (int s, int badIndex)
 {
-    int badImportance = 0;
-    int sum = 0;
-
-    for (unsigned int index = 1; sum <= badIndex; index++)
-    {
-        sum += index;
-        if (badIndex == sum)
-        {
-            badImportance = 1;
-        }
-    }
-
-    if (badImportance)
-    {
-        sum = 0;
-        for (unsigned int index = 2; index <= s; index++)
-        {
-            sum += index;
-        }
-    }
-    else
-    {
-        sum = 0;
-        for (unsigned int index = 1; index <= s; index++)
-        {
-            sum += index;
-        }
-    }
-
-    return sum;
+    
 }
 
 int minimumMoves (int arr1_count, int* arr1, int arr2_count, int* arr2)
 {
-    int numberCopy1;
-    int numberCopy2;
-    int digit1;
-    int digit2;
-    int counter = 0;
-
-    for (unsigned int index = 0; index < arr1_count; index++)
-    {
-        numberCopy1 = arr1[index];
-        numberCopy2 = arr2[index];
-
-        while (numberCopy1 || numberCopy2)
-        {
-            digit1 = numberCopy1 % 10;
-            digit2 = numberCopy2 % 10;
-
-            // while (digit1 > digit2)
-            // {
-            //     digit1--;
-            //     counter++;
-            // }
-
-            // while (digit1 < digit2)
-            // {
-            //     digit1++;
-            //     counter++;
-            // }
-
-            if (digit1 > digit2)
-                counter += (digit1 - digit2);
-
-            if (digit2 > digit1)
-                counter += (digit2 - digit1);
-
-            numberCopy1 = numberCopy1 / 10;
-            numberCopy2 = numberCopy2 / 10;
-        }
-    }
-
-    return counter;
+    
 }

@@ -92,18 +92,18 @@ int main ()
     // int sum = addNumbers2 (1.1, 3.89);
     // printf ("%d\n", sum);
 
-    int arr1[] = {3, 13, 4, 11, 9, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
-    int sum = arraySum ( 5, arr1);
-    printf ("%d \n", sum);
+    // int arr1[] = {3, 13, 4, 11, 9, 20, 4, 9, 16, 128, 255, 13, 2147483648, 2147483649, 4294967296, 4294967295};
+    // int sum = arraySum ( 5, arr1);
+    // printf ("%d \n", sum);
 
     // char* string = lastLetters ("bat");
-    // string_print (string);  
+    // string_print (string); 
+
+    int result_count;
+    int* arr = getOneBits (37, &result_count);
+    array_print (arr, result_count);
 
     // printf ("%d\n", superPower(7));
-
-    // int result_count;
-    // int* arr = getOneBits (161, &result_count);
-    // array_print (arr, result_count);
 
     // printf ("%d\n", changeAds (30));
 
