@@ -99,34 +99,22 @@ int main ()
     // char* string = lastLetters ("bat");
     // string_print (string); 
 
-    int result_count;
-    int* arr = getOneBits (37, &result_count);
-    array_print (arr, result_count);
-
-    // printf ("%d\n", superPower(7));
-
-    // printf ("%d\n", changeAds (30));
+    // int result_count;
+    // int* arr = getOneBits (37, &result_count);
+    // array_print (arr, result_count);
 
     // string_print (newPassword ("hackerrank", "tree"));
 
-    // // char skills[] = "pcmbzpcmbz";
-    // char skills[] = "mppzbmbpzcbmpbmczcz";
+    //  char skills[] = "pcmbzpcmbz";
+    // // char skills[] = "mppzbmbpzcbmpbmczcz";
     // printf ("%d\n", perfectTeam (skills));
 
     // char str[] = "GTCAG";
     // string_print (dnaComplement (str));
 
-    // printf ("%d\n", closedPaths (649578));
-
-    // char s[] = "bcbbc";
-    // char t[] = "b";
-    // printf ("%d\n", maxMoves (s, t));
-
     // int badNumbers[] = {37, 7, 22, 15, 49, 60};
     // int badNumbers_count = sizeof (badNumbers)/sizeof(int);
     // printf ("%d\n", goodSegment (badNumbers_count, badNumbers, 3, 48));
-
-    // printf ("%d\n", maxIndex (4, 6));
 
     // int arr1[] = {123, 543};
     // int arr1_count = sizeof(arr1)/sizeof(arr1[0]);
@@ -134,5 +122,15 @@ int main ()
     // int arr2_count = sizeof(arr2)/sizeof(arr2[0]);
     // printf ("%d\n", minimumMoves (arr1_count, arr1, arr2_count, arr2));
 
-    
+    // printf ("%d\n", changeAds (30));
+
+    // printf ("%d\n", maxIndex (4, 6));
+
+    // printf ("%d\n", closedPaths (649578));
+
+    // char s[] = "bcbbc";
+    // char t[] = "b";
+    // printf ("%d\n", maxMoves (s, t));
+
+    printf ("%d\n", superPower(27));
 }

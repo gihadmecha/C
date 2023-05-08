@@ -598,93 +598,387 @@ char* lastLetters (char* word)
 }
 /////////////////////////////////////////////////////////////////
 
-static int numberBits[32];
+static int numberBits[32] = {0};
 int* getOneBits (int n, int* result_count)
 {
-    int index = 0;
-    int result_index = 0;
-    int firstIndex = 0;
-    for (int i = 31; i >= 0; i--)
-    {
-        if (firstIndex == 1)
-            index++;
+    int firstOneFlag = 0;
+    int index;
+    *result_count = 0;
 
+    for (signed int i = 31; i >= 0; i--)
+    {
         if ((n>>i)&1)
         {
-            if (firstIndex == 0)
+            if (firstOneFlag == 0)
             {
-                firstIndex = 1;
+                firstOneFlag = 1;
                 index = 1;
             }
-            numberBits[result_index] = index;
-            result_index++;
+
+            numberBits[*result_count] = index;
+            (*result_count)++;
+        }
+
+        if (firstOneFlag == 1)
+        {
+            index++;
         }
     }
-    *result_count = result_index;
     return numberBits;
 }
+//////////////////////////////////////////////////////////////////
 
-int superPower (int z)
+int string_lengthNewPassword (char* string)
 {
-    
-}
-
-int changeAds (int base10)
-{
-    
+    int length = 0;
+    for (length = 0; string[length]; length++);
+    return length;
 }
 
 char* newPassword (char* a, char* b)
 {
-   
-}
+    int aLength = string_lengthNewPassword (a);
+    int bLength = string_lengthNewPassword (b);
+    int cLength = aLength + bLength + 1;
 
-int array_shortestSeries (char* str)
-{
-    
+    char* c = malloc (cLength * sizeof(char));
+
+    int aIndex = 0;
+    int bIndex = 0;
+    int cIndex = 0;
+
+    while (cIndex < cLength - 1)
+    {
+        if (aIndex < aLength && bIndex < bLength)
+        {
+            c[cIndex] = a[aIndex];
+            c[++cIndex] = b[bIndex];
+            aIndex++;
+            bIndex++;
+            cIndex++;
+        }
+        else if (aIndex < aLength)
+        {
+            c[cIndex] = a[aIndex];
+            aIndex++;
+            cIndex++;
+        }
+        else if (bIndex < bLength)
+        {
+            c[cIndex] = a[bIndex];
+            bIndex++;
+            cIndex++;
+        }
+    }
+    c[cIndex] = 0;
+    return c;
 }
+/////////////////////////////////////////////////////////////////
 
 int perfectTeam (char* skills)
 {
-    
-}
+    int counter[26] = {0};
+    for(int i = 0; skills[i]; i++)
+    {
+        counter[skills[i] - 'a']++;
+    }
 
-void string_reverseComplement (char* str)
+    if (counter['p' - 'a'] <= counter['p' - 'a'] && counter['p' - 'a'] <= counter['c' - 'a'] && counter['p' - 'a'] <= counter['m' - 'a'] && counter['p' - 'a'] <= counter['b' - 'a'] && counter['p' - 'a'] <= counter['z' - 'a'])
+        return counter['p' - 'a'];
+    else if (counter['c' - 'a'] <= counter['p' - 'a'] && counter['c' - 'a'] <= counter['c' - 'a'] && counter['c' - 'a'] <= counter['m' - 'a'] && counter['c' - 'a'] <= counter['b' - 'a'] && counter['c' - 'a'] <= counter['z' - 'a'])
+        return counter['c' - 'a'];
+    else if (counter['m' - 'a'] <= counter['p' - 'a'] && counter['m' - 'a'] <= counter['c' - 'a'] && counter['m' - 'a'] <= counter['m' - 'a'] && counter['m' - 'a'] <= counter['b' - 'a'] && counter['m' - 'a'] <= counter['z' - 'a'])
+        return counter['m' - 'a'];
+    else if (counter['b' - 'a'] <= counter['p' - 'a'] && counter['b' - 'a'] <= counter['c' - 'a'] && counter['b' - 'a'] <= counter['m' - 'a'] && counter['b' - 'a'] <= counter['b' - 'a'] && counter['b' - 'a'] <= counter['z' - 'a'])
+        return counter['b' - 'a'];
+    else if (counter['z' - 'a'] <= counter['p' - 'a'] && counter['z' - 'a'] <= counter['c' - 'a'] && counter['z' - 'a'] <= counter['m' - 'a'] && counter['z' - 'a'] <= counter['b' - 'a'] && counter['z' - 'a'] <= counter['z' - 'a'])
+        return counter['z' - 'a'];
+}
+////////////////////////////////////////////////////////////////////
+
+int string_lengthDnaComplement (char* string)
 {
-    
+    int length;
+    for (length = 0; string[length]; length++);
+    return length;
 }
 
 char* dnaComplement (char* s)
 {
+    int sLength = string_lengthDnaComplement (s) + 1;
 
+    char* b = malloc (sLength * sizeof(char));
+
+    int bIndex = 0;
+    for (signed int i = sLength-2; i >= 0; i--)
+    {
+        b[bIndex] = s[i];
+
+        if (b[bIndex] == 'A')
+            b[bIndex] = 'T';
+        else if (b[bIndex] == 'T')
+            b[bIndex] = 'A';
+        else if (b[bIndex] == 'C')
+            b[bIndex] = 'G';
+        else if (b[bIndex] == 'G')
+            b[bIndex] = 'C';
+
+        bIndex++;
+    }
+    b[sLength-1] = 0;
+  
+    return b;
+}
+//////////////////////////////////////////////////////////////////////////
+
+void swap_GoodSegment (int* number1, int* number2)
+{
+    int temp = *number1;
+    *number1 = *number2;
+    *number2 = temp;
 }
 
-int closedPaths (int number)
+void sort_GoodSegment (int* arr, int size)
 {
-    
-}
-
-int maxMoves (char* s, char* t)
-{
-    
-}
-
-void sort_badNumbers (int badNumbers_count, int* badNumbers)
-{
-    
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = i+1; j < size; j++)
+        {
+            if (arr[i] > arr[j])
+                swap_GoodSegment (arr+i, arr+j);
+        }
+    }
 }
 
 int goodSegment (int badNumbers_count, int* badNumbers, int lower, int upper)
 {
-    
+    sort_GoodSegment (badNumbers, badNumbers_count);
+    int size = upper - lower + 1;
+    int counter = 0;
+    int badIndex = 0;
+    int max =  0;
+    for (int i = 0; i < size; i++)
+    {
+        if (lower + i != badNumbers[badIndex])
+        {
+            counter++;
+        }
+        else if (lower + i == badNumbers[badIndex] || lower + i == upper)
+        {
+            if (max < counter)
+                max = counter;
+
+            counter = 0;
+            badIndex++;
+        }
+    }
+    return max;    
+}
+////////////////////////////////////////////////////////////////////////////////////////
+
+int minimumMoves (int arr1_count, int* arr1, int arr2_count, int* arr2)
+{
+    int digit1;
+    int digit2;
+    int counter = 0;
+    int num1;
+    int num2;
+
+    for (int i = 0; i < arr1_count; i++)
+    {
+        while (arr1[i])
+        {
+            num1 = arr1[i];
+            num2 = arr2[i];
+
+            digit1 = arr1[i]%10;
+            arr1[i] = arr1[i]/10;
+        
+            digit2 = arr2[i]%10;
+            arr2[i] = arr2[i]/10;
+        
+            // while (digit1 < digit2)
+            // {
+            //     digit1++;
+            //     counter++;
+            // }
+
+            // while (digit1 > digit2)
+            // {
+            //     digit1--;
+            //     counter++;
+            // }
+
+            if (digit1 > digit2)
+                counter += digit1 - digit2;
+
+            if (digit2 > digit1)
+                counter += digit2 - digit1;
+        }
+    }
+    return counter;
+}
+
+int changeAds (int base10)
+{
+    int number = 0;
+    int index;
+
+    for (int i = 0; i < 32; i++)
+    {
+        if ((base10>>i)&1)
+            index = i;   
+    }
+
+    for (int i = 0; i <= index; i++)
+    {
+        if ((base10>>i)&1)
+            number &= ~(1<<i);
+        else
+            number |= 1<<i;
+    }
+
+    return number;    
 }
 
 int maxIndex (int s, int badIndex)
 {
+    int badImportance = 0;
+    int sum = 0;
+
+    for (int j = 1; j <= s; j++)
+    {
+        sum += j;
+        if (sum == badIndex)
+        {
+            badImportance = 1;
+        }
+    }
+
+    if (badImportance == 1)
+    {
+        sum = 0;
+        for (int j = 2; j <= s; j++)
+        {
+            sum += j;
+        }
+    }
     
+    return sum;
 }
 
-int minimumMoves (int arr1_count, int* arr1, int arr2_count, int* arr2)
+int closedPaths (int number)
 {
-    
+    int digit;
+    int sum = 0;
+    while (number)
+    {
+        digit = number % 10;
+
+        if (digit == 0 || digit == 4 || digit == 6 || digit == 9)
+            sum +=1;
+        else if (digit == 8)
+            sum +=2;
+
+        number = number / 10;
+    }
+    return sum;
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+
+int compare_maxMoves (char* s, char* t)
+{
+    for (int i = 0; t[i]; i++)
+    {
+        if (s[i] != t[i])
+            return 0;
+    }
+    return 1;
+}
+
+int string_length_maxMoves (char* string)
+{
+    int i;
+    for (i = 0; string[i]; i++);
+    return i;
+}
+
+int string_copy_maxMoves (char* string1, char* string2)
+{
+    int counter = 0;
+    int i = 0;
+    for ( i = 0; string2[i]; i++)
+    {
+        string1[i] = string2[i];
+        counter++;
+    }
+    string1[i] = 0;
+    return counter;
+}
+
+int maxMoves_leftToRight (char* s, char* t)
+{
+    int tFirstIndex;
+    int tLength = string_length_maxMoves(t);
+    int sFirstIndex;
+    int counter = 0;
+    for (signed int i = 0; s[i]; i++)
+    {
+        if (compare_maxMoves(s+i, t))
+        {
+            tFirstIndex = i;
+            sFirstIndex = i + tLength;
+            counter += string_copy_maxMoves (s+tFirstIndex, s+sFirstIndex);
+            i--;
+        }
+    }
+    return counter;
+}
+
+int maxMoves_rightToLeft (char* s, char* t)
+{
+    int tFirstIndex;
+    int tLength = string_length_maxMoves(t);
+    int sFirstIndex;
+    int counter = 0;
+    int size = string_length_maxMoves (s);
+    for (int i = size-1; i >= 0; i--)
+    {
+        if (compare_maxMoves(s+i, t))
+        {
+            tFirstIndex = i;
+            sFirstIndex = i + tLength;
+            counter += string_copy_maxMoves (s+tFirstIndex, s+sFirstIndex);
+        }
+    }
+    return counter;
+}
+
+int maxMoves (char* s, char* t)
+{
+    int left = maxMoves_leftToRight (s, t);
+    int right = maxMoves_rightToLeft (s,  t);
+
+   return left>right?left:right; 
+}
+////////////////////////////////////////////////////////////////////////////////
+
+int superPower (int z)
+{
+   int multi = 1;
+   for (int i = 1; i <= z; i++)
+   {
+        multi = i;
+        for (int j = 1; j <= i; j++)
+        {
+            multi *= i;
+            
+            if (multi == z)
+                return 1;
+        }
+        
+        multi = 1; 
+   }
+   return 0;
 }
