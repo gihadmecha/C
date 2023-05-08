@@ -2,21 +2,19 @@
 
 // uint8 PwmGenerator (uint8 DutyCycle)
 // {
-//     static int counter = 0;
+//     static uint8 counter = 0;
 
 //     if (DutyCycle < 0 || DutyCycle > 10)
 //         return 2;
 
 //     if (counter == 10)
-//     {
 //         counter = 0;
-//     }
 
 //     if (counter < DutyCycle)
 //     {
 //         counter++;
 //         return 1;
-//     }
+//     }    
 //     else
 //     {
 //         counter++;
@@ -26,26 +24,25 @@
 
 // uint8 LedFlasher (uint8 OnofInterval)
 // {
-//     static int counter = 0;
-//     static uint8 status = 1;
+//     static uint8 counter = 0;
+//     static uint8 state = 1;
 
-//     if (OnOffInterval < 1 || OnOffInterval > 10)
+//     if (OnofInterval < 1 || OnofInterval > 10)
 //         return 0xFF;
 
-//     if (counter >= OnOffInterval)
+//     if (counter >= OnofInterval)
 //     {
-//         status != status;
+//         state != state;
 //         counter = 0;
 //     }
-    
 //     counter++;
 
-//     return status;
+//     return state;
 // }
 
 // uint8 ControlFan (uint8 Temp)
 // {
-//     static int state = 0;
+//     static uint8 state = 0;
 
 //     if (Temp >= 50)
 //         state = 1;
@@ -57,55 +54,56 @@
 
 // uint8 SawtoothGenerator ()
 // {
-//     static uint8 step = 0;
-//     return step++;
+//     static uint8 counter = 0;
+//     return counter++;
 // }
 
 // uint8 Dec2SevenSeg (uint8 DecimalNum)
 // {
-//     if (0 <= DecimalNum && DecimalNum <= 9)
+//     if (DecimalNum >= 0 && DecimalNum <= 9)
 //     {
-//         uint8 seg[] = {0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0x5F, 0x70, 0x7F, 0x7B}; 
+//         static uint8 seg[] = {0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0x5F, 0x70, 0x7F, 0x7B}; 
 //         return seg[DecimalNum];
 //     }
-
-//     return 0x00;
+//     return 0;
 // }
 
 // uint32 FallingEdgeCounter (uint8 PinReading)
 // {
-//     static uint8 lastState = 0;
+//     static uint8 previousReading = PinReading;
 //     static uint32 counter = 0;
 
-//     if (lastState == 1 && PinReading == 0)
+//     if (previousReading == 1 && PinReading == 0)
 //         counter++;
 
-//     lastState = PinReading;
+//     previousReading = PinReading;
 
 //     return counter;
 // }
 
 // uint8 CalcTempValue (uint8 AdcRead)
 // {
-//     if (AdcRead > 200)
-//         return 120;
+//     uint8 r;
 
 //     if (0 <= AdcRead && AdcRead <= 60)
-//         return ADC * 50 / 60;
+//         r = ((ADC - 0)*(50 - 0))/(60-0) + 0; 
 //     else if (61 <= AdcRead && AdcRead <= 100)
-//         return ((ADC-60)*50/40) + 50;
+//         r = ((ADC - 60)*(100 - 50))/(100-60) + 50;
 //     else if (101 <= AdcRead && AdcRead <= 200)
-//         return ((ADC-100)*20/100)+100;
+//         r = ((ADC - 100)*(120 - 100))/(200-100) + 100;
+//     else if (201 <= AdcRead )
+//         r = 120;
+
+//     return r;
 // }
 
 // uint8 BattaryVoltageMonitor (uint8 BattaryVoltage)
 // {
-//     BattaryVoltage /= 10;
-//     static uint8 state = 'U';
 //     static uint8 counter1 = 0;
 //     static uint8 counter2 = 0;
 //     static uint8 counter3 = 0;
-
+//     static uint8 result = 'U'
+//     BattaryVoltage /= 10;
 //     if (BattaryVoltage < 5)
 //     {
 //         counter1++;
@@ -114,33 +112,33 @@
 
 //         if (counter1 > 2)
 //         {
-//             state = 'E';
-//         }
+//             result = 'E';
+//         } 
 //     }
-//     else if (6 <= BattaryVoltage && BattaryVoltage < 9)
+//     else if (BattaryVoltage >= 6 && BattaryVoltage < 9)
 //     {
-//         counter1 = 0;
-//         counter2++;
+//         counter1++;
+//         counter2 = 0;
 //         counter3 = 0;
 
 //         if (counter2 > 2)
 //         {
-//             state = 'L';
-//         }
+//             result = 'L';
+//         } 
 //     }
-//     else if (12 <= BattaryVoltage)
+//     else if (BattaryVoltage >= 12 && BattaryVoltage < 26)
 //     {
-//         counter1 = 0;
+//         counter1++;
 //         counter2 = 0;
-//         counter3++;
+//         counter3 = 0;
 
 //         if (counter3 > 2)
 //         {
-//             state = 'N';
-//         }
+//             result = 'N';
+//         } 
 //     }
 
-//     return state;
+//     return result;
 // }
 
 int u8FindLast (int au32Array_count, int* au32Array, int u32ItemToFind)
