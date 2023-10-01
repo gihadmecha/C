@@ -2,6 +2,7 @@
 #include "coding.h"
 #include "myArray.h"
 #include "myString.h"
+#include "complex.h"
 
 int main ()
 {
@@ -42,7 +43,7 @@ int main ()
     // printf ("%d\n", vidPrintMaxZeros(197));
 
     // unsigned int pu32Output;
-    // printf ("%d\n", u8RightCircularShift (0xaabbccdd, 4, &pu32Output));
+    // printf ("%x\n", u8RightCircularShift (0xaabbccdd, 40, &pu32Output));
     // printf ("%x\n", pu32Output);
 
     // printf ("%d\n", u8CalculateHeatingTime (35));
@@ -132,5 +133,14 @@ int main ()
     // char t[] = "b";
     // printf ("%d\n", maxMoves (s, t));
 
-    printf ("%d\n", superPower(27));
+    // printf ("%d\n", superPower(27));
+
+    complex number1 = {2, 1};
+    complex number2 = {5, 6};
+    complex number;
+    number = complexAdd (number1, number2);
+    number = complexSubtract (number1, number2);
+    number = complexMultiply (number1, number2);
+    number = complexDivide (number1, number2);
+    complexPrint (number);    
 }

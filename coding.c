@@ -288,14 +288,16 @@ int vidPrintMaxZeros (unsigned char u8Number)
 
 unsigned char u8RightCircularShift (unsigned int u32InputNumber, int u8NumberOfShifts, unsigned int *pu32Output)
 {
-    if (u8NumberOfShifts > 32)
+    if (u8NumberOfShifts < 32)
+    {
+        *pu32Output = (u32InputNumber<<(32-u8NumberOfShifts)) | (u32InputNumber>>u8NumberOfShifts);
+        return 0;
+    }
+    else
     {
         *pu32Output = u32InputNumber;
         return 0xFF;
-    }    
-
-    *pu32Output = (u32InputNumber<<(32 - u8NumberOfShifts)) | (u32InputNumber>>u8NumberOfShifts);
-    return 0;
+    }
 }
 
 unsigned int u8CalculateHeatingTime (unsigned int u8WaterTempature)

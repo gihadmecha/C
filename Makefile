@@ -4,7 +4,7 @@ exeFileRm = main.exe
 
 
 all:
-	gcc -o $(exeFile) coding.h coding.c myArray.h myArray.c myBasics.h myBasics.c myString.h myString.c $(sourceFile)
+	gcc -o $(exeFile) complex.c coding.h coding.c myArray.h myArray.c myBasics.h myBasics.c myString.h myString.c $(sourceFile)
 	./$(exeFile) 
 	del $(exeFileRm)
 
